@@ -24,11 +24,13 @@ function NavBar(){
             
           ) : (
             <>
+            <h3>SAMAN</h3>
           <Tabs 
             textColor="inherit" 
             value={currentTab}
             onChange={(e, currentTab) => setCurrentTab(currentTab)}
             indicatorColor="white"
+            sx={{marginLeft: 'auto'}}
             >
               {
               PAGES.map((page, index) => (

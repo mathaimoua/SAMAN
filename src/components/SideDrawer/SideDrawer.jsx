@@ -17,7 +17,7 @@ function SideDrawer(){
           <h1>SAMAN</h1>
           {
             PAGES.map((page, index) => (
-              <ListItemButton key={index}>
+              <ListItemButton key={index} onClick={() => setOpenDrawer(!openDrawer)}>
               <ListItemIcon>
                 <ListItemText>{page}</ListItemText>
               </ListItemIcon>
