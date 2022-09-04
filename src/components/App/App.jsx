@@ -29,7 +29,7 @@ function App() {
 
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
-    dispatch({type: 'FETCH_ITEMS' })
+    dispatch({type: 'FETCH_RECENT_ITEMS' })
   }, [dispatch]);
 
   return (

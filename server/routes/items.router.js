@@ -5,7 +5,7 @@ const {
   rejectUnauthenticated,
 } = require('../modules/authentication-middleware');
 
-router.get('/', rejectUnauthenticated, (req, res) => {
+router.get('/recentItems', rejectUnauthenticated, (req, res) => {
   const queryText = `
   SELECT "item_name", "current_holder", "model", "serial", "warranty_expiration", "state", "container_name" FROM "items"
   JOIN "user" ON "items".user_id = "user".id
