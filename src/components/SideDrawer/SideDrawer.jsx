@@ -5,7 +5,7 @@ import { useState } from 'react'
 
 function SideDrawer(){
 
-  const PAGES = ["Locations", "Dashboard", "Add New Item", "About", "Logout"]
+  const PAGES = ["Dashboard", "Locations", "Add New Item", "About", "Logout"]
   const [openDrawer, setOpenDrawer] = useState(false)
 
   return(

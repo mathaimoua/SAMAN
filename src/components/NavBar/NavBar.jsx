@@ -5,7 +5,7 @@ import SideDrawer from '../SideDrawer/SideDrawer';
 
 function NavBar(){
 
-  const PAGES = ["Locations", "Dashboard", "Add New Item", "About"]
+  const PAGES = [ "Dashboard", "Locations", "Add New Item", "About"]
   const [currentTab, setCurrentTab] = useState();
   const theme = useTheme();
   console.log(theme);
