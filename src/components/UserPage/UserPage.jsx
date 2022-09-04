@@ -15,7 +15,7 @@ function UserPage() {
       <h3>Recent Items:</h3>
       <h1>{items.map(item => {
         return (
-          <div>
+          <div key={item.item_id}>
           <h5>{item.item_name} @ {item.container_name}</h5>
           </div>
         )
