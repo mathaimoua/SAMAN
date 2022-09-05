@@ -8,7 +8,7 @@ import {
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import Nav from '../Nav/Nav';
+// import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
@@ -19,6 +19,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import NavBar from '../NavBar/NavBar';
 
 import './App.css';
 
@@ -29,13 +30,14 @@ function App() {
 
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
-    dispatch({type: 'FETCH_RECENT_ITEMS' })
+    dispatch({type: 'FETCH_RECENT_ITEMS'})
   }, [dispatch]);
 
   return (
     <Router>
-      <div>
-        <Nav />
+      <div className="appDiv">
+        {/* <Nav /> */}
+        <NavBar />
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/home" />
