@@ -30,12 +30,12 @@ function App() {
 
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
-    dispatch({type: 'FETCH_RECENT_ITEMS' })
+    dispatch({type: 'FETCH_RECENT_ITEMS'})
   }, [dispatch]);
 
   return (
     <Router>
-      <div>
+      <div className="appDiv">
         {/* <Nav /> */}
         <NavBar />
         <Switch>

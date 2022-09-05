@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {useSelector} from 'react-redux';
 
 function UserPage() {
-
   const user = useSelector((store) => store.user);
   const items = useSelector((store) => store.items);
 
