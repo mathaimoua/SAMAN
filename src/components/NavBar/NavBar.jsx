@@ -16,18 +16,10 @@ import { useSelector } from "react-redux";
 // Imports for TextFields
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import AccountCircle from "@mui/icons-material/AccountCircle";
 import InputAdornment from "@mui/material/InputAdornment";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-// import FormHelperText from "@mui/material/FormHelperText";
-// import FormControl from "@mui/material/FormControl";
-// import InputLabel from "@mui/material/InputLabel";
-// import FilledInput from "@mui/material/FilledInput";
-// import OutlinedInput from "@mui/material/OutlinedInput";
-
 import IconButton from "@mui/material/IconButton";
-import VpnKey from "@mui/material/IconButton";
 
 function NavBar() {
   const handlePasswordChange = (event) => {
@@ -56,17 +48,18 @@ function NavBar() {
 
     if (values.username && values.password) {
       dispatch({
-        type: 'LOGIN',
+        type: "LOGIN",
         payload: {
           username: values.username,
           password: values.password,
         },
       });
     } else {
-      dispatch({ type: 'LOGIN_INPUT_ERROR' });
+      dispatch({ type: "LOGIN_INPUT_ERROR" });
     }
   };
 
+  const errors = useSelector((store) => store.errors);
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const PAGES = ["Dashboard", "Locations", "Add New Item", "About"];
@@ -84,6 +77,7 @@ function NavBar() {
     <React.Fragment>
       <AppBar
         sx={{ background: "black", paddingTop: "5px", paddingBottom: "5px" }}
+        className="appBar"
       >
         <Toolbar>
           {isMatch ? (
@@ -94,6 +88,18 @@ function NavBar() {
           ) : (
             <>
               <h3>SAMAN</h3>
+              {user.id ? (
+                <></>
+              ) : (
+                <Tabs
+                  textColor="inherit"
+                  onChange={(e, currentTab) => setCurrentTab(currentTab)}
+                  indicatorColor="primary"
+                  sx={{ marginRight: "auto" }}
+                >
+                  <Tab label="About"></Tab>
+                </Tabs>
+              )}
               {user.id && (
                 <Tabs
                   textColor="inherit"
@@ -119,10 +125,22 @@ function NavBar() {
                   component="form"
                   onSubmit={handleLogin}
                   className="inputsBox"
-                  sx={{ marginLeft: "auto" }}
+                  sx={{ marginLeft: "auto", display: "flex" }}
                 >
+                  <div marginLeft="auto">
+                    {errors.loginMessage && (
+                      <h3 className="alert" role="alert">
+                        {errors.loginMessage}
+                      </h3>
+                    )}
+                  </div>
                   <TextField
-                    sx={{ m: 1, width: "25ch" }}
+                    sx={{
+                      m: "auto",
+                      marginLeft: "10px",
+                      marginRight: "5px",
+                      width: "25ch",
+                    }}
                     label="username"
                     id="filled-size-small"
                     variant="filled"
@@ -132,7 +150,12 @@ function NavBar() {
                     onChange={handleUsernameChange}
                   />
                   <TextField
-                    sx={{ m: 1, width: "25ch" }}
+                    sx={{
+                      m: "auto",
+                      marginLeft: "5px",
+                      marginRight: "5px",
+                      width: "25ch",
+                    }}
                     label="password"
                     id="filled-size-small"
                     variant="filled"
@@ -160,7 +183,15 @@ function NavBar() {
                       ),
                     }}
                   />
-                  <Button type="submit">Submit</Button>
+                  <Button
+                    sx={{
+                      marginTop: "0em",
+                      marginLeft: "auto",
+                      color: "white",
+                    }}
+                  >
+                    <PowerSettingsNewIcon onClick={handleLogin} />
+                  </Button>
                 </Box>
               )}
             </>
