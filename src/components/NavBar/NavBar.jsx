@@ -20,16 +20,21 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import InputAdornment from "@mui/material/InputAdornment";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import FormHelperText from "@mui/material/FormHelperText";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import FilledInput from "@mui/material/FilledInput";
-import OutlinedInput from "@mui/material/OutlinedInput";
+// import FormHelperText from "@mui/material/FormHelperText";
+// import FormControl from "@mui/material/FormControl";
+// import InputLabel from "@mui/material/InputLabel";
+// import FilledInput from "@mui/material/FilledInput";
+// import OutlinedInput from "@mui/material/OutlinedInput";
+
 import IconButton from "@mui/material/IconButton";
+import VpnKey from "@mui/material/IconButton";
 
 function NavBar() {
   const handlePasswordChange = (event) => {
     setValues({ ...values, password: event.target.value });
+  };
+  const handleUsernameChange = (event) => {
+    setValues({ ...values, username: event.target.value });
   };
 
   const handleClickShowPassword = () => {
@@ -41,10 +46,27 @@ function NavBar() {
   };
 
   const [values, setValues] = useState({
+    username: "",
     password: "",
     showPassword: false,
   });
-  
+
+  const handleLogin = (event) => {
+    event.preventDefault();
+
+    if (values.username && values.password) {
+      dispatch({
+        type: 'LOGIN',
+        payload: {
+          username: values.username,
+          password: values.password,
+        },
+      });
+    } else {
+      dispatch({ type: 'LOGIN_INPUT_ERROR' });
+    }
+  };
+
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const PAGES = ["Dashboard", "Locations", "Add New Item", "About"];
@@ -93,8 +115,12 @@ function NavBar() {
               {user.id ? (
                 <></>
               ) : (
-                <div>
-               <form className="loginFormDiv"><Box className="inputsBox" sx={{ marginLeft: "auto" }}>
+                <Box
+                  component="form"
+                  onSubmit={handleLogin}
+                  className="inputsBox"
+                  sx={{ marginLeft: "auto" }}
+                >
                   <TextField
                     sx={{ m: 1, width: "25ch" }}
                     label="username"
@@ -102,13 +128,8 @@ function NavBar() {
                     variant="filled"
                     size="small"
                     className="usernameTextField"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <AccountCircle />
-                        </InputAdornment>
-                      ),
-                    }}
+                    value={values.username}
+                    onChange={handleUsernameChange}
                   />
                   <TextField
                     sx={{ m: 1, width: "25ch" }}
@@ -117,24 +138,30 @@ function NavBar() {
                     variant="filled"
                     size="small"
                     className="usernameTextField"
-                    type={values.showPassword ? 'text' : 'password'}
+                    type={values.showPassword ? "text" : "password"}
                     value={values.password}
                     onChange={handlePasswordChange}
                     InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={handleClickShowPassword}
-                          onMouseDown={handleMouseDownPassword}
-                          edge="end"
-                        >
-                          {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      </InputAdornment>
-                    )}}
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                            edge="end"
+                          >
+                            {values.showPassword ? (
+                              <VisibilityOff />
+                            ) : (
+                              <Visibility />
+                            )}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
                   />
-                </Box></form></div>
+                  <Button type="submit">Submit</Button>
+                </Box>
               )}
             </>
           )}

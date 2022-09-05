@@ -116,15 +116,10 @@ input {
   margin-bottom: 10px;
 }
 
-.inputForm {
+/* .inputForm {
   text-align: left;
-}
+} */
 
 .usernameTextField {
   background-color: #efefef;
 }
-
-/* .loginFormDiv{
-  float: right;
-  text-align: right;
-} */
