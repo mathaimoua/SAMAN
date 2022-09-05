@@ -13,7 +13,38 @@ import SideDrawer from "../SideDrawer/SideDrawer";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
+// Imports for TextFields
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import InputAdornment from "@mui/material/InputAdornment";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import FormHelperText from "@mui/material/FormHelperText";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import FilledInput from "@mui/material/FilledInput";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import IconButton from "@mui/material/IconButton";
+
 function NavBar() {
+  const handlePasswordChange = (event) => {
+    setValues({ ...values, password: event.target.value });
+  };
+
+  const handleClickShowPassword = () => {
+    setValues({ ...values, showPassword: !values.showPassword });
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+  const [values, setValues] = useState({
+    password: "",
+    showPassword: false,
+  });
+  
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const PAGES = ["Dashboard", "Locations", "Add New Item", "About"];
@@ -29,7 +60,9 @@ function NavBar() {
 
   return (
     <React.Fragment>
-      <AppBar sx={{ background: "black" }}>
+      <AppBar
+        sx={{ background: "black", paddingTop: "5px", paddingBottom: "5px" }}
+      >
         <Toolbar>
           {isMatch ? (
             <>
@@ -57,7 +90,52 @@ function NavBar() {
                   <PowerSettingsNewIcon onClick={handleLogout} />
                 </Button>
               )}
-              {user.id ? (<></>) : (<div><input type='text' className="inputForm"></input></div>)}
+              {user.id ? (
+                <></>
+              ) : (
+                <div>
+               <form className="loginFormDiv"><Box className="inputsBox" sx={{ marginLeft: "auto" }}>
+                  <TextField
+                    sx={{ m: 1, width: "25ch" }}
+                    label="username"
+                    id="filled-size-small"
+                    variant="filled"
+                    size="small"
+                    className="usernameTextField"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <AccountCircle />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                  <TextField
+                    sx={{ m: 1, width: "25ch" }}
+                    label="password"
+                    id="filled-size-small"
+                    variant="filled"
+                    size="small"
+                    className="usernameTextField"
+                    type={values.showPassword ? 'text' : 'password'}
+                    value={values.password}
+                    onChange={handlePasswordChange}
+                    InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    )}}
+                  />
+                </Box></form></div>
+              )}
             </>
           )}
         </Toolbar>
