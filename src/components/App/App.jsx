@@ -5,10 +5,9 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-
+import { useMediaQuery, useTheme } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux';
-
-// import Nav from '../Nav/Nav';
+// Look into Multer
 import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
@@ -27,6 +26,10 @@ function App() {
   const dispatch = useDispatch();
 
   const user = useSelector(store => store.user);
+  const theme = useTheme();
+  const isMatch = useMediaQuery(theme.breakpoints.down("md")); 
+  console.log(isMatch)
+
 
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
@@ -55,13 +58,20 @@ function App() {
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
-          <ProtectedRoute
+          {/* <ProtectedRoute
             // logged in shows UserPage else shows LoginPage
             exact
             path="/user"
           >
             <UserPage />
-          </ProtectedRoute>
+          </ProtectedRoute> */}
+
+          <Route
+            exact
+            path="/user"
+          >
+            {user.id ? <UserPage /> : (isMatch ? <LoginPage/> : <></>)}
+          </Route>
 
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
@@ -79,10 +89,7 @@ function App() {
               // If the user is already logged in, 
               // redirect to the /user page
               <Redirect to="/user" />
-              :
-              // Otherwise, show the login page
-              <LoginPage />
-            }
+            : (isMatch ? <LoginPage /> : <></>) }
           </Route>
 
           <Route

@@ -12,6 +12,7 @@ import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 import SideDrawer from "../SideDrawer/SideDrawer";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import navLogo from '../../files/SAMANLogo.png'
 
 // Imports for TextFields
 import Box from "@mui/material/Box";
@@ -83,11 +84,13 @@ function NavBar() {
           {isMatch ? (
             <>
               <SideDrawer />
-              SAMAN
+              <img src={navLogo} className="SAMANLogoNAV"/>
             </>
           ) : (
             <>
-              <h3>SAMAN</h3>
+              {/* <h3>SAMAN</h3> */}
+              <img src={navLogo} className="SAMANLogoNAV"/>
+
               {user.id ? (
                 <></>
               ) : (
@@ -134,6 +137,7 @@ function NavBar() {
                       </h3>
                     )}
                   </div>
+                  <form onSubmit={handleLogin}>
                   <TextField
                     sx={{
                       m: "auto",
@@ -185,13 +189,15 @@ function NavBar() {
                   />
                   <Button
                     sx={{
-                      marginTop: "0em",
+                      marginTop: ".5em",
                       marginLeft: "auto",
                       color: "white",
                     }}
+                    onClick={handleLogin}
                   >
-                    <PowerSettingsNewIcon onClick={handleLogin} />
+                    Login
                   </Button>
+                  </form>
                 </Box>
               )}
             </>
