@@ -16,15 +16,50 @@ img {
 
 /* Spacing for under the nav bar */
 .appDiv {
-  margin-top: 100px;
+  margin-top: 70px;
+  padding-bottom: 70px;
 }
+
+.appBar {
+  max-height: 70px;
+  min-height: 70px;
+}
+
+#videoBG {
+  /* position: fixed;
+  width: 100%;
+  height: auto; */
+  object-fit: cover;
+  z-index: -1;
+  filter: brightness(40%);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+/* @media (min-aspect-ratio: 16/9) {
+  #videoBG {
+      width:100%;
+      height: auto;
+  }
+}
+
+@media (max-aspect-ratio: 16/9) {
+  #videoBG {
+      right: 0%;
+      width:auto;
+      height: 100%;
+  }
+} */
 
 /* --------------------------------------------------------------------------------
 Container
 -------------------------------------------------------------------------------- */
 
 .container {
-  padding: 20px;
+  padding: 0px;
 }
 
 /* --------------------------------------------------------------------------------
@@ -37,8 +72,8 @@ Button
   border-color: #014041;
   border-width: 1px 1px 3px;
   border-radius: 4px;
-  background-color: #00acb0;
-  color: #f8f8f8;
+  background-color: #97c30a;
+  color: #000;
   font-size: 1.1rem;
   outline: 0;
   cursor: pointer;
@@ -60,7 +95,7 @@ Button
 }
 
 .btn:hover {
-  background-color: #008183;
+  background-color: #75960a;
   text-decoration: none;
 }
 
@@ -77,8 +112,8 @@ Button
 
 .btn_asLink:hover {
   background-color: transparent;
-  border-color: #008183;
-  color: #008183;
+  border-color: #d4645a;
+  color: #ff776b;
 }
 
 /* --------------------------------------------------------------------------------
@@ -87,13 +122,14 @@ Alert
 
 .alert {
   box-sizing: border-box;
-  padding: 15px 10px;
-  margin: 15px 0;
-  border: 2px solid #e01616;
-  background-color: #efefef;
-  border-radius: 3px;
-  color: #e01616;
+  padding: 15px 0px;
+  margin: auto;
+  /* border: 2px solid #e01616; */
+  /* background-color: #efefef; */
+  /* border-radius: 3px; */
+  color: #cf5a5a;
   font-size: 0.8rem;
+  font-style: italic;
 }
 
 /* --------------------------------------------------------------------------------
@@ -104,11 +140,15 @@ Form Treatment
   box-sizing: border-box;
   width: 400px;
   max-width: 100%;
+  color: black;
   padding: 25px;
   margin: 0 auto 20px;
-  background-color: #efefef;
+  background-color: #4bc0d2;
   border-radius: 3px;
   box-shadow: 0 1px 2px rgb(0, 0, 0, 0.4);
+  background-image: radial-gradient(rgb(130, 130, 130) 1px, transparent 0);
+  background-size: 20px 20px;
+  background-position: -50px -50px;
 }
 
 input {
@@ -116,6 +156,11 @@ input {
   margin-bottom: 10px;
 }
 
-.inputForm {
-  text-align: left;
+.usernameTextField {
+  background-color: #efefef;
+}
+
+.SAMANLogoNAV {
+  height: 40px;
+  width: auto;
 }
