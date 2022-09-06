@@ -124,9 +124,8 @@ function NavBar() {
               {user.id ? (
                 <></>
               ) : (
+                <form onSubmit={handleLogin}>
                 <Box
-                  component="form"
-                  onSubmit={handleLogin}
                   className="inputsBox"
                   sx={{ marginLeft: "auto", display: "flex" }}
                 >
@@ -193,10 +192,12 @@ function NavBar() {
                       color: "white",
                     }}
                     onClick={handleLogin}
+                    type='submit'
                   >
                     Login
                   </Button>
                 </Box>
+                </form>
               )}
             </>
           )}
