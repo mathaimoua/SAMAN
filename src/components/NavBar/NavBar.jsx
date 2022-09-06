@@ -130,14 +130,13 @@ function NavBar() {
                   className="inputsBox"
                   sx={{ marginLeft: "auto", display: "flex" }}
                 >
-                  <div marginLeft="auto">
+                  <div>
                     {errors.loginMessage && (
                       <h3 className="alert" role="alert">
                         {errors.loginMessage}
                       </h3>
                     )}
                   </div>
-                  <form onSubmit={handleLogin}>
                   <TextField
                     sx={{
                       m: "auto",
@@ -197,7 +196,6 @@ function NavBar() {
                   >
                     Login
                   </Button>
-                  </form>
                 </Box>
               )}
             </>

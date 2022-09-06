@@ -28,9 +28,8 @@ function LandingPage() {
       <div className="grid">
         <div className="grid-col grid-col_8">
           <img src={SAMANLogo} id="fullLogo" />
-          <p>
-            Simple Asset Management is exactly what it sounds like, managing
-            your physical assets in a simple and easy way!
+          <p id='landingPageText'>
+            Simple Asset Management (SAMAN) is exactly what the name suggests, easy organizing of your belongings. SAMAN makes it easy for any organization or individual to keep track of their belongings. Unlike other asset management software, SAMAN does NOT cost an arm and a leg, in fact, <span id='itsfree'>it's free!</span>
           </p>
         </div>
         <div className="grid-col grid-col_4">

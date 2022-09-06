@@ -3,9 +3,22 @@
   align-content: center;
   text-align: center;
   color: white;
+  padding: 10px;
 }
 
 #fullLogo {
   max-width: 70%;
   height: auto;
+}
+
+#itsfree {
+  color: salmon;
+  font-size: larger;
+  font-weight: bold;
+}
+
+#landingPageText {
+  margin: auto;
+  max-width: 70%;
+  margin-bottom: 15px;
 }
