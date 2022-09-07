@@ -101,7 +101,7 @@ function NavBar() {
                   indicatorColor="primary"
                   sx={{ marginRight: "auto" }}
                 >
-                  <Tab label="About"></Tab>
+                  <Tab label="About" style={theme.tab}></Tab>
                 </Tabs>
               )}
               {user.id && (
