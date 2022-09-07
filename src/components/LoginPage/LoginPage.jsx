@@ -8,7 +8,7 @@ function LoginPage() {
 
   return (
     <div className="loginRegisterPageContainer">
-      <img src={blurredBG} class='blurredBG'/>
+      <img src={blurredBG} className='blurredBG'/>
       <LoginForm />
       <center>
         <button

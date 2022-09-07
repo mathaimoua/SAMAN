@@ -13,8 +13,8 @@ function RegisterPage() {
   const history = useHistory();
 
   return (
-    <div class="loginRegisterPageContainer">
-      <img src={blurredRegisterBG} class='blurredBG'/>
+    <div className="loginRegisterPageContainer">
+      <img src={blurredRegisterBG} className='blurredBG'/>
       <RegisterForm />
       {isMatch &&
       <center>
