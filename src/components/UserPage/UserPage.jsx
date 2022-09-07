@@ -10,9 +10,9 @@ function UserPage() {
       <div>
         <h2>Welcome, {user.username}!</h2>
         <h2>Location</h2>
-        <button>View Items</button>
-        <button>Add New Item</button>
-        <button>Add New Container</button>
+        <button className="button-54">View Items</button>
+        <button className="button-54">Add New Item</button>
+        <button className="button-54">Add New Container</button>
         <h3>Recent Items:</h3>
         <h1>
           {items &&

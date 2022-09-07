@@ -11,6 +11,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
+import SAMANLogo from "../../files/SAMANLogo.png";
 
 function SideDrawer() {
   const dispatch = useDispatch();
@@ -25,9 +26,15 @@ function SideDrawer() {
 
   return (
     <React.Fragment>
-      <Drawer open={openDrawer} onClose={() => setOpenDrawer(false)}>
+      <Drawer
+        PaperProps={{
+          sx: { width: "35%", textAlign: "center", alignItems: "center" },
+        }}
+        open={openDrawer}
+        onClose={() => setOpenDrawer(false)}
+      >
+        <img src={SAMANLogo} className="SAMANLogoNav" width="70%" />
         <List>
-          <h1>SAMAN</h1>
           {user.id ? (
             <>
               <ListItemButton onClick={() => setOpenDrawer(!openDrawer)}>
@@ -47,7 +54,7 @@ function SideDrawer() {
                   <ListItemText>Add New Item</ListItemText>
                 </ListItemIcon>
               </ListItemButton>
-              
+
               <ListItemButton onClick={() => setOpenDrawer(!openDrawer)}>
                 <ListItemIcon>
                   <ListItemText>About</ListItemText>
