@@ -28,7 +28,7 @@ function SideDrawer() {
     <React.Fragment>
       <Drawer
         PaperProps={{
-          sx: { width: "35%", textAlign: "center", alignItems: "center" },
+          sx: { width: "45%", textAlign: "center", alignItems: "center" },
         }}
         open={openDrawer}
         onClose={() => setOpenDrawer(false)}

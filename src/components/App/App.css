@@ -1,3 +1,12 @@
+/* 
+Palette: 
+  #fa8072 = SALMON
+  #97c30a = Lilypad Green
+  #1FBED6 = River Blue
+  #C0BCB6 = Light Gray
+  #555555 = Dark Gray
+*/
+
 /* --------------------------------------------------------------------------------
 Globals
 -------------------------------------------------------------------------------- */
@@ -7,9 +16,28 @@ body,
   height: 100%;
 }
 
+a {
+  color: #1FBED6;
+  text-decoration: solid;
+  text-shadow: #000 2px 2px 2px;
+  text-transform: uppercase;
+}
+
+a:hover {
+  color: #555555
+}
+
+a:visited {
+
+}
+
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Open Sans", sans-serif;
   margin: 0px;
+  background-color: #C0BCB6;
+  background-image: radial-gradient(rgb(130, 130, 130) 1px, transparent 0);
+  background-size: 60px 50px;
+  background-position: -50px -50px;
 }
 
 img {
@@ -22,18 +50,6 @@ input {
   margin-bottom: 10px;
 }
 
-/* Spacing for under the nav bar */
-.appDiv {
-  margin-top: 70px;
-  padding-bottom: 70px;
-  padding-top: 5px;
-}
-
-.appBar {
-  max-height: 70px;
-  min-height: 70px;
-}
-
 /* --------------------------------------------------------------------------------
 Backgrounds
 -------------------------------------------------------------------------------- */
@@ -44,7 +60,7 @@ Backgrounds
   height: auto; */
   object-fit: cover;
   z-index: -1;
-  filter: brightness(40%);
+  filter: brightness(60%);
   width: 100vw;
   height: 100vh;
   position: fixed;
@@ -55,7 +71,7 @@ Backgrounds
 .blurredBG {
   object-fit: cover;
   z-index: -1;
-  filter: blur(7px) brightness(40%);
+  filter: blur(7px) brightness(60%);
   transform: scale(1.1);
   width: 100vw;
   height: 100vh;
@@ -79,12 +95,26 @@ Containers
   text-align: center;
 }
 
+/* Spacing for under the nav bar */
+.appDiv {
+  margin-top: 70px;
+  padding-bottom: 70px;
+  padding-top: 5px;
+}
+
+.appBar {
+  max-height: 70px;
+  min-height: 70px;
+}
+
 .sideDrawerContainer {
   width: 100%
 }
 
 .dashBoardContainer {
   text-align: center;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 /* --------------------------------------------------------------------------------
@@ -92,16 +122,29 @@ Button
 -------------------------------------------------------------------------------- */
 
 .btn {
+  font-family: "Open Sans", sans-serif;
+  letter-spacing: 1px;
+  text-decoration: none;
+  text-transform: uppercase;
   display: inline-block;
-  padding: 10px 20px;
+  padding: 10px 10px;
   border-color: #014041;
   border-width: 1px 1px 3px;
   border-radius: 4px;
   background-color: #97c30a;
   color: #000;
-  font-size: 1.1rem;
   outline: 0;
   cursor: pointer;
+  /* Responsive button width and text size */
+  max-width: 50%;
+  font-size: 3vw;
+  /*  */
+  box-shadow: 5px 5px 2px 2px rgba(91, 91, 91, 0.2);
+  margin: 3px;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
 }
 
 .btn_sizeMin {
@@ -124,15 +167,21 @@ Button
   text-decoration: none;
 }
 
+.btn:active {
+  box-shadow: 2px 2px 1px 1px rgba(55, 55, 55, 0.2);
+  top: 2px;
+  left: 2px;
+}
+
 /* This line makes the "Register" and "Login" buttons look like links */
 .btn_asLink {
   padding: 0;
   border-width: 0;
-  border-bottom: 1px solid #cacaca;
+  border-bottom: 1px solid #C0BCB6;
   border-radius: 0;
   background: none;
   font: inherit;
-  color: #cacaca;
+  color: #C0BCB6;
 }
 
 .btn_asLink:hover {
@@ -141,40 +190,18 @@ Button
   color: salmon;
 }
 
-/* Responsive Dashboard buttons */
-.button-54 {
-  font-family: "Open Sans", sans-serif;
-  /* font-size: 16px; */
-  letter-spacing: 1px;
-  text-decoration: none;
-  text-transform: uppercase;
-  color: #000;
-  cursor: pointer;
-/* Responsive button width and text size */
-  max-width: 40%;
-  font-size:2.25vw;
-/*  */
-  border: 3px solid;
-  padding: 1em 0.5em;
-  box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
-  position: relative;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-}
-
-.button-54:active {
-  box-shadow: 0px 0px 0px 0px;
-  top: 5px;
-  left: 5px;
-}
-
 @media (min-width: 900px) {
-  .button-54 {
-    font-size:1.25vw;
+  .btn{
+    font-size: 14pt;
     max-width: 40%;
     padding: .75em .5em;
   }
+  .dashBoardContainer {
+    text-align: center;
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+  
 }
 
 /* --------------------------------------------------------------------------------
@@ -204,11 +231,11 @@ Form Treatment
   color: black;
   padding: 25px;
   margin: 0 auto 20px;
-  background-color: #cacaca;
+  background-color: #C0BCB6;
   border-radius: 3px;
   box-shadow: 0 1px 2px rgb(0, 0, 0, 0.4);
   background-image: radial-gradient(rgb(130, 130, 130) 1px, transparent 0);
-  background-size: 20px 20px;
+  background-size: 60px 50px;
   background-position: -50px -50px;
 }
 
@@ -225,4 +252,12 @@ Logos
 .SAMANLogoNAV {
   height: 40px;
   width: auto;
+}
+
+/* --------------------------------------------------------------------------------
+Misc
+-------------------------------------------------------------------------------- */
+
+.recentlyAddedItemsHeader {
+  margin-bottom: 5px;
 }

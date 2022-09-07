@@ -5,18 +5,17 @@ const {
   rejectUnauthenticated,
 } = require('../modules/authentication-middleware');
 
-router.get('/recentItems', rejectUnauthenticated, (req, res) => {
+router.get('/main', rejectUnauthenticated, (req, res) => {
   const queryText = `
-  SELECT "item_name", "item_id","current_holder", "model", "serial", "warranty_expiration", "state", "container_name", "date_added" FROM "items"
-  JOIN "user" ON "items".user_id = "user".id
-  JOIN "containers" ON "items".container_id = "containers".container_id
-  WHERE "user".id = $1
-  LIMIT 5;`;
+  SELECT "location_name" FROM "locations"
+  JOIN "user"
+  ON "locations".user_id = "user".id
+  WHERE "locations".user_id = $1 AND "isActive" = true;`;
 
   pool.query(queryText, [req.user.id])
     .then(response => {
       // console.log('data from server is', response.rows)
-      res.send(response.rows)
+      res.send(response.rows[0])
     }).catch(err => {
       // console.log(err)
       // res.sendStatus(500)

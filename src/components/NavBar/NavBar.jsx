@@ -12,6 +12,7 @@ import SideDrawer from "../SideDrawer/SideDrawer";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import navLogo from '../../files/SAMANLogo.png'
+import { Link } from 'react-router-dom'
 
 // Imports for TextFields
 import Box from "@mui/material/Box";
@@ -78,19 +79,22 @@ function NavBar() {
   return (
     <React.Fragment>
       <AppBar
-        sx={{ background: "#333333", paddingTop: "5px", paddingBottom: "5px"}}
+        sx={{ background: "#555555", paddingTop: "5px", paddingBottom: "5px"}}
         className="appBar"
       >
         <Toolbar>
           {isMatch ? (
             <>
               <SideDrawer />
+              <Link to="/home">
               <img src={navLogo} className="SAMANLogoNAV"/>
+              </Link>
             </>
           ) : (
             <>
-              {/* <h3>SAMAN</h3> */}
+              <Link to="/home">
               <img src={navLogo} className="SAMANLogoNAV"/>
+              </Link>
 
               {user.id ? (
                 <></>
