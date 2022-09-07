@@ -21,23 +21,26 @@ function UserPage() {
       <div>
         <h2>Welcome, {user.username}!</h2>
         <h2>Location</h2>
-        <button className="button-54">View Items</button>
-        <button className="button-54">Add New Item</button>
-        <button className="button-54">Add New Container</button>
+        <button className="btn">View Items</button>
+        <button className="btn">Add New Item</button>
+        <button className="btn">Add New Container</button>
       </div>
+      <h3 class='recentlyAddedItemsHeader'>Recently Added Items</h3>
       <TableContainer
-        sx={{ width: "80%", marginLeft: "10%", marginTop: '25px', boxShadow: 2}}
+        sx={{maxWidth: '100%', marginTop: '0px', boxShadow: 2}}
         component={Paper}
       >
-        <Toolbar sx={{justifyContent: "center", backgroundColor: '#fa8072'}}><h3>Recent Items</h3></Toolbar>
-        <Table sx={{ minWidth: 350 }} aria-label="simple table">
+        {/* <Toolbar sx={{display: 'flex', justifyContent: "center", backgroundColor: '#fa8072'}}><h3>Recent Items</h3></Toolbar> */}
+        <Table aria-label="simple table">
           <TableHead>
-            <TableRow>
-              <TableCell sx={{ maxWidth: 100, fontWeight: 'bold' }}>Item Name</TableCell>
-              <TableCell sx={{ minWidth: 100, fontWeight: 'bold' }} align="right">
+            <TableRow sx={{backgroundColor: '#1FBED6'}}>
+              <TableCell sx={{minWidth: 100, fontWeight: 'bold', fontSize: '12pt'}}
+              >Item Name
+              </TableCell>
+              <TableCell sx={{ minWidth: 100, fontWeight: 'bold', fontSize: '12pt' }}>
                 Container
               </TableCell>
-              <TableCell sx={{ minWidth: 100, fontWeight: 'bold' }} align="right">
+              <TableCell sx={{ minWidth: 100, fontWeight: 'bold', fontSize: '12pt' }}>
                 Date Added
               </TableCell>
               {/* <TableCell align="right">Carbs&nbsp;(g)</TableCell>
@@ -54,8 +57,8 @@ function UserPage() {
                 <TableCell component="th" scope="row">
                   {item.item_name}
                 </TableCell>
-                <TableCell align="right">{item.container_name}</TableCell>
-                <TableCell align="right">
+                <TableCell>{item.container_name}</TableCell>
+                <TableCell>
                   <Moment format="MMM Do YYYY">{item.date_added}</Moment>
                 </TableCell>
               </TableRow>

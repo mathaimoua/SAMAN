@@ -98,6 +98,7 @@ Containers
 
 .dashBoardContainer {
   text-align: center;
+  padding: 25px;
 }
 
 /* --------------------------------------------------------------------------------
@@ -105,16 +106,29 @@ Button
 -------------------------------------------------------------------------------- */
 
 .btn {
+  font-family: "Open Sans", sans-serif;
+  letter-spacing: 1px;
+  text-decoration: none;
+  text-transform: uppercase;
   display: inline-block;
-  padding: 10px 20px;
+  padding: 10px 10px;
   border-color: #014041;
   border-width: 1px 1px 3px;
   border-radius: 4px;
   background-color: #97c30a;
   color: #000;
-  font-size: 1.1rem;
   outline: 0;
   cursor: pointer;
+  /* Responsive button width and text size */
+  max-width: 50%;
+  font-size: 3vw;
+  /*  */
+  box-shadow: 5px 5px 2px 2px rgba(91, 91, 91, 0.2);
+  margin: 3px;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
 }
 
 .btn_sizeMin {
@@ -137,6 +151,12 @@ Button
   text-decoration: none;
 }
 
+.btn:active {
+  box-shadow: 2px 2px 1px 1px rgba(55, 55, 55, 0.2);
+  top: 2px;
+  left: 2px;
+}
+
 /* This line makes the "Register" and "Login" buttons look like links */
 .btn_asLink {
   padding: 0;
@@ -154,39 +174,9 @@ Button
   color: salmon;
 }
 
-/* Responsive Dashboard buttons */
-.button-54 {
-  font-family: "Open Sans", sans-serif;
-  /* font-size: 16px; */
-  letter-spacing: 1px;
-  text-decoration: none;
-  text-transform: uppercase;
-  color: black;
-  background-color: #97c30a;
-  cursor: pointer;
-/* Responsive button width and text size */
-  max-width: 40%;
-  font-size:2.25vw;
-/*  */
-  border: 3px solid;
-  margin: 3px;
-  padding: 1em 0.5em;
-  box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
-  position: relative;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-}
-
-.button-54:active {
-  box-shadow: 0px 0px 0px 0px;
-  top: 5px;
-  left: 5px;
-}
-
 @media (min-width: 900px) {
-  .button-54 {
-    font-size:1.25vw;
+  .btn{
+    font-size: 14pt;
     max-width: 40%;
     padding: .75em .5em;
   }
@@ -240,4 +230,12 @@ Logos
 .SAMANLogoNAV {
   height: 40px;
   width: auto;
+}
+
+/* --------------------------------------------------------------------------------
+Misc
+-------------------------------------------------------------------------------- */
+
+.recentlyAddedItemsHeader {
+  margin-bottom: 5px;
 }
