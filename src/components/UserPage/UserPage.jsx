@@ -11,12 +11,15 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import Toolbar from "@mui/material/Toolbar";
 
 function UserPage() {
   const user = useSelector((store) => store.user);
   const items = useSelector((store) => store.items);
   const mainLocation = useSelector((store) => store.locations.main);
+
+  const handleSort = (columnName) => {
+
+  }
 
   return (
     <div className="dashBoardContainer">
@@ -36,7 +39,7 @@ function UserPage() {
         <Table aria-label="simple table">
           <TableHead>
             <TableRow sx={{backgroundColor: '#fa8072'}}>
-              <TableCell sx={{minWidth: 100, fontWeight: 'bold', fontSize: '12pt'}}
+              <TableCell onClick={() => {handleSort('item_name')}} sx={{minWidth: 100, fontWeight: 'bold', fontSize: '12pt'}}
               >Item Name
               </TableCell>
               <TableCell sx={{ minWidth: 100, fontWeight: 'bold', fontSize: '12pt' }}>
