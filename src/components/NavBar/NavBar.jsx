@@ -8,7 +8,6 @@ import {
   useTheme,
 } from "@mui/material";
 import React, { useState } from "react";
-import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 import SideDrawer from "../SideDrawer/SideDrawer";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -23,6 +22,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import IconButton from "@mui/material/IconButton";
 
 function NavBar() {
+
   const handlePasswordChange = (event) => {
     setValues({ ...values, password: event.target.value });
   };
@@ -46,7 +46,6 @@ function NavBar() {
 
   const handleLogin = (event) => {
     event.preventDefault();
-
     if (values.username && values.password) {
       dispatch({
         type: "LOGIN",
@@ -55,6 +54,7 @@ function NavBar() {
           password: values.password,
         },
       });
+      setValues({ ...values, username: '', password: ''})
     } else {
       dispatch({ type: "LOGIN_INPUT_ERROR" });
     }
@@ -63,10 +63,11 @@ function NavBar() {
   const errors = useSelector((store) => store.errors);
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
-  const PAGES = ["Dashboard", "Locations", "Add New Item", "About"];
-  const [currentTab, setCurrentTab] = useState();
   const theme = useTheme();
-  console.log(theme);
+  const PAGES = ["Dashboard", "Locations", "Add New Item", "About"];
+  const [currentTab, setCurrentTab] = useState(0);
+
+  // console.log(theme);
   const isMatch = useMediaQuery(theme.breakpoints.down("md")); // Check for mobile device
   // console.log(isMatch);
 
@@ -77,7 +78,7 @@ function NavBar() {
   return (
     <React.Fragment>
       <AppBar
-        sx={{ background: "black", paddingTop: "5px", paddingBottom: "5px" }}
+        sx={{ background: "#333333", paddingTop: "5px", paddingBottom: "5px"}}
         className="appBar"
       >
         <Toolbar>
@@ -95,8 +96,8 @@ function NavBar() {
                 <></>
               ) : (
                 <Tabs
-                  textColor="inherit"
-                  onChange={(e, currentTab) => setCurrentTab(currentTab)}
+                  textColor="secondary"
+                  onChange={(currentTab) => setCurrentTab(currentTab)}
                   indicatorColor="primary"
                   sx={{ marginRight: "auto" }}
                 >
@@ -105,20 +106,20 @@ function NavBar() {
               )}
               {user.id && (
                 <Tabs
-                  textColor="inherit"
+                  textColor="secondary"
                   value={currentTab}
                   onChange={(e, currentTab) => setCurrentTab(currentTab)}
                   indicatorColor="primary"
                   sx={{ marginLeft: "auto" }}
                 >
                   {PAGES.map((page, index) => (
-                    <Tab key={index} label={page} />
+                    <Tab key={index} label={page} style={theme.tab} />
                   ))}
                 </Tabs>
               )}
               {user.id && (
-                <Button sx={{ marginLeft: "auto", color: "white" }}>
-                  <PowerSettingsNewIcon onClick={handleLogout} />
+                <Button sx={{ marginLeft: "auto", color: "white" }} onClick={handleLogout} >
+                  Logout
                 </Button>
               )}
               {user.id ? (

@@ -1,17 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 import "./LandingPage.css";
 import SAMANLogo from "../../files/SAMANLogo.png";
-import videoBG from '../../files/SAMANBG.MP4'
-import { useMediaQuery, useTheme } from '@mui/material'
+import videoBG from "../../files/SAMANBG.MP4";
+import { useMediaQuery, useTheme } from "@mui/material";
 
 // CUSTOM COMPONENTS
 import RegisterForm from "../RegisterForm/RegisterForm";
 
 function LandingPage() {
   const theme = useTheme();
-  const isMatch = useMediaQuery(theme.breakpoints.down("md")); 
-  console.log(isMatch)
+  const isMatch = useMediaQuery(theme.breakpoints.down("md"));
   // const [heading, setHeading] = useState("Welcome");
   const history = useHistory();
 
@@ -28,19 +27,28 @@ function LandingPage() {
       <div className="grid">
         <div className="grid-col grid-col_8">
           <img src={SAMANLogo} id="fullLogo" />
-          <p id='landingPageText'>
-            Simple Asset Management (SAMAN) is exactly what the name suggests, easy organizing of your belongings. SAMAN makes it easy for any organization or individual to keep track of their belongings. Unlike other asset management software, SAMAN does NOT cost an arm and a leg, in fact, <span id='itsfree'>it's free!</span>
+          <p id="landingPageText">
+            Simple Asset Management (SAMAN) is exactly what the name suggests,
+            easy organizing of your belongings. SAMAN makes it easy for any
+            organization or individual to get organized and help reduce
+            unnecessary losses. Unlike other asset management software, SAMAN
+            does NOT cost an arm and a leg, in fact,{" "}
+            <span id="itsfree">it's free!</span>
           </p>
         </div>
         <div className="grid-col grid-col_4">
           <RegisterForm />
 
-      {isMatch ? <center className="alreadyMember">
-            <h4>Already a Member?</h4>
-            <button className="btn btn_sizeSm" onClick={onLogin}>
-              Login
-            </button>
-          </center> : <></>}
+          {isMatch ? (
+            <center className="alreadyMember">
+              <h4>Already a Member?</h4>
+              <button className="btn btn_sizeSm" onClick={onLogin}>
+                Login
+              </button>
+            </center>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     </div>

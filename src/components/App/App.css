@@ -104,11 +104,11 @@ Button
 .btn_asLink {
   padding: 0;
   border-width: 0;
-  border-bottom: 1px solid #444;
+  border-bottom: 1px solid #cacaca;
   border-radius: 0;
   background: none;
   font: inherit;
-  color: #444;
+  color: #cacaca;
 }
 
 .btn_asLink:hover {
@@ -158,10 +158,29 @@ input {
 }
 
 .usernameTextField {
-  background-color: #cacaca;
+  background-color: #ffffff;
 }
 
 .SAMANLogoNAV {
   height: 40px;
   width: auto;
+}
+
+.blurredBG {
+  object-fit: cover;
+  z-index: -1;
+  filter: blur(7px) brightness(40%);
+  transform: scale(1.1);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.loginRegisterPageContainer {
+  padding-top: 15%;
+  padding-left: 3%;
+  padding-right: 3%;
+  text-align: center;
 }

@@ -1,15 +1,22 @@
 import React from 'react';
-
+import blurredRegisterBG from '../../files/SAMANStillRegistration.png'
 import { useHistory } from 'react-router-dom';
 import RegisterForm from '../RegisterForm/RegisterForm';
+import { useMediaQuery, useTheme } from "@mui/material";
+
+
+
 
 function RegisterPage() {
+  const theme = useTheme();
+  const isMatch = useMediaQuery(theme.breakpoints.down("md"));
   const history = useHistory();
 
   return (
-    <div>
+    <div class="loginRegisterPageContainer">
+      <img src={blurredRegisterBG} class='blurredBG'/>
       <RegisterForm />
-
+      {isMatch &&
       <center>
         <button
           type="button"
@@ -20,7 +27,7 @@ function RegisterPage() {
         >
           Login
         </button>
-      </center>
+      </center> }
     </div>
   );
 }

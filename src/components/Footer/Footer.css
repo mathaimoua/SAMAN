@@ -4,6 +4,7 @@ footer {
   bottom: 0;
   width: 100%;
   text-align: center;
-  background-color: black;
+  background-color: #333333;
+  filter: opacity(96%);
   color: white;
 }

@@ -1,14 +1,15 @@
 import React from 'react';
 import LoginForm from '../LoginForm/LoginForm';
 import { useHistory } from 'react-router-dom';
+import blurredBG from '../../files/SAMANStillBG.png'
 
 function LoginPage() {
   const history = useHistory();
 
   return (
-    <div>
+    <div className="loginRegisterPageContainer">
+      <img src={blurredBG} class='blurredBG'/>
       <LoginForm />
-
       <center>
         <button
           type="button"
