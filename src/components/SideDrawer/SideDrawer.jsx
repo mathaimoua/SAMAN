@@ -6,6 +6,7 @@ import {
   ListItemIcon,
   ListItemText,
   IconButton,
+  useTheme,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
@@ -13,10 +14,11 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import SAMANLogo from "../../files/SAMANLogo.png";
 
-function SideDrawer() {
+function SideDrawer(){
+
   const dispatch = useDispatch();
+  const theme = useTheme();
   const user = useSelector((store) => store.user);
-  const PAGES = ["Dashboard", "Locations", "Add New Item", "About"];
   const [openDrawer, setOpenDrawer] = useState(false);
 
   const handleLogout = () => {
@@ -39,38 +41,38 @@ function SideDrawer() {
             <>
               <ListItemButton onClick={() => setOpenDrawer(!openDrawer)}>
                 <ListItemIcon>
-                  <ListItemText>Dashboard</ListItemText>
+                  <ListItemText><h3>Dashboard</h3></ListItemText>
                 </ListItemIcon>
               </ListItemButton>
 
               <ListItemButton onClick={() => setOpenDrawer(!openDrawer)}>
                 <ListItemIcon>
-                  <ListItemText>Locations</ListItemText>
+                  <ListItemText><h3>Locations</h3></ListItemText>
                 </ListItemIcon>
               </ListItemButton>
 
               <ListItemButton onClick={() => setOpenDrawer(!openDrawer)}>
                 <ListItemIcon>
-                  <ListItemText>Add New Item</ListItemText>
+                  <ListItemText><h3>Add New Item</h3></ListItemText>
                 </ListItemIcon>
               </ListItemButton>
 
               <ListItemButton onClick={() => setOpenDrawer(!openDrawer)}>
                 <ListItemIcon>
-                  <ListItemText>About</ListItemText>
+                  <ListItemText><h3>About</h3></ListItemText>
                 </ListItemIcon>
               </ListItemButton>
 
               <ListItemButton onClick={handleLogout}>
                 <ListItemIcon>
-                  <ListItemText>Logout</ListItemText>
+                  <ListItemText><h3>Logout</h3></ListItemText>
                 </ListItemIcon>
               </ListItemButton>
             </>
           ) : (
             <ListItemButton>
               <ListItemIcon>
-                <ListItemText>About</ListItemText>
+                <ListItemText><h3>About</h3></ListItemText>
               </ListItemIcon>
             </ListItemButton>
           )}

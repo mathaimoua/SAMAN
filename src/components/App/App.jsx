@@ -38,7 +38,7 @@ function App() {
       // width: '140px',
       // height: '72px',
       color: '#ffffff'
-  },
+    },
   });
   // console.log(theme)
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));

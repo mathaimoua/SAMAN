@@ -92,7 +92,7 @@ function NavBar() {
             </>
           ) : (
             <>
-              <Link to="/home">
+              <Link to="/home" onClick={() => setCurrentTab(0)}>
               <img src={navLogo} className="SAMANLogoNAV"/>
               </Link>
 
