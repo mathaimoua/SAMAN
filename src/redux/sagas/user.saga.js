@@ -20,6 +20,7 @@ function* fetchUser() {
     // the client-side code know the user is logged in
     yield put({ type: 'SET_USER', payload: response.data });
     yield put({type: 'FETCH_RECENT_ITEMS'})
+    yield put({type: 'FETCH_MAIN_LOCATION'})
   } catch (error) {
     console.log('User get request failed', error);
   }
