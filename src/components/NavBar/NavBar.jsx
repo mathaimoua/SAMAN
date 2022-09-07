@@ -78,7 +78,7 @@ function NavBar() {
   return (
     <React.Fragment>
       <AppBar
-        sx={{ background: "#333333", paddingTop: "5px", paddingBottom: "5px"}}
+        sx={{ background: "#555555", paddingTop: "5px", paddingBottom: "5px"}}
         className="appBar"
       >
         <Toolbar>

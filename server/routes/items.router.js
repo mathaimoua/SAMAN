@@ -7,7 +7,7 @@ const {
 
 router.get('/recentItems', rejectUnauthenticated, (req, res) => {
   const queryText = `
-  SELECT "item_name", "item_id","current_holder", "model", "serial", "warranty_expiration", "state", "container_name" FROM "items"
+  SELECT "item_name", "item_id","current_holder", "model", "serial", "warranty_expiration", "state", "container_name", "date_added" FROM "items"
   JOIN "user" ON "items".user_id = "user".id
   JOIN "containers" ON "items".container_id = "containers".container_id
   WHERE "user".id = $1
