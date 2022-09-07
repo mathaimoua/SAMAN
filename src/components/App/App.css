@@ -1,3 +1,6 @@
+/* --------------------------------------------------------------------------------
+Globals
+-------------------------------------------------------------------------------- */
 html,
 body,
 #react-root {
@@ -14,6 +17,11 @@ img {
   max-width: 100%;
 }
 
+input {
+  margin: 5px;
+  margin-bottom: 10px;
+}
+
 /* Spacing for under the nav bar */
 .appDiv {
   margin-top: 70px;
@@ -25,6 +33,10 @@ img {
   max-height: 70px;
   min-height: 70px;
 }
+
+/* --------------------------------------------------------------------------------
+Backgrounds
+-------------------------------------------------------------------------------- */
 
 #videoBG {
   /* position: fixed;
@@ -40,27 +52,39 @@ img {
   left: 0;
 }
 
-/* @media (min-aspect-ratio: 16/9) {
-  #videoBG {
-      width:100%;
-      height: auto;
-  }
+.blurredBG {
+  object-fit: cover;
+  z-index: -1;
+  filter: blur(7px) brightness(40%);
+  transform: scale(1.1);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
-@media (max-aspect-ratio: 16/9) {
-  #videoBG {
-      right: 0%;
-      width:auto;
-      height: 100%;
-  }
-} */
-
 /* --------------------------------------------------------------------------------
-Container
+Containers
 -------------------------------------------------------------------------------- */
 
 .container {
   padding: 0px;
+}
+
+.loginRegisterPageContainer {
+  padding-top: 15%;
+  padding-left: 3%;
+  padding-right: 3%;
+  text-align: center;
+}
+
+.sideDrawerContainer {
+  width: 100%
+}
+
+.dashBoardContainer {
+  text-align: center;
 }
 
 /* --------------------------------------------------------------------------------
@@ -117,6 +141,42 @@ Button
   color: salmon;
 }
 
+/* Responsive Dashboard buttons */
+.button-54 {
+  font-family: "Open Sans", sans-serif;
+  /* font-size: 16px; */
+  letter-spacing: 1px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #000;
+  cursor: pointer;
+/* Responsive button width and text size */
+  max-width: 40%;
+  font-size:2.25vw;
+/*  */
+  border: 3px solid;
+  padding: 1em 0.5em;
+  box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-54:active {
+  box-shadow: 0px 0px 0px 0px;
+  top: 5px;
+  left: 5px;
+}
+
+@media (min-width: 900px) {
+  .button-54 {
+    font-size:1.25vw;
+    max-width: 40%;
+    padding: .75em .5em;
+  }
+}
+
 /* --------------------------------------------------------------------------------
 Alert
 -------------------------------------------------------------------------------- */
@@ -152,75 +212,17 @@ Form Treatment
   background-position: -50px -50px;
 }
 
-input {
-  margin: 5px;
-  margin-bottom: 10px;
-}
-
+/* Nav bar fields */
 .usernameTextField {
   background-color: #ffffff;
 }
+/*  */
+
+/* --------------------------------------------------------------------------------
+Logos
+-------------------------------------------------------------------------------- */
 
 .SAMANLogoNAV {
   height: 40px;
   width: auto;
-}
-
-.blurredBG {
-  object-fit: cover;
-  z-index: -1;
-  filter: blur(7px) brightness(40%);
-  transform: scale(1.1);
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-}
-
-.loginRegisterPageContainer {
-  padding-top: 15%;
-  padding-left: 3%;
-  padding-right: 3%;
-  text-align: center;
-}
-
-.sideDrawerContainer {
-  width: 100%
-}
-
-/* Responsive button */
-.button-54 {
-  font-family: "Open Sans", sans-serif;
-  /* font-size: 16px; */
-  letter-spacing: 1px;
-  text-decoration: none;
-  text-transform: uppercase;
-  color: #000;
-  cursor: pointer;
-/* Responsive button width and text size */
-  max-width: 40%;
-  font-size:2.5vw;
-/*  */
-  border: 3px solid;
-  padding: 2em 1em;
-  box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
-  position: relative;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-}
-
-.button-54:active {
-  box-shadow: 0px 0px 0px 0px;
-  top: 5px;
-  left: 5px;
-}
-
-@media (min-width: 900px) {
-  .button-54 {
-    font-size:2vw;
-    max-width: 50%;
-    padding: .5em 1.5em;
-  }
 }
