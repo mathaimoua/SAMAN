@@ -7,7 +7,7 @@ const {
 
 router.get('/main', rejectUnauthenticated, (req, res) => {
   const queryText = `
-  SELECT "location_name" FROM "locations"
+  SELECT "location_name", "location_id" FROM "locations"
   JOIN "user"
   ON "locations".user_id = "user".id
   WHERE "locations".user_id = $1 AND "isActive" = true;`;
@@ -16,6 +16,23 @@ router.get('/main', rejectUnauthenticated, (req, res) => {
     .then(response => {
       // console.log('data from server is', response.rows)
       res.send(response.rows[0])
+    }).catch(err => {
+      // console.log(err)
+      // res.sendStatus(500)
+    })
+});
+
+router.get('/', rejectUnauthenticated, (req, res) => {
+  const queryText = `
+  SELECT "location_name", "location_id", "isActive" FROM "locations"
+  JOIN "user"
+  ON "locations".user_id = "user".id
+  WHERE "locations".user_id = $1;`;
+
+  pool.query(queryText, [req.user.id])
+    .then(response => {
+      // console.log('data from server is', response.rows)
+      res.send(response.rows)
     }).catch(err => {
       // console.log(err)
       // res.sendStatus(500)

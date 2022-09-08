@@ -9,6 +9,7 @@ import {
   useTheme,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+import { Link } from 'react-router-dom'
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -45,7 +46,7 @@ function SideDrawer(){
                 </ListItemIcon>
               </ListItemButton>
 
-              <ListItemButton onClick={() => setOpenDrawer(!openDrawer)}>
+              <ListItemButton component={Link} to="/locations" onClick={() => setOpenDrawer(!openDrawer)}>
                 <ListItemIcon>
                   <ListItemText><h3>Locations</h3></ListItemText>
                 </ListItemIcon>

@@ -25,7 +25,7 @@ function UserPage() {
     <div className="dashBoardContainer">
       <div>
         <h2>Welcome, {user.username}!</h2>
-        <h2>Currently managing: <Link>{mainLocation}</Link></h2>
+        <h2>Currently managing: <Link to={'/location:'+mainLocation.location_id}>{mainLocation.location_name}</Link></h2>
         <button className="btn">View Items</button>
         <button className="btn">Add New Item</button>
         <button className="btn">Add New Container</button>
@@ -48,8 +48,6 @@ function UserPage() {
               <TableCell sx={{ minWidth: 100, fontWeight: 'bold', fontSize: '12pt' }}>
                 Date Added
               </TableCell>
-              {/* <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell> */}
             </TableRow>
           </TableHead>
           <TableBody>
