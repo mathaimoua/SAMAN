@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 function LocationForm() {
+
+  const history = useHistory();
   const [locationName, setLocationName] = useState("");
   const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
@@ -12,6 +15,7 @@ function LocationForm() {
       return -1;
     } else {
       dispatch({ type: "ADD_LOCATION", payload: locationName });
+      history.push('/locations')
     }
   };
 

@@ -39,9 +39,6 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     })
 });
 
-/**
- * POST route template
- */
 router.post('/', (req, res) => {
   console.log('req.body.name is', req.body.name)
   const queryText = `
@@ -57,6 +54,13 @@ router.post('/', (req, res) => {
       console.log(err)
       res.sendStatus(500)
     })
+});
+
+router.put('/makeactive/:id', rejectUnauthenticated, (req, res) => {
+  const queryText = `
+    
+  ;`;
+
 });
 
 module.exports = router;
