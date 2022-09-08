@@ -300,3 +300,12 @@ Misc
 .recentlyAddedItemsHeader {
   margin-bottom: 5px;
 }
+
+.noLocationText {
+  color: salmon;
+  margin-left: 50px;
+  margin-right: 50px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: #555555;
+}

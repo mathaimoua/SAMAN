@@ -58,9 +58,20 @@ router.post('/', (req, res) => {
 
 router.put('/makeactive/:id', rejectUnauthenticated, (req, res) => {
   const queryText = `
-    
+  UPDATE "locations"
+  SET "isActive" = TRUE
+  WHERE user_id = $1 AND "location_id" = $2;
   ;`;
 
+  pool.query(queryText, [req.user.id, req.params])
+    .then(response => {
+      console.log(response)
+      res.sendStatus(200)
+    .catch(err => {
+      console.log(err)
+      res.sendStatus(500)
+    })
+    })
 });
 
 module.exports = router;
