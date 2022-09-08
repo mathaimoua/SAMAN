@@ -25,7 +25,7 @@ function UserPage() {
     <div className="dashBoardContainer">
       <div>
         <h2>Welcome, {user.username}!</h2>
-        <h2>Currently managing: <Link to={'/location:'+mainLocation.location_id}>{mainLocation.location_name}</Link></h2>
+        <h2>Currently managing: <Link className="locationLink" to={'/location/'+mainLocation.location_id}>{mainLocation.location_name}</Link></h2>
         <button className="btn">View Items</button>
         <button className="btn">Add New Item</button>
         <button className="btn">Add New Container</button>

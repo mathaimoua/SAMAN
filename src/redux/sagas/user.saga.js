@@ -19,16 +19,24 @@ function* fetchUser() {
     // with an id and username set the client-side user object to let
     // the client-side code know the user is logged in
     yield put({ type: 'SET_USER', payload: response.data });
-    yield put({type: 'FETCH_RECENT_ITEMS'})
-    yield put({type: 'FETCH_MAIN_LOCATION'})
-    yield put({type: 'FETCH_ALL_LOCATIONS'})
+    // yield put({type: 'FETCH_RECENT_ITEMS'})
+    // yield put({type: 'FETCH_MAIN_LOCATION'})
+    // yield put({type: 'FETCH_ALL_LOCATIONS'})
+    yield loadData();
   } catch (error) {
     console.log('User get request failed', error);
   }
 }
 
+function* loadData(){
+  yield put({type: 'FETCH_RECENT_ITEMS'})
+  yield put({type: 'FETCH_MAIN_LOCATION'})
+  yield put({type: 'FETCH_ALL_LOCATIONS'})
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
+  yield takeLatest('LOAD_DATA', loadData);
 }
 
 export default userSaga;

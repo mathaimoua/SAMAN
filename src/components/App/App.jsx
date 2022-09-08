@@ -19,6 +19,7 @@ import LoginPage from "../LoginPage/LoginPage";
 import RegisterPage from "../RegisterPage/RegisterPage";
 import NavBar from "../NavBar/NavBar";
 import Locations from "../Locations/Locations";
+import LocationForm from "../LocationForm/LocationForm";
 import "./App.css";
 
 function App() {
@@ -70,6 +71,10 @@ function App() {
 
             <ProtectedRoute exact path="/info">
               <InfoPage />
+            </ProtectedRoute>
+
+            <ProtectedRoute exact path="/addlocation">
+              <LocationForm />
             </ProtectedRoute>
 
             <ProtectedRoute exact path="/locations">

@@ -36,11 +36,11 @@ function SideDrawer(){
         open={openDrawer}
         onClose={() => setOpenDrawer(false)}
       >
-        <img src={SAMANLogo} className="SAMANLogoNav" width="70%" />
+        <img src={SAMANLogo} className="SAMANLogoSide" width="80%"/>
         <List>
           {user.id ? (
             <>
-              <ListItemButton onClick={() => setOpenDrawer(!openDrawer)}>
+              <ListItemButton component={Link} to="/user" onClick={() => setOpenDrawer(!openDrawer)}>
                 <ListItemIcon>
                   <ListItemText><h3>Dashboard</h3></ListItemText>
                 </ListItemIcon>
@@ -58,7 +58,7 @@ function SideDrawer(){
                 </ListItemIcon>
               </ListItemButton>
 
-              <ListItemButton onClick={() => setOpenDrawer(!openDrawer)}>
+              <ListItemButton component={Link} to="/about" onClick={() => setOpenDrawer(!openDrawer)}>
                 <ListItemIcon>
                   <ListItemText><h3>About</h3></ListItemText>
                 </ListItemIcon>
@@ -71,11 +71,31 @@ function SideDrawer(){
               </ListItemButton>
             </>
           ) : (
-            <ListItemButton>
+            <>
+            <ListItemButton component={Link} to="/home" onClick={handleLogout}>
+              <ListItemIcon>
+                <ListItemText><h3>Home</h3></ListItemText>
+              </ListItemIcon>
+            </ListItemButton>
+
+            <ListItemButton component={Link} to="/login" onClick={handleLogout}>
+              <ListItemIcon>
+                <ListItemText><h3>Login</h3></ListItemText>
+              </ListItemIcon>
+            </ListItemButton>
+
+            <ListItemButton component={Link} to="/registration" onClick={handleLogout}>
+              <ListItemIcon>
+                <ListItemText><h3>Register</h3></ListItemText>
+              </ListItemIcon>
+            </ListItemButton>
+
+            <ListItemButton component={Link} to="/about" onClick={handleLogout}>
               <ListItemIcon>
                 <ListItemText><h3>About</h3></ListItemText>
               </ListItemIcon>
             </ListItemButton>
+            </>
           )}
         </List>
       </Drawer>

@@ -16,14 +16,14 @@ body,
   height: 100%;
 }
 
-a {
+.locationLink {
   color: #1FBED6;
   text-decoration: solid;
   text-shadow: #000 2px 2px 2px;
   text-transform: uppercase;
 }
 
-a:hover {
+.locationLink:hover {
   color: #555555
 }
 
@@ -118,11 +118,19 @@ Containers
 }
 
 .locationsContainer { 
-  padding: 50px;
+  padding: 20px;
 }
 
 .locationsDataContainer {
   text-align: center;
+}
+
+.addLocationBtn {
+  text-align: right;
+}
+
+.locationFormDiv {
+  margin-top: 50px;
 }
 
 /* --------------------------------------------------------------------------------
@@ -135,7 +143,7 @@ Button
   text-decoration: none;
   text-transform: uppercase;
   display: inline-block;
-  padding: 10px 10px;
+  padding: 8px 8px;
   border-color: #014041;
   border-width: 1px 1px 3px;
   border-radius: 4px;
@@ -145,7 +153,7 @@ Button
   cursor: pointer;
   /* Responsive button width and text size */
   max-width: 50%;
-  font-size: 2.75vw;
+  font-size: 10pt;
   /*  */
   box-shadow: 5px 5px 2px 2px rgba(91, 91, 91, 0.2);
   margin: 3px;
@@ -209,6 +217,9 @@ Button
     padding-left: 80px;
     padding-right: 80px;
   }
+  .locationsContainer { 
+    padding: 80px;
+  }
   
 }
 
@@ -247,6 +258,19 @@ Form Treatment
   background-position: -50px -50px;
 }
 
+.locationForm {
+  box-sizing: border-box;
+  width: 400px;
+  max-width: 100%;
+  color: black;
+  padding: 25px;
+  margin: 0 auto 20px;
+  background-color: #ffffff;
+  border-radius: 3px;
+  box-shadow: 0 1px 2px rgb(0, 0, 0, 0.4);
+  text-align: center;
+}
+
 /* Nav bar fields */
 .usernameTextField {
   background-color: #ffffff;
@@ -261,6 +285,13 @@ Logos
   height: 40px;
   width: auto;
 }
+
+.SAMANLogoSide {
+  height: 60px;
+  width: auto;
+  margin-top: 20px;
+}
+
 
 /* --------------------------------------------------------------------------------
 Misc

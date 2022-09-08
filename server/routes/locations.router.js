@@ -43,7 +43,20 @@ router.get('/', rejectUnauthenticated, (req, res) => {
  * POST route template
  */
 router.post('/', (req, res) => {
-  // POST route code here
+  console.log('req.body.name is', req.body.name)
+  const queryText = `
+  INSERT INTO "locations" ("location_name", "user_id")
+  VALUES ($1, $2);
+  `;
+
+  pool.query(queryText, [req.body.name, req.user.id])
+    .then(response => {
+      console.log(response)
+      res.sendStatus(200)
+    }).catch(err => {
+      console.log(err)
+      res.sendStatus(500)
+    })
 });
 
 module.exports = router;

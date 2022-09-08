@@ -21,9 +21,20 @@ function* fetchLocations() {
   }
 }
 
+function* addLocation(action) {
+  try {
+    yield axios.post( '/api/locations/', {name: action.payload})
+    // yield console.log( 'payload from fetchLocations', response.data )
+    yield put({ type: 'LOAD_DATA' });
+  } catch ( error ) {
+    // console.log('User get request failed', error);
+  }
+}
+
 function* mainLocationSaga() {
   yield takeEvery('FETCH_MAIN_LOCATION', fetchMainLocation);
   yield takeEvery('FETCH_ALL_LOCATIONS', fetchLocations);
+  yield takeLatest('ADD_LOCATION', addLocation);
 }
 
 export default mainLocationSaga;
