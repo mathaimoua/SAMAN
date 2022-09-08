@@ -1,4 +1,4 @@
-const locationsReducer = (state = {main: '', allLocations: []}, action) => {
+const locationsReducer = (state = {main: {}, allLocations: []}, action) => {
   switch (action.type) {
     case "SET_MAIN_LOCATION":
       return {...state, main: action.payload};

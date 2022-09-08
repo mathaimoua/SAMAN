@@ -23,7 +23,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import IconButton from "@mui/material/IconButton";
 
 function NavBar() {
-  
+
   const errors = useSelector((store) => store.errors);
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
@@ -74,8 +74,6 @@ function NavBar() {
       dispatch({ type: "LOGIN_INPUT_ERROR" });
     }
   };
-
-
 
   const handleLogout = () => {
     dispatch({ type: "LOGOUT" });
