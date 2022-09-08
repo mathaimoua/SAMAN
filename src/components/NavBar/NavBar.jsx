@@ -23,6 +23,20 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import IconButton from "@mui/material/IconButton";
 
 function NavBar() {
+  
+  const errors = useSelector((store) => store.errors);
+  const user = useSelector((store) => store.user);
+  const dispatch = useDispatch();
+  const theme = useTheme();
+  // console.log(theme);
+  // For use with Tab and Tabs
+  const PAGES = ["Dashboard", "Locations", "Add New Item", "About"];
+  const pageLinks = ["/user", "/locations", "/additem", "/about"]
+  const [currentTab, setCurrentTab] = useState(0);
+
+  // Check for mobile device
+  const isMatch = useMediaQuery(theme.breakpoints.down("md")); 
+  // console.log(isMatch);
 
   const handlePasswordChange = (event) => {
     setValues({ ...values, password: event.target.value });
@@ -61,16 +75,7 @@ function NavBar() {
     }
   };
 
-  const errors = useSelector((store) => store.errors);
-  const user = useSelector((store) => store.user);
-  const dispatch = useDispatch();
-  const theme = useTheme();
-  const PAGES = ["Dashboard", "Locations", "Add New Item", "About"];
-  const [currentTab, setCurrentTab] = useState(0);
 
-  // console.log(theme);
-  const isMatch = useMediaQuery(theme.breakpoints.down("md")); // Check for mobile device
-  // console.log(isMatch);
 
   const handleLogout = () => {
     dispatch({ type: "LOGOUT" });
@@ -105,7 +110,11 @@ function NavBar() {
                   indicatorColor="primary"
                   sx={{ marginRight: "auto" }}
                 >
-                  <Tab label="About" style={theme.tab}></Tab>
+                  <Tab 
+                    component={Link}
+                    to="/about" 
+                    label="About" 
+                    style={theme.tab}></Tab>
                 </Tabs>
               )}
               {user.id && (
@@ -117,7 +126,8 @@ function NavBar() {
                   sx={{ marginLeft: "auto" }}
                 >
                   {PAGES.map((page, index) => (
-                    <Tab key={index} label={page} style={theme.tab} />
+                    <Tab component={Link}
+                    to={pageLinks[index]} key={index} label={page} style={theme.tab} />
                   ))}
                 </Tabs>
               )}
