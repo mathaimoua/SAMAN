@@ -1,5 +1,6 @@
 import { useHistory, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useState } from 'react'
 
 // Table Imports
 import Table from "@mui/material/Table";
@@ -21,16 +22,28 @@ import { Button } from "@mui/material";
 
 function Locations() {
   const history = useHistory();
+  const [open, setOpen] = useState(false);
+  const [IDToDelete, setIDToDelete] = useState();
   const locations = useSelector((store) => store.locations.allLocations);
 
   const handleAddLocation = () => {
     history.push('/addlocation')
   }
 
-  const handleDelete = (ID) => {
-    // console.log(ID);
-
+  const handleDelete = () => {
+    console.log('id to delete is', IDToDelete)
+    setOpen(false);
   }
+
+  const handleClickDelete = (id) => {
+    // console.log(id)
+    setIDToDelete(id)
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <div className="locationsContainer">
@@ -98,7 +111,8 @@ function Locations() {
                     sx={{ minWidth: 25, fontWeight: "bold", fontSize: "12pt" }}
                   >
                     <Button
-                      onClick={() => handleDelete(location.location_id)}
+                      // onClick={() => handleDelete(location.location_id)}
+                      onClick={() => handleClickDelete(location.location_id)}
                       sx={{
                         marginTop: ".5em",
                         marginLeft: "auto",
@@ -116,6 +130,33 @@ function Locations() {
         <div className="addLocationBtn">
           <button className="btn" onClick={handleAddLocation}>Add New Location</button>
         </div>
+        <Dialog
+        PaperProps={{
+          style: {
+            backgroundColor: '#C0BCB6',
+            boxShadow: 'none',
+          },
+        }}
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Permanently Delete Location?"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are you sure you want to delete this location?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button sx={{color: 'black'}} onClick={handleClose}>Cancel</Button>
+          <Button sx={{color: 'red'}}  onClick={handleDelete} autoFocus>
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
       </div>
     </div>
   );
