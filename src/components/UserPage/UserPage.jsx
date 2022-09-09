@@ -25,7 +25,7 @@ function UserPage() {
     <div className="dashBoardContainer">
       <div>
         <h2>Welcome, {user.username}!</h2>
-        <span><h2>Currently managing:</h2> { mainLocation ? <Link className="locationLink" to={'/location/'+mainLocation.location_id}>{mainLocation.location_name}</Link> : <p className="noLocationText">No location set, please create a location!</p> }</span>
+        <h2>Currently managing: { mainLocation ? <Link className="locationLink" to={'/location/'+mainLocation.location_id}>{mainLocation.location_name}</Link> : <p className="noLocationText">No location set, please create a location!</p> }</h2>
         <p></p>
         <button className="btn">View Items</button>
         <button className="btn">Add New Item</button>
@@ -36,7 +36,6 @@ function UserPage() {
         sx={{maxWidth: '100%', marginTop: '0px', boxShadow: 2}}
         component={Paper}
       >
-        {/* <Toolbar sx={{display: 'flex', justifyContent: "center", backgroundColor: '#fa8072'}}><h3>Recent Items</h3></Toolbar> */}
         <Table aria-label="simple table">
           <TableHead>
             <TableRow sx={{backgroundColor: '#fa8072'}}>

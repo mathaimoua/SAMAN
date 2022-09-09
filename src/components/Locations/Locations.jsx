@@ -10,6 +10,13 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
+// Confirmation Dialogue Imports
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+
 import { Button } from "@mui/material";
 
 function Locations() {
@@ -18,6 +25,11 @@ function Locations() {
 
   const handleAddLocation = () => {
     history.push('/addlocation')
+  }
+
+  const handleDelete = (ID) => {
+    // console.log(ID);
+
   }
 
   return (
@@ -37,7 +49,6 @@ function Locations() {
           }}
           component={Paper}
         >
-          {/* <Toolbar sx={{display: 'flex', justifyContent: "center", backgroundColor: '#fa8072'}}><h3>Recent Items</h3></Toolbar> */}
           <Table aria-label="simple table">
             <TableHead>
               <TableRow sx={{ backgroundColor: "#fa8072" }}>
@@ -87,6 +98,7 @@ function Locations() {
                     sx={{ minWidth: 25, fontWeight: "bold", fontSize: "12pt" }}
                   >
                     <Button
+                      onClick={() => handleDelete(location.location_id)}
                       sx={{
                         marginTop: ".5em",
                         marginLeft: "auto",

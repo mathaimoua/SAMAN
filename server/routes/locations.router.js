@@ -40,7 +40,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  console.log('req.body.name is', req.body.name)
+  // console.log('req.body.name is', req.body.name)
   const queryText = `
   INSERT INTO "locations" ("location_name", "user_id")
   VALUES ($1, $2);
@@ -57,20 +57,21 @@ router.post('/', (req, res) => {
 });
 
 router.put('/makeactive/:id', rejectUnauthenticated, (req, res) => {
+  const id = req.params.id
+  console.log('params is', id)
   const queryText = `
   UPDATE "locations"
   SET "isActive" = TRUE
   WHERE user_id = $1 AND "location_id" = $2;
   ;`;
 
-  pool.query(queryText, [req.user.id, req.params])
+  pool.query(queryText, [req.user.id, id])
     .then(response => {
       console.log(response)
-      res.sendStatus(200)
+      res.sendStatus(200)})
     .catch(err => {
       console.log(err)
       res.sendStatus(500)
-    })
     })
 });
 

@@ -4,18 +4,23 @@ import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 function LocationForm() {
-
   const history = useHistory();
   const [locationName, setLocationName] = useState("");
   const errors = useSelector((store) => store.errors);
+  const location = useSelector((store) => store.locations);
   const dispatch = useDispatch();
 
   const handleSubmit = () => {
-    if ((locationName === '')) {
+    if (locationName === "") {
       return -1;
     } else {
-      dispatch({ type: "ADD_LOCATION", payload: locationName });
-      history.push('/locations')
+      if (location.main === {} || location.main === "") {
+        dispatch({ type: "ADD_FIRST_LOCATION", payload: locationName });
+        history.push('/locations')
+      } else {
+        dispatch({ type: "ADD_LOCATION", payload: locationName });
+        history.push("/locations");
+      }
     }
   };
 
