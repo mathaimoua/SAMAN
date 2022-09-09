@@ -4,8 +4,8 @@ import { put, takeLatest } from 'redux-saga/effects';
 // worker Saga: will be fired on "FETCH_USER" actions
 function* fetchContainers(action) {
   try {
-    // console.log('/api/containers/', action.payload)
-    const response = yield axios.get(`/api/containers/${action.payload}`)
+    console.log('/api/containers/', action.payload.id)
+    const response = yield axios.get(`/api/containers/${action.payload.id}`)
     // yield console.log('payload is', response.data)
     yield put({ type: 'SET_CONTAINERS', payload: response.data });
   } catch (error) {

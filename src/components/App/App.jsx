@@ -82,7 +82,7 @@ function App() {
               <Locations />
             </ProtectedRoute>
 
-            <ProtectedRoute path="/containers/">
+            <ProtectedRoute path="/containers/:id">
               <Containers />
             </ProtectedRoute>
 

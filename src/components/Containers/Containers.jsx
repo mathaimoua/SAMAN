@@ -1,4 +1,4 @@
-import { useHistory, Link } from "react-router-dom";
+import { useHistory, Link,  useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 
@@ -23,14 +23,20 @@ import { Button } from "@mui/material";
 
 function Containers() {
 
+  const {id} = useParams();
+  console.log(id)
   const history = useHistory();
   const dispatch = useDispatch();
   const mainLocation = useSelector((store) => store.locations.main);
   const containers = useSelector(store => store.containers)
 
   useEffect(() => {
-    dispatch({ type: "FETCH_CONTAINERS", payload: mainLocation.location_id });
+    refresh(id)
   }, []);
+
+  const refresh = () => {
+    dispatch({type: 'FETCH_CONTAINERS', payload: {id: id}})
+  }
 
   return (
     <div className="containersContainer">

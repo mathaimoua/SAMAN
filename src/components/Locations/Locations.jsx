@@ -76,6 +76,11 @@ function Locations() {
     setEditOpen(false);
   };
 
+  const handleLocationClick = (id) => {
+    dispatch({type: "FETCH_CONTAINERS", payload: id })
+    history.push(`/containers/${id}`)
+  }
+
   return (
     <div className="locationsContainer">
       <button className="btn" onClick={() => history.goBack()}>
@@ -118,9 +123,7 @@ function Locations() {
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
-                    <Link to={"/containers/"}>
-                      {location.location_name}
-                    </Link>
+                  <button className="btn_asLink2"  onClick={() => handleLocationClick(location.location_id)}><h2>{location.location_name}</h2></button>
                   </TableCell>
                   <TableCell>{String(location.isActive)}</TableCell>
                   <TableCell

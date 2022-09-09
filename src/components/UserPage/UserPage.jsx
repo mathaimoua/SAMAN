@@ -23,7 +23,7 @@ function UserPage() {
 
   const handleLocationClick = () => {
     dispatch({type: "FETCH_CONTAINERS", payload: mainLocation.location_id })
-    history.push('/containers')
+    history.push(`/containers/${mainLocation.location_id}`)
   }
 
   return (
