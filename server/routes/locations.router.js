@@ -62,10 +62,45 @@ router.put('/makeactive/:id', rejectUnauthenticated, (req, res) => {
   const queryText = `
   UPDATE "locations"
   SET "isActive" = TRUE
-  WHERE user_id = $1 AND "location_id" = $2;
+  WHERE user_id = $1 AND "location_id" = $2
   ;`;
 
   pool.query(queryText, [req.user.id, id])
+    .then(response => {
+      console.log(response)
+      res.sendStatus(200)})
+    .catch(err => {
+      console.log(err)
+      res.sendStatus(500)
+    })
+});
+
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
+  const locID = req.params.id
+  const queryText = `
+  DELETE FROM "locations"
+  WHERE location_id = $1 AND user_id = $2
+  ;`;
+
+  pool.query(queryText, [locID, req.user.id])
+    .then(response => {
+      console.log(response)
+      res.sendStatus(200)})
+    .catch(err => {
+      console.log(err)
+      res.sendStatus(500)
+    })
+});
+
+router.put('/:id', rejectUnauthenticated, (req, res) => {
+  const locID = req.params.id
+  const queryText = `
+  UPDATE "locations"
+  SET "location_name" = $1
+  WHERE user_id = $2 AND "location_id" = $3
+  ;`;
+
+  pool.query(queryText, [req.body.name, req.user.id, locID ])
     .then(response => {
       console.log(response)
       res.sendStatus(200)})

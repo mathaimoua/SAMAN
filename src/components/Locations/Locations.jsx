@@ -1,6 +1,6 @@
 import { useHistory, Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { useState } from 'react'
+import { useSelector, useDispatch } from "react-redux";
+import { useState } from "react";
 
 // Table Imports
 import Table from "@mui/material/Table";
@@ -12,38 +12,69 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
 // Confirmation Dialogue Imports
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import TextField from "@mui/material/TextField";
 
 import { Button } from "@mui/material";
 
 function Locations() {
   const history = useHistory();
-  const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
+  const [deleteOpen, setDeleteOpen] = useState(false);
+  const [editOpen, setEditOpen] = useState(false);
   const [IDToDelete, setIDToDelete] = useState();
+  const [IDToEdit, setIDToEdit] = useState();
+  const [newLocName, setNewLocName] = useState('');
   const locations = useSelector((store) => store.locations.allLocations);
 
   const handleAddLocation = () => {
-    history.push('/addlocation')
+    history.push("/addlocation");
+  };
+
+  const changeNewLocName = (event) => {
+    setNewLocName(event.target.value)
   }
 
   const handleDelete = () => {
-    console.log('id to delete is', IDToDelete)
-    setOpen(false);
-  }
+    // console.log("id to delete is", IDToDelete);
+    dispatch({type: 'DELETE_LOC', payload: IDToDelete})
+    setDeleteOpen(false);
+  };
 
   const handleClickDelete = (id) => {
     // console.log(id)
-    setIDToDelete(id)
-    setOpen(true);
+    setIDToDelete(id);
+    setDeleteOpen(true);
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleClickEdit = (id) => {
+    // console.log(id)
+    setIDToEdit(id);
+    setEditOpen(true);
   };
+
+  const handleDeleteClose = () => {
+    setDeleteOpen(false);
+  };
+
+  const handleEditClose = () => {
+    setEditOpen(false);
+  };
+
+  const handleEditNewName = () => {
+    // console.log("id to edit is", IDToEdit);
+    // console.log("new name will be", newLocName);
+    dispatch({ 
+      type: 'SET_LOCATION_NAME', 
+      payload: {name: newLocName, id: IDToEdit} 
+    })
+    setNewLocName('')
+    setEditOpen(false);
+  }
 
   return (
     <div className="locationsContainer">
@@ -87,7 +118,7 @@ function Locations() {
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
-                    <Link to={'/location/'+location.location_id}>
+                    <Link to={"/location/" + location.location_id}>
                       {location.location_name}
                     </Link>
                   </TableCell>
@@ -97,6 +128,7 @@ function Locations() {
                     sx={{ minWidth: 25, fontWeight: "bold", fontSize: "12pt" }}
                   >
                     <Button
+                      onClick={() => handleClickEdit(location.location_id)}
                       sx={{
                         marginTop: ".5em",
                         marginLeft: "auto",
@@ -128,35 +160,75 @@ function Locations() {
           </Table>
         </TableContainer>
         <div className="addLocationBtn">
-          <button className="btn" onClick={handleAddLocation}>Add New Location</button>
+          <button className="btn" onClick={handleAddLocation}>
+            Add New Location
+          </button>
         </div>
+
+        {/* Delete Button Dialog */}
         <Dialog
-        PaperProps={{
-          style: {
-            backgroundColor: '#C0BCB6',
-            boxShadow: 'none',
-          },
-        }}
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          {"Permanently Delete Location?"}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Are you sure you want to delete this location?
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button sx={{color: 'black'}} onClick={handleClose}>Cancel</Button>
-          <Button sx={{color: 'red'}}  onClick={handleDelete} autoFocus>
-            Delete
-          </Button>
-        </DialogActions>
-      </Dialog>
+          PaperProps={{
+            style: {
+              backgroundColor: "#C0BCB6",
+              boxShadow: "none",
+            },
+          }}
+          open={deleteOpen}
+          onClose={handleDeleteClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">
+            {"Permanently Delete Location?"}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              Are you sure you want to delete this location?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button sx={{ color: "black" }} onClick={handleDeleteClose}>
+              Cancel
+            </Button>
+            <Button sx={{ border: "1px solid black", backgroundColor: "#555555",  color: "salmon" }} onClick={handleDelete} autoFocus>
+              Delete
+            </Button>
+          </DialogActions>
+        </Dialog>
+
+        {/* Edit Form Dialog */}
+        <Dialog
+          PaperProps={{
+            style: {
+              backgroundColor: "#C0BCB6",
+              boxShadow: "none",
+            },
+          }}
+          open={editOpen}
+          onClose={handleEditClose}
+        >
+          <DialogTitle>Edit</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Please enter a new name for the location.
+            </DialogContentText>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="name"
+              value={newLocName}
+              onChange={changeNewLocName}
+              label="Location Name"
+              type="text"
+              fullWidth
+              variant="standard"
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button sx={{ color: "black" }} onClick={handleEditClose}>Cancel</Button>
+            <Button sx={{ border: "1px solid black", backgroundColor: "#97c30a", color: "black" }} onClick={handleEditNewName}>Confirm</Button>
+          </DialogActions>
+        </Dialog>
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ function* fetchMainLocation() {
     // yield console.log('payload is', response.data)
     yield put({ type: 'SET_MAIN_LOCATION', payload: response.data });
   } catch ( error ) {
-    // console.log('User get request failed', error);
+    console.log('Error in fetchMainLocation', error);
   }
 }
 
@@ -17,7 +17,7 @@ function* fetchLocations() {
     // yield console.log( 'payload from fetchLocations', response.data )
     yield put({ type: 'SET_ALL_LOCATIONS', payload: response.data });
   } catch ( error ) {
-    // console.log('User get request failed', error);
+    console.log('Error in fetchLocations', error);
   }
 }
 
@@ -27,7 +27,7 @@ function* addLocation(action) {
     // yield console.log( 'payload from fetchLocations', response.data )
     yield put({ type: 'LOAD_DATA' });
   } catch ( error ) {
-    // console.log('User get request failed', error);
+    console.log('Error in addLocation', error);
   }
 }
 
@@ -40,7 +40,25 @@ function* addFirstLocation(action) {
     yield axios.put( 'api/locations/makeactive/'+ response.data[0].location_id)
     yield put({ type: 'LOAD_DATA' });
   } catch ( error ) {
-    // console.log('User get request failed', error);
+    console.log('Error in addFirstLocation', error);
+  }
+}
+
+function* deleteLocation(action) {
+  try {
+    yield axios.delete( '/api/locations/' + action.payload)
+    yield put({ type: 'LOAD_DATA' });
+  } catch ( error ) {
+    console.log('Error in deleteLocation', error);
+  }
+}
+
+function* setLocationName(action) {
+  try {
+    yield axios.put( '/api/locations/' + action.payload.id, {name: action.payload.name})
+    yield put({ type: 'LOAD_DATA' });
+  } catch ( error ) {
+    console.log('Error in setLocationName', error);
   }
 }
 
@@ -49,6 +67,8 @@ function* mainLocationSaga() {
   yield takeEvery('FETCH_ALL_LOCATIONS', fetchLocations);
   yield takeLatest('ADD_LOCATION', addLocation);
   yield takeLatest('ADD_FIRST_LOCATION', addFirstLocation)
+  yield takeLatest('DELETE_LOC', deleteLocation)
+  yield takeLatest('SET_LOCATION_NAME', setLocationName)
 }
 
 export default mainLocationSaga;
