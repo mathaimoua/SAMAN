@@ -133,6 +133,14 @@ Containers
   margin-top: 50px;
 }
 
+.containersContainer {
+  padding: 20px;
+}
+
+.containersDataContainer {
+  text-align: center;
+}
+
 /* --------------------------------------------------------------------------------
 Button
 -------------------------------------------------------------------------------- */
@@ -200,6 +208,19 @@ Button
   color: #C0BCB6;
 }
 
+.btn_asLink2 {
+  color: #1FBED6;
+  text-decoration: solid;
+  text-shadow: #000 2px 2px 2px;
+  text-transform: uppercase;
+  background-color:rgba(0, 0, 0, 0);
+  border: 0px;
+}
+
+.btn_asLink2:hover {
+  color: #555555
+}
+
 .btn_asLink:hover {
   background-color: transparent;
   border-color: #d4645a;
@@ -218,7 +239,12 @@ Button
     padding-right: 80px;
   }
   .locationsContainer { 
-    padding: 80px;
+    padding-left: 100px;
+    padding-right: 100px;
+  }
+  .containersContainer { 
+    padding-left: 100px;
+    padding-right: 100px;
   }
   .noLocationText {
     margin-left: 50px;

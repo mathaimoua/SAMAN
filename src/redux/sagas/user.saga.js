@@ -32,6 +32,7 @@ function* loadData(){
   yield put({type: 'FETCH_RECENT_ITEMS'})
   yield put({type: 'FETCH_MAIN_LOCATION'})
   yield put({type: 'FETCH_ALL_LOCATIONS'})
+  // yield put({type: 'FETCH_ALL_LOCATIONS'})
 }
 
 function* userSaga() {

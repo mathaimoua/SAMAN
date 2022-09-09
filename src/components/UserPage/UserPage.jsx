@@ -1,7 +1,8 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Moment from "react-moment";
 import { Link } from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 
 // MUI Table Imports
 import Table from "@mui/material/Table";
@@ -13,19 +14,23 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
 function UserPage() {
+
+  const dispatch = useDispatch();
+  const history = useHistory();
   const user = useSelector((store) => store.user);
   const items = useSelector((store) => store.items);
   const mainLocation = useSelector((store) => store.locations.main);
 
-  const handleSort = (columnName) => {
-
+  const handleLocationClick = () => {
+    dispatch({type: "FETCH_CONTAINERS", payload: mainLocation.location_id })
+    history.push('/containers')
   }
 
   return (
     <div className="dashBoardContainer">
       <div>
         <h2>Welcome, {user.username}!</h2>
-        <h2>Currently managing: { mainLocation ? <Link className="locationLink" to={'/location/'+mainLocation.location_id}>{mainLocation.location_name}</Link> : <p className="noLocationText">No location set, please create a location!</p> }</h2>
+        <h2>Currently managing: { mainLocation ? <button className="btn_asLink2"  onClick={handleLocationClick}><h2>{mainLocation.location_name}</h2></button> : <p className="noLocationText">No location set, please create a location!</p> }</h2>
         <p></p>
         <button className="btn">View Items</button>
         <button className="btn">Add New Item</button>

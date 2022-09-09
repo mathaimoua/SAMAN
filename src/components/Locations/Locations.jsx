@@ -28,7 +28,7 @@ function Locations() {
   const [editOpen, setEditOpen] = useState(false);
   const [IDToDelete, setIDToDelete] = useState();
   const [IDToEdit, setIDToEdit] = useState();
-  const [newLocName, setNewLocName] = useState('');
+  const [newLocName, setNewLocName] = useState("");
   const locations = useSelector((store) => store.locations.allLocations);
 
   const handleAddLocation = () => {
@@ -36,12 +36,12 @@ function Locations() {
   };
 
   const changeNewLocName = (event) => {
-    setNewLocName(event.target.value)
-  }
+    setNewLocName(event.target.value);
+  };
 
   const handleDelete = () => {
     // console.log("id to delete is", IDToDelete);
-    dispatch({type: 'DELETE_LOC', payload: IDToDelete})
+    dispatch({ type: "DELETE_LOC", payload: IDToDelete });
     setDeleteOpen(false);
   };
 
@@ -68,13 +68,13 @@ function Locations() {
   const handleEditNewName = () => {
     // console.log("id to edit is", IDToEdit);
     // console.log("new name will be", newLocName);
-    dispatch({ 
-      type: 'SET_LOCATION_NAME', 
-      payload: {name: newLocName, id: IDToEdit} 
-    })
-    setNewLocName('')
+    dispatch({
+      type: "SET_LOCATION_NAME",
+      payload: { name: newLocName, id: IDToEdit },
+    });
+    setNewLocName("");
     setEditOpen(false);
-  }
+  };
 
   return (
     <div className="locationsContainer">
@@ -118,7 +118,7 @@ function Locations() {
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
-                    <Link to={"/location/" + location.location_id}>
+                    <Link to={"/containers/"}>
                       {location.location_name}
                     </Link>
                   </TableCell>
@@ -183,14 +183,23 @@ function Locations() {
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              Are you sure you want to delete this location?
+              Are you sure you want to delete this location? This will delete
+              all containers and items in the current location!
             </DialogContentText>
           </DialogContent>
           <DialogActions>
             <Button sx={{ color: "black" }} onClick={handleDeleteClose}>
               Cancel
             </Button>
-            <Button sx={{ border: "1px solid black", backgroundColor: "#555555",  color: "salmon" }} onClick={handleDelete} autoFocus>
+            <Button
+              sx={{
+                border: "1px solid black",
+                backgroundColor: "#555555",
+                color: "salmon",
+              }}
+              onClick={handleDelete}
+              autoFocus
+            >
               Delete
             </Button>
           </DialogActions>
@@ -225,8 +234,19 @@ function Locations() {
             />
           </DialogContent>
           <DialogActions>
-            <Button sx={{ color: "black" }} onClick={handleEditClose}>Cancel</Button>
-            <Button sx={{ border: "1px solid black", backgroundColor: "#97c30a", color: "black" }} onClick={handleEditNewName}>Confirm</Button>
+            <Button sx={{ color: "black" }} onClick={handleEditClose}>
+              Cancel
+            </Button>
+            <Button
+              sx={{
+                border: "1px solid black",
+                backgroundColor: "#97c30a",
+                color: "black",
+              }}
+              onClick={handleEditNewName}
+            >
+              Confirm
+            </Button>
           </DialogActions>
         </Dialog>
       </div>
