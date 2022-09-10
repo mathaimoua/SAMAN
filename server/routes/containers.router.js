@@ -22,11 +22,40 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
     })
 });
 
-/**
- * POST route template
- */
-router.post('/', (req, res) => {
-  // POST route code here
+router.post('/', rejectUnauthenticated, (req, res) => {
+  const queryText = `
+  INSERT INTO "containers" ("container_name", "location_id")
+  VALUES ($1, $2);
+  ;`;
+
+  pool.query(queryText, [req.body.name, req.body.location])
+    .then( response => {
+      console.log(response)
+      res.sendStatus(200)    
+    }).catch( err => {
+        console.log(err)
+        res.sentStatus(500)
+      })
+
+});
+
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
+  const containerID = req.params.id
+  console.log(containerID)
+  const queryText = `
+  DELETE FROM "containers"
+  
+  WHERE container_id = $1
+  ;`;
+
+  pool.query(queryText, [containerID])
+    .then(response => {
+      console.log(response)
+      res.sendStatus(200)
+    }).catch(err => {
+      console.log(err)
+      res.sendStatus(500)
+    })
 });
 
 module.exports = router;

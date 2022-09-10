@@ -123,7 +123,7 @@ function Locations() {
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
-                  <button className="btn_asLink2"  onClick={() => handleLocationClick(location.location_id)}><h2>{location.location_name}</h2></button>
+                  <button className="btn_asLinkTables"  onClick={() => handleLocationClick(location.location_id)}><h2>{location.location_name}</h2></button>
                   </TableCell>
                   <TableCell>{String(location.isActive)}</TableCell>
                   <TableCell

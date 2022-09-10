@@ -30,7 +30,7 @@ function UserPage() {
     <div className="dashBoardContainer">
       <div>
         <h2>Welcome, {user.username}!</h2>
-        <h2>Currently managing: { mainLocation ? <button className="btn_asLink2"  onClick={handleLocationClick}><h2>{mainLocation.location_name}</h2></button> : <p className="noLocationText">No location set, please create a location!</p> }</h2>
+        <h2>Currently managing: { mainLocation ? <button className="btn_asLinkMainLocation"  onClick={handleLocationClick}><h2>{mainLocation.location_name}</h2></button> : <p className="noLocationText">No location set, please create a location!</p> }</h2>
         <p></p>
         <button className="btn">View Items</button>
         <button className="btn">Add New Item</button>

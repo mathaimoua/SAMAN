@@ -208,7 +208,15 @@ Button
   color: #C0BCB6;
 }
 
-.btn_asLink2 {
+.btn_asLinkTables {
+  font-size: 10pt;
+  padding: 0px;
+  color: #1FBED6;
+  background-color:rgba(0, 0, 0, 0);
+  border: none;
+}
+
+.btn_asLinkMainLocation {
   color: #1FBED6;
   text-decoration: solid;
   text-shadow: #000 2px 2px 2px;
@@ -217,11 +225,7 @@ Button
   border: 0px;
 }
 
-.btn_asLink2:hover {
-  color: #555555
-}
-
-.btn_asLink:hover {
+.btn_asLink:hover, .btn_asLinkTables:hover, .btn_asLinkMainLocation:hover {
   background-color: transparent;
   border-color: #d4645a;
   color: salmon;
