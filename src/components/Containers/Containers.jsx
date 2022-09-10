@@ -1,4 +1,4 @@
-import { useHistory, Link,  useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 
@@ -32,6 +32,8 @@ function Containers() {
   const [newContainerName, setNewContainerName] = useState("");
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [IDToDelete, setIDToDelete] = useState(-1);
+  const [editOpen, setEditOpen] = useState(false);
+  const [IDToEdit, setIDToEdit] = useState();
 
   useEffect(() => {
     refresh(id)
@@ -81,6 +83,32 @@ function Containers() {
     setDeleteOpen(false);
   };
 
+  const handleClickEdit = (newID) => {
+    // console.log(id)
+    setIDToEdit(newID);
+    setEditOpen(true);
+  };
+
+  const handleEditClose = () => {
+    setEditOpen(false);
+  };
+
+  const handleEditNewName = () => {
+    console.log("id to edit is", IDToEdit);
+    console.log("new name will be", newContainerName);
+    dispatch({
+      type: "SET_CONTAINER_NAME",
+      payload: { name: newContainerName, id: IDToEdit,  location: Number(id)}
+    });
+    setNewContainerName("");
+    setEditOpen(false);
+  };
+
+  const handleContainerClick = (id) => {
+    dispatch({type: "FETCH_ITEMS", payload: id })
+    history.push(`/items/${id}`)
+  }
+
   return (
     <div className="containersContainer">
       <button className="btn" onClick={() => history.goBack()}>
@@ -122,7 +150,7 @@ function Containers() {
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
-                    <button className="btn_asLinkTables">
+                    <button className="btn_asLinkTables" onClick={() => handleContainerClick(container.container_id)}>
                       <h2>{container.container_name}</h2>
                     </button>
                   </TableCell>
@@ -132,6 +160,7 @@ function Containers() {
                     sx={{ minWidth: 25, fontWeight: "bold", fontSize: "12pt" }}
                   >
                     <Button
+                      onClick={() => handleClickEdit(container.container_id)}
                       sx={{
                         marginTop: ".5em",
                         marginLeft: "auto",
@@ -246,6 +275,50 @@ function Containers() {
               autoFocus
             >
               Delete
+            </Button>
+          </DialogActions>
+        </Dialog>
+
+        <Dialog
+          PaperProps={{
+            style: {
+              backgroundColor: "#C0BCB6",
+              boxShadow: "none",
+            },
+          }}
+          open={editOpen}
+          onClose={handleEditClose}
+        >
+          <DialogTitle>Edit</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Please enter a new name for the container.
+            </DialogContentText>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="name"
+              value={newContainerName}
+              onChange={changeNewContainerName}
+              label="Container Name"
+              type="text"
+              fullWidth
+              variant="standard"
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button sx={{ color: "black" }} onClick={handleEditClose}>
+              Cancel
+            </Button>
+            <Button
+              sx={{
+                border: "1px solid black",
+                backgroundColor: "#97c30a",
+                color: "black",
+              }}
+              onClick={handleEditNewName}
+            >
+              Confirm
             </Button>
           </DialogActions>
         </Dialog>

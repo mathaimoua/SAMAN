@@ -24,9 +24,24 @@ router.get('/recentItems', rejectUnauthenticated, (req, res) => {
     })
 });
 
-/**
- * POST route template
- */
+router.get('/:id', (req, res) => {
+  queryText = `
+  SELECT "item_name", "current_holder", "model", "serial", "warranty_expiration", "state", "container_name" FROM "items"
+  JOIN "user" ON "items".user_id = "user".id
+  JOIN "containers" ON "items".container_id = "containers".container_id
+  JOIN "locations" ON "containers".location_id = "locations".location_id
+  WHERE "user".id = $1 AND "containers".container_id = $2
+  ;`;
+
+  pool.query(queryText, [req.user.id, req.params.id])
+    .then( response => {
+      res.send(response.rows)
+    }).catch( err => {
+      console.log(err);
+      res.sendStatus(500)
+    })
+})
+
 router.post('/', (req, res) => {
   // POST route code here
 });

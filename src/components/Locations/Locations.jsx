@@ -31,6 +31,7 @@ function Locations() {
   const [newLocName, setNewLocName] = useState("");
   const locations = useSelector((store) => store.locations.allLocations);
 
+
   const handleAddLocation = () => {
     history.push("/addlocation");
   };
@@ -70,7 +71,7 @@ function Locations() {
     // console.log("new name will be", newLocName);
     dispatch({
       type: "SET_LOCATION_NAME",
-      payload: { name: newLocName, id: IDToEdit },
+      payload: { name: newLocName, id: IDToEdit},
     });
     setNewLocName("");
     setEditOpen(false);

@@ -32,10 +32,21 @@ function* deleteContainer(action) {
   }
 }
 
+function* setContainerName(action) {
+  try {
+    // yield console.log('payload is', action.payload)
+    yield axios.put( 'api/containers/editname/' + action.payload.id, action.payload )
+    yield put({ type: 'FETCH_CONTAINERS', payload: {id: action.payload.location} })
+  } catch (error) {
+    console.log('Error in Container', error)
+  }
+}
+
 function* containersSaga() {
   yield takeLatest('FETCH_CONTAINERS', fetchContainers);
   yield takeLatest('CREATE_CONTAINER', createContainer);
   yield takeLatest('DELETE_CONTAINER', deleteContainer);
+  yield takeLatest('SET_CONTAINER_NAME', setContainerName);
 }
 
 export default containersSaga;

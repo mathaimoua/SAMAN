@@ -66,7 +66,7 @@ function SideDrawer(){
 
               <ListItemButton onClick={handleLogout}>
                 <ListItemIcon>
-                  <ListItemText><h3>Logout</h3></ListItemText>
+                  <ListItemText sx={{ color: 'red' }}><h3>Logout</h3></ListItemText>
                 </ListItemIcon>
               </ListItemButton>
             </>

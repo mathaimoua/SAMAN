@@ -18,7 +18,7 @@ function UserPage() {
   const dispatch = useDispatch();
   const history = useHistory();
   const user = useSelector((store) => store.user);
-  const items = useSelector((store) => store.items);
+  const items = useSelector((store) => store.items.recentItems);
   const mainLocation = useSelector((store) => store.locations.main);
 
   const handleLocationClick = () => {

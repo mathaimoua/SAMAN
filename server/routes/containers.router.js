@@ -41,14 +41,31 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
   const containerID = req.params.id
-  console.log(containerID)
   const queryText = `
   DELETE FROM "containers"
-  
   WHERE container_id = $1
   ;`;
 
   pool.query(queryText, [containerID])
+    .then(response => {
+      console.log(response)
+      res.sendStatus(200)
+    }).catch(err => {
+      console.log(err)
+      res.sendStatus(500)
+    })
+});
+
+router.put('/editname/:id', rejectUnauthenticated, (req, res) => {
+  const containerID = req.params.id
+  // console.log('id is', containerID, 'new name is', req.body.name)
+  const queryText = `
+  UPDATE "containers"
+  SET "container_name" = $1
+  WHERE "container_id" = $2
+  ;`;
+
+  pool.query(queryText, [req.body.name, containerID])
     .then(response => {
       console.log(response)
       res.sendStatus(200)

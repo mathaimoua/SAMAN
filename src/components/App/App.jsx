@@ -21,6 +21,7 @@ import NavBar from "../NavBar/NavBar";
 import Locations from "../Locations/Locations";
 import LocationForm from "../LocationForm/LocationForm";
 import Containers from "../Containers/Containers";
+import Items from "../Items/Items"
 import "./App.css";
 
 function App() {
@@ -84,6 +85,10 @@ function App() {
 
             <ProtectedRoute path="/containers/:id">
               <Containers />
+            </ProtectedRoute>
+
+            <ProtectedRoute path="/items/:id">
+              <Items />
             </ProtectedRoute>
 
             <Route exact path="/login">
