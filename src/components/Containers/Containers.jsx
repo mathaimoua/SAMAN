@@ -41,7 +41,7 @@ function Containers() {
 
   const refresh = () => {
     dispatch({ type: 'FETCH_CONTAINERS', payload: paramID.id})
-    dispatch({ type: 'FETCH_CURRENT_CONTAINER', payload:  { id: paramID.id } })
+    dispatch({ type: 'FETCH_CURRENT_LOCATION', payload:  { id: paramID.id } })
   }
 
   const handleAddContainer = () => {

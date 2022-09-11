@@ -64,9 +64,7 @@ function* setLocationName(action) {
 
 function* fetchCurrentLocation(action) {
   try {
-    console.log('location id is', action.payload)
     const response = yield axios.get( `api/locations/current/`+action.payload.id)
-    yield console.log('response is', response.data[0]);
     yield put({type: 'SET_CURRENT_LOCATION', payload: response.data[0]})
   } catch (error) {
     console.log('Error in fetchCurrentContainer', error)

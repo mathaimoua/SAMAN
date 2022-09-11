@@ -44,8 +44,8 @@ function* setContainerName(action) {
 
 function* fetchCurrentContainer(action) {
   try {
-    const response = yield axios.get( `api/containers/current/`+action.payload.id)
-    yield console.log('response is', response.data);
+    console.log('container payload is', action.payload)
+    const response = yield axios.get( `api/containers/current/${action.payload.id}`)
     yield put({type: 'SET_CURRENT_CONTAINER', payload: response.data[0]})
   } catch (error) {
     console.log('Error in fetchCurrentContainer', error)
