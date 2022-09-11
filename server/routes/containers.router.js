@@ -17,8 +17,23 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
     .then(response => {
       res.send(response.rows)
     }).catch(err => {
-      // console.log(err)
-      // res.sendStatus(500)
+      console.log(err)
+      res.sendStatus(500)
+    })
+});
+
+router.get('/current/:id', rejectUnauthenticated, (req, res) => {
+  const queryText = `
+  SELECT "container_name", "container_id", "location_id" FROM "containers"
+  WHERE "container_id" = $1
+  ;`;
+
+  pool.query(queryText, [req.params.id])
+    .then(response => {
+      res.send(response.rows)
+    }).catch(err => {
+      console.log(err)
+      res.sendStatus(500)
     })
 });
 

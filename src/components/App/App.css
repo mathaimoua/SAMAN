@@ -117,10 +117,6 @@ Containers
   padding: 50px;
 }
 
-.locationsContainer { 
-  padding: 20px;
-}
-
 .locationsDataContainer {
   text-align: center;
 }
@@ -133,7 +129,7 @@ Containers
   margin-top: 50px;
 }
 
-.containersContainer {
+.containersContainer, .itemsContainer, .locationsContainer {
   padding: 20px;
 }
 

@@ -1,7 +1,9 @@
-const containersReducer = (state = [], action) => {
+const containersReducer = (state = { containersList: [], currentContainer: {} }, action) => {
   switch (action.type) {
     case 'SET_CONTAINERS':
-      return action.payload;
+      return {...state, containersList: action.payload};
+    case 'SET_CURRENT_CONTAINER':
+      return {...state, currentContainer: action.payload};
     default:
       return state;
   }

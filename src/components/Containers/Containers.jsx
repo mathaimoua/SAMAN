@@ -143,7 +143,7 @@ function Containers() {
               </TableRow>
             </TableHead>
             <TableBody>
-            {containers.map((container) => (
+            {containers.containersList.map((container) => (
                 <TableRow
                   hover
                   key={container.container_id}
@@ -195,50 +195,6 @@ function Containers() {
             Add New Container
           </button>
         </div>
-
-        <Dialog
-          PaperProps={{
-            style: {
-              backgroundColor: "#C0BCB6",
-              boxShadow: "none",
-            },
-          }}
-          open={addOpen}
-          onClose={handleAddClose}
-        >
-          <DialogTitle>Add New Container</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              Please enter a name for the container.
-            </DialogContentText>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              value={newContainerName}
-              onChange={changeNewContainerName}
-              label="Location Name"
-              type="text"
-              fullWidth
-              variant="standard"
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button sx={{ color: "black" }} onClick={handleAddClose}>
-              Cancel
-            </Button>
-            <Button
-              sx={{
-                border: "1px solid black",
-                backgroundColor: "#97c30a",
-                color: "black",
-              }}
-              onClick={handleCreateContainer}
-            >
-              Confirm
-            </Button>
-          </DialogActions>
-        </Dialog>
 
         <Dialog
           PaperProps={{

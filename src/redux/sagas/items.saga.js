@@ -12,20 +12,31 @@ function* fetchRecentItems() {
   }
 }
 
-function* fetchItems(action) {
+function* fetchContainerItems(action) {
   try {
-    // yield console.log(action.payload)
+    // yield console.log('container id is', action.payload)
     const response = yield axios.get(`/api/items/${action.payload}`)
     // yield console.log('payload is', response.data)
-    yield put({ type: 'SET_ITEMS', payload: response.data });
+    yield put({ type: 'SET_CONTAINER_ITEMS', payload: response.data });
   } catch (error) {
     console.log('Error in fetchItems', error);
   }
 }
 
+function* deleteItem(action) {
+  try {
+    yield axios.delete(`api/items/${action.payload.deleteID}`)
+    yield put({ type: 'FETCH_CONTAINER_ITEMS', payload: action.payload.container
+    })
+  } catch (error) {
+    console.log('Error in deleteItem', error)
+  }
+}
+
 function* itemsSaga() {
   yield takeLatest('FETCH_RECENT_ITEMS', fetchRecentItems);
-  yield takeLatest('FETCH_ITEMS', fetchItems);
+  yield takeLatest('FETCH_CONTAINER_ITEMS', fetchContainerItems);
+  yield takeLatest('DELETE_ITEM', deleteItem);
 }
 
 export default itemsSaga;
