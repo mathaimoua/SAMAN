@@ -137,6 +137,7 @@ Containers
   text-align: center;
 }
 
+
 /* --------------------------------------------------------------------------------
 Button
 -------------------------------------------------------------------------------- */
@@ -342,4 +343,10 @@ Misc
 
 .itemDetailsHeader {
   margin: 5px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.detailsDiv {
+  vertical-align: auto;
 }
