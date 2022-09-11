@@ -129,7 +129,7 @@ Containers
   margin-top: 50px;
 }
 
-.containersContainer, .itemsContainer, .locationsContainer {
+.containersContainer, .itemsContainer, .locationsContainer, .itemDetailsContainer {
   padding: 20px;
 }
 
@@ -238,11 +238,7 @@ Button
     padding-left: 80px;
     padding-right: 80px;
   }
-  .locationsContainer { 
-    padding-left: 100px;
-    padding-right: 100px;
-  }
-  .containersContainer { 
+  .locationsContainer, .itemsContainer, .itemDetailsContainer, .containersContainer { 
     padding-left: 100px;
     padding-right: 100px;
   }

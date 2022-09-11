@@ -19,9 +19,9 @@ import LoginPage from "../LoginPage/LoginPage";
 import RegisterPage from "../RegisterPage/RegisterPage";
 import NavBar from "../NavBar/NavBar";
 import Locations from "../Locations/Locations";
-import LocationForm from "../LocationForm/LocationForm";
 import Containers from "../Containers/Containers";
 import Items from "../Items/Items"
+import ItemDetails from "../ItemDetails/ItemDetails";
 import "./App.css";
 
 function App() {
@@ -75,16 +75,16 @@ function App() {
               <InfoPage />
             </ProtectedRoute>
 
-            <ProtectedRoute exact path="/addlocation">
-              <LocationForm />
-            </ProtectedRoute>
-
             <ProtectedRoute exact path="/locations">
               <Locations />
             </ProtectedRoute>
 
             <ProtectedRoute path="/containers/:id">
               <Containers />
+            </ProtectedRoute>
+
+            <ProtectedRoute path="/details/:id">
+              <ItemDetails />
             </ProtectedRoute>
 
             <ProtectedRoute path="/items/:id">

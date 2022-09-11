@@ -110,4 +110,19 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
     })
 });
 
+router.get('/current/:id', rejectUnauthenticated, (req, res) => {
+  const queryText = `
+  SELECT "location_name", "location_id", "user_id" FROM "locations"
+  WHERE "location_id" = $1
+  ;`;
+
+  pool.query(queryText, [req.params.id])
+    .then(response => {
+      res.send(response.rows)
+    }).catch(err => {
+      console.log(err)
+      res.sendStatus(500)
+    })
+});
+
 module.exports = router;

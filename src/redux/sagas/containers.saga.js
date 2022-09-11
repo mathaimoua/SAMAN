@@ -5,7 +5,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 function* fetchContainers(action) {
   try {
     // console.log('/api/containers/', action.payload.id)
-    const response = yield axios.get(`/api/containers/${action.payload.id}`)
+    const response = yield axios.get(`/api/containers/${action.payload}`)
     // yield console.log('payload is', response.data)
     yield put({ type: 'SET_CONTAINERS', payload: response.data });
   } catch (error) {
@@ -44,7 +44,8 @@ function* setContainerName(action) {
 
 function* fetchCurrentContainer(action) {
   try {
-    const response = yield axios.get( `api/containers/current/${action.payload}`)
+    const response = yield axios.get( `api/containers/current/`+action.payload.id)
+    yield console.log('response is', response.data);
     yield put({type: 'SET_CURRENT_CONTAINER', payload: response.data[0]})
   } catch (error) {
     console.log('Error in fetchCurrentContainer', error)

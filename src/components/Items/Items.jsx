@@ -17,7 +17,6 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import TextField from "@mui/material/TextField";
 
 import { Button } from "@mui/material";
 
@@ -42,6 +41,10 @@ function Items(){
     setIDToDelete(-1);
     setDeleteOpen(false);
   };
+
+  const handleItemClick = (itemID) => {
+    history.push(`/details/${itemID}`)
+  }
 
   const handleClickDelete = (itemID) => {
     // console.log('deleting item', itemID)
@@ -108,7 +111,7 @@ function Items(){
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
-                  <button className="btn_asLinkTables"  onClick={() => handleItemClick(containerID)}><h2>{item.item_name}</h2></button>
+                  <button className="btn_asLinkTables"  onClick={() => handleItemClick(item.item_id)}><h2>{item.item_name}</h2></button>
                   </TableCell>
                   <TableCell
                   align="left"

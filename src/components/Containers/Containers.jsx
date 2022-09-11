@@ -23,10 +23,10 @@ import { Button } from "@mui/material";
 
 function Containers() {
 
-  const {id} = useParams();
+  const paramID = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
-  const mainLocation = useSelector((store) => store.locations.main);
+  const location = useSelector((store) => store.locations);
   const containers = useSelector(store => store.containers)
   const [addOpen, setAddOpen] = useState(false);
   const [newContainerName, setNewContainerName] = useState("");
@@ -36,11 +36,12 @@ function Containers() {
   const [IDToEdit, setIDToEdit] = useState();
 
   useEffect(() => {
-    refresh(id)
+    refresh(paramID.id)
   }, [dispatch]);
 
   const refresh = () => {
-    dispatch({type: 'FETCH_CONTAINERS', payload: {id: id}})
+    dispatch({ type: 'FETCH_CONTAINERS', payload: paramID.id})
+    dispatch({ type: 'FETCH_CURRENT_CONTAINER', payload:  { id: paramID.id } })
   }
 
   const handleAddContainer = () => {
@@ -115,7 +116,7 @@ function Containers() {
         Back
       </button>
       <div className="containersDataContainer">
-        <h2>Containers of {mainLocation.location_name}</h2>
+        <h2>Containers of {location.currentLocation.location_name}</h2>
         <TableContainer
           sx={{
             maxWidth: "100%",
@@ -195,6 +196,50 @@ function Containers() {
             Add New Container
           </button>
         </div>
+
+        <Dialog
+          PaperProps={{
+            style: {
+              backgroundColor: "#C0BCB6",
+              boxShadow: "none",
+            },
+          }}
+          open={addOpen}
+          onClose={handleAddClose}
+        >
+          <DialogTitle>Add New Container</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Please enter a name for the container.
+            </DialogContentText>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="name"
+              value={newContainerName}
+              onChange={changeNewContainerName}
+              label="Location Name"
+              type="text"
+              fullWidth
+              variant="standard"
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button sx={{ color: "black" }} onClick={handleAddClose}>
+              Cancel
+            </Button>
+            <Button
+              sx={{
+                border: "1px solid black",
+                backgroundColor: "#97c30a",
+                color: "black",
+              }}
+              onClick={handleCreateContainer}
+            >
+              Confirm
+            </Button>
+          </DialogActions>
+        </Dialog>
 
         <Dialog
           PaperProps={{

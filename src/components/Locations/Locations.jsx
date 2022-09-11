@@ -1,4 +1,4 @@
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 
@@ -30,14 +30,38 @@ function Locations() {
   const [IDToEdit, setIDToEdit] = useState();
   const [newLocName, setNewLocName] = useState("");
   const locations = useSelector((store) => store.locations.allLocations);
-
-
-  const handleAddLocation = () => {
-    history.push("/addlocation");
-  };
+  const mainLocation = useSelector((store) => store.locations.main);
+  const [addOpen, setAddOpen] = useState(false);
+  const [addLocationName, setAddLocationName] = useState("");
 
   const changeNewLocName = (event) => {
     setNewLocName(event.target.value);
+  };
+
+  const changeAddLocationName = (event) => {
+    setAddLocationName(event.target.value);
+  }
+
+  const handleClickAdd = () => {
+    setAddOpen(true);
+  };
+
+  const handleAddClose = () => {
+    setAddOpen(false);
+  };
+
+  const handleAddLocation = () => {
+    if (addLocationName === "") {
+      return -1;
+    } else {
+      if (mainLocation.name === {} || mainLocation.name === "" || mainLocation.name === undefined ) {
+        dispatch({ type: "ADD_FIRST_LOCATION", payload: addLocationName });
+        history.push('/locations')
+      } else {
+        dispatch({ type: "ADD_LOCATION", payload: addLocationName });
+        history.push("/locations");
+      }
+    }
   };
 
   const handleDelete = () => {
@@ -78,7 +102,8 @@ function Locations() {
   };
 
   const handleLocationClick = (id) => {
-    dispatch({type: "FETCH_CONTAINERS", payload: id })
+    dispatch({ type: "FETCH_CONTAINERS", payload: id })
+    dispatch({ type: 'FETCH_CURRENT_LOCATION', payload:  { id: id } })
     history.push(`/containers/${id}`)
   }
 
@@ -164,7 +189,7 @@ function Locations() {
           </Table>
         </TableContainer>
         <div className="addLocationBtn">
-          <button className="btn" onClick={handleAddLocation}>
+          <button className="btn" onClick={handleClickAdd}>
             Add New Location
           </button>
         </div>
@@ -248,6 +273,50 @@ function Locations() {
                 color: "black",
               }}
               onClick={handleEditNewName}
+            >
+              Confirm
+            </Button>
+          </DialogActions>
+        </Dialog>
+
+        <Dialog
+          PaperProps={{
+            style: {
+              backgroundColor: "#C0BCB6",
+              boxShadow: "none",
+            },
+          }}
+          open={addOpen}
+          onClose={handleAddClose}
+        >
+          <DialogTitle>Add New Location</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Please enter a new name for the location.
+            </DialogContentText>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="name"
+              value={addLocationName}
+              onChange={changeAddLocationName}
+              label="Location Name"
+              type="text"
+              fullWidth
+              variant="standard"
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button sx={{ color: "black" }} onClick={handleAddClose}>
+              Cancel
+            </Button>
+            <Button
+              sx={{
+                border: "1px solid black",
+                backgroundColor: "#97c30a",
+                color: "black",
+              }}
+              onClick={handleAddLocation}
             >
               Confirm
             </Button>
