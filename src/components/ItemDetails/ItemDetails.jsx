@@ -6,7 +6,12 @@ function ItemDetails(){
 
   return (
     <div className="itemDetailsContainer">
-    <h1>Details</h1>
+      <button className="btn" onClick={() => history.goBack()}>
+        Back
+      </button>
+      <div className="itemDetailsDataContainer">
+      <h1>Details</h1>
+      </div>
     </div>
   )
 }
