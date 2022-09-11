@@ -43,6 +43,7 @@ function Items(){
   };
 
   const handleItemClick = (itemID) => {
+    // dispatch({type: 'FETCH_CURRENT_ITEM', payload: itemID})
     history.push(`/details/${itemID}`)
   }
 

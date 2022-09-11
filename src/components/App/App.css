@@ -129,7 +129,7 @@ Containers
   margin-top: 50px;
 }
 
-.containersContainer, .itemsContainer, .locationsContainer, .itemDetailsContainer {
+.containersContainer, .itemsContainer, .locationsContainer, .itemDetailsContainer, .itemDetailsDataContainer {
   padding: 20px;
 }
 
@@ -141,7 +141,7 @@ Containers
 Button
 -------------------------------------------------------------------------------- */
 
-.btn {
+.btn, .editItembtn {
   font-family: "Open Sans", sans-serif;
   letter-spacing: 1px;
   text-decoration: none;
@@ -167,15 +167,19 @@ Button
   touch-action: manipulation;
 }
 
-.btn:hover {
+.btn:hover, .editItembtn:hover {
   background-color: #75960a;
   text-decoration: none;
 }
 
-.btn:active {
+.btn:active, .editItembtn:active {
   box-shadow: 2px 2px 1px 1px rgba(55, 55, 55, 0.2);
   top: 2px;
   left: 2px;
+}
+
+.editItembtn {
+  float: right;
 }
 
 .btn_sizeMin {
@@ -228,7 +232,7 @@ Button
 }
 
 @media (min-width: 900px) {
-  .btn{
+  .btn, .editItembtn {
     font-size: 12pt;
     max-width: 40%;
     padding: .75em .5em;
@@ -334,4 +338,8 @@ Misc
   padding-left: 10px;
   padding-right: 10px;
   background-color: #555555;
+}
+
+.itemDetailsHeader {
+  margin: 5px;
 }

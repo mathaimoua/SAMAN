@@ -33,10 +33,21 @@ function* deleteItem(action) {
   }
 }
 
+function* fetchCurrentItem(action) {
+  try {
+    const response = yield axios.get(`api/items/current/${action.payload}`)
+    // yield console.log('response from fetchCurrentItem', response.data)
+    yield put({type: 'SET_CURRENT_ITEM', payload: response.data[0]})
+  } catch (error) {
+    console.log('Error in fetchCurrentItem', error)
+  }
+}
+
 function* itemsSaga() {
   yield takeLatest('FETCH_RECENT_ITEMS', fetchRecentItems);
   yield takeLatest('FETCH_CONTAINER_ITEMS', fetchContainerItems);
   yield takeLatest('DELETE_ITEM', deleteItem);
+  yield takeLatest('FETCH_CURRENT_ITEM', fetchCurrentItem)
 }
 
 export default itemsSaga;
