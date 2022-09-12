@@ -54,7 +54,7 @@ function Locations() {
     if (addLocationName === "") {
       return -1;
     } else {
-      if (mainLocation.name === {} || mainLocation.name === "" || mainLocation.name === undefined ) {
+      if (mainLocation.name === {} || mainLocation.name === "" || mainLocation.name === undefined || !mainLocation || !mainLocation.name) {
         dispatch({ type: "ADD_FIRST_LOCATION", payload: addLocationName });
         history.push('/locations')
       } else {

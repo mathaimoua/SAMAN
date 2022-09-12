@@ -38,18 +38,20 @@ router.get('/current/:id', rejectUnauthenticated, (req, res) => {
 });
 
 router.post('/', rejectUnauthenticated, (req, res) => {
+  const number = req.body.location
+  console.log('number is', number)
   const queryText = `
   INSERT INTO "containers" ("container_name", "location_id")
   VALUES ($1, $2);
-  ;`;
+  `;
 
-  pool.query(queryText, [req.body.name, req.body.location])
+  pool.query(queryText, [req.body.name, number])
     .then( response => {
       console.log(response)
       res.sendStatus(200)    
     }).catch( err => {
         console.log(err)
-        res.sentStatus(500)
+        res.sendStatus(500)
       })
 
 });

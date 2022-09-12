@@ -40,6 +40,7 @@ function Containers() {
   }, [dispatch]);
 
   const refresh = () => {
+    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
     dispatch({ type: 'FETCH_CONTAINERS', payload: paramID.id})
     dispatch({ type: 'FETCH_CURRENT_LOCATION', payload:  { id: paramID.id } })
   }
@@ -61,7 +62,7 @@ function Containers() {
     // console.log('creating container named', newContainerName)
     dispatch({
       type: 'CREATE_CONTAINER', 
-      payload: {name: newContainerName, location: Number(id)} });
+      payload: {name: newContainerName, location: Number(paramID.id)} });
     setNewContainerName('');
     setAddOpen(false);
   }
@@ -69,7 +70,7 @@ function Containers() {
   const handleDelete = () => {
     dispatch({ 
       type: 'DELETE_CONTAINER', 
-      payload: {container: IDToDelete, location: Number(id)} });
+      payload: {container: IDToDelete, location: Number(paramID.id)} });
     setIDToDelete(-1);
     setDeleteOpen(false);
   };

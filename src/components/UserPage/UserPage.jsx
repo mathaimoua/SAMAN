@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Moment from "react-moment";
 import { Link } from 'react-router-dom'
@@ -34,12 +34,16 @@ function UserPage() {
     history.push(`/details/${itemID}`)
   }
 
+  useEffect(() => {
+    dispatch({ type: 'FETCH_MAIN_LOCATION' })
+  }, [dispatch]);
+
   return (
     <div className="dashBoardContainer">
       
       <div>
       
-        <h2>Welcome, {user.username}!</h2>
+        <h2>Welcome, {String(user.username).charAt(0).toUpperCase()+String(user.username).slice(1)}!</h2>
         <h2>Currently managing: { mainLocation ? <button className="btn_asLinkMainLocation"  onClick={handleLocationClick}><h2>{mainLocation.location_name}</h2></button> : <p className="noLocationText">No location set, please create a location!</p> }</h2>
         <TextField 
           id="filled-search"

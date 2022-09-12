@@ -27,6 +27,7 @@ function ItemDetails() {
   }, [dispatch]);
 
   const refresh = () => {
+    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
     dispatch({ type: "FETCH_CURRENT_ITEM", payload: itemID.id });
   };
 
