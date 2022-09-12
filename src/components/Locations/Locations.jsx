@@ -54,10 +54,10 @@ function Locations() {
     if (addLocationName === "") {
       return -1;
     } else {
-      if (mainLocation.name == "" || mainLocation.name == undefined || !mainLocation || !mainLocation.name) {
+      if (mainLocation.location_name == "" || mainLocation.location_name == undefined || !mainLocation || !mainLocation.location_name) {
         dispatch({ type: "ADD_FIRST_LOCATION", payload: addLocationName });
         history.push('/locations')
-      } else if (mainLocation){
+      } else {
         dispatch({ type: "ADD_LOCATION", payload: addLocationName });
         history.push("/locations");
       }
