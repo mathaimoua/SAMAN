@@ -176,7 +176,7 @@ Button
   text-decoration: none;
 }
 
-.btn:active, .editItembtn:active {
+.btn:active, .editItembtn:active, .searchButton:active {
   box-shadow: 2px 2px 1px 1px rgba(55, 55, 55, 0.2);
   top: 2px;
   left: 2px;
@@ -246,7 +246,7 @@ Button
     padding-left: 80px;
     padding-right: 80px;
   }
-  .locationsContainer, .itemsContainer, .itemDetailsContainer, .containersContainer { 
+  .locationsContainer, .editItemContainer, .itemsContainer, .itemDetailsContainer, .containersContainer { 
     padding-left: 100px;
     padding-right: 100px;
   }

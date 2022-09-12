@@ -6,6 +6,8 @@ import { useHistory } from "react-router-dom";
 
 // MUI Table Imports
 import Table from "@mui/material/Table";
+import Button from "@mui/material/Button"
+import TextField from '@mui/material/TextField'
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
@@ -34,9 +36,30 @@ function UserPage() {
 
   return (
     <div className="dashBoardContainer">
+      
       <div>
+      
         <h2>Welcome, {user.username}!</h2>
         <h2>Currently managing: { mainLocation ? <button className="btn_asLinkMainLocation"  onClick={handleLocationClick}><h2>{mainLocation.location_name}</h2></button> : <p className="noLocationText">No location set, please create a location!</p> }</h2>
+        <TextField 
+          id="filled-search"
+          label="Search for an item"
+          type="search"
+          variant="filled"
+          sx={{backgroundColor: '#FFFFFF', width: '66%', height: 'auto'}} 
+        />
+        <br></br>
+        <Button
+          className="searchButton"
+          sx={{ 
+            color: '#97c30a', 
+            margin: '5px', 
+            backgroundColor: '#555555', 
+            width: '20%', 
+            height: 'auto',
+            boxShadow: '5px 5px 2px 2px rgba(91, 91, 91, 0.2)'
+        }} 
+        >Go</Button>
         <p></p>
         <button className="btn">View Items</button>
         <button className="btn">Add New Item</button>
