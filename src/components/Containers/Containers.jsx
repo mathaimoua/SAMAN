@@ -36,7 +36,7 @@ function Containers() {
   const [IDToEdit, setIDToEdit] = useState();
 
   useEffect(() => {
-    refresh(paramID.id)
+    refresh()
   }, [dispatch]);
 
   const refresh = () => {
@@ -106,7 +106,7 @@ function Containers() {
   };
 
   const handleContainerClick = (id) => {
-    dispatch({type: "FETCH_ITEMS", payload: id })
+    dispatch({type: "FETCH_CONTAINER_ITEMS", payload: id })
     history.push(`/items/${id}`)
   }
 

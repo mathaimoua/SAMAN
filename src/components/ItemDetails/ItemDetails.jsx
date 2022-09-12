@@ -9,23 +9,22 @@ import {
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { TextField } from "@mui/material";
-import Moment from "react-moment";
 import moment from "moment";
 
 function ItemDetails() {
+
   const currentItem = useSelector((store) => store.items.currentItem);
   const dispatch = useDispatch();
   const itemID = useParams();
   const history = useHistory();
-  const [fieldLocked, setFieldLocked] = useState(true);
-  const [itemName, setItemName] = useState("");
-
-  const handleItemNameChange = (event) => {
-    setItemName(event.target.value);
-  };
+  // const [fieldLocked, setFieldLocked] = useState(true);
+  // const [itemName, setItemName] = useState("");
+  const handleEditItem = (idtoedit) => {
+    history.push(`/edititem/${idtoedit}`)
+  }
 
   useEffect(() => {
-    refresh(itemID.id);
+    refresh();
   }, [dispatch]);
 
   const refresh = () => {
@@ -37,7 +36,7 @@ function ItemDetails() {
       <button className="btn" onClick={() => history.goBack()}>
         Back
       </button>
-      <button className="editItembtn" onClick={() => history.goBack()}>
+      <button className="editItembtn" onClick={() => handleEditItem(itemID.id)}>
         Edit Item
       </button>
       <div className="itemDetailsDataContainer">
@@ -71,7 +70,7 @@ function ItemDetails() {
             <br></br>
             <span style={{display: 'inline'}}>
               Warranty Expiration: </span><h2 style={{display: 'inline'}}>{moment(currentItem.warranty_expiration).format('MMM Do YYYY')}</h2>
-            
+          
         </Box>
       </div>
     </div>

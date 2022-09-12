@@ -27,6 +27,11 @@ function UserPage() {
     history.push(`/containers/${mainLocation.location_id}`)
   }
 
+  const handleItemClick = (itemID) => {
+    // dispatch({type: "FETCH_CURRENT_ITEM", payload: itemID })
+    history.push(`/details/${itemID}`)
+  }
+
   return (
     <div className="dashBoardContainer">
       <div>
@@ -64,7 +69,7 @@ function UserPage() {
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  {item.item_name}
+                <button className="btn_asLinkTables" onClick={() => handleItemClick(item.item_id)}>{item.item_name}</button>
                 </TableCell>
                 <TableCell>{item.container_name}</TableCell>
                 <TableCell>

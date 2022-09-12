@@ -129,7 +129,7 @@ Containers
   margin-top: 50px;
 }
 
-.containersContainer, .itemsContainer, .locationsContainer, .itemDetailsContainer, .itemDetailsDataContainer {
+.containersContainer, .itemsContainer, .locationsContainer, .itemDetailsContainer, .itemDetailsDataContainer, .editItemContainer {
   padding: 20px;
 }
 
@@ -137,6 +137,9 @@ Containers
   text-align: center;
 }
 
+.editItemDataContainer {
+  text-align: center;
+}
 
 /* --------------------------------------------------------------------------------
 Button

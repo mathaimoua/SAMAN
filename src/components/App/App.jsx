@@ -22,6 +22,7 @@ import Locations from "../Locations/Locations";
 import Containers from "../Containers/Containers";
 import Items from "../Items/Items"
 import ItemDetails from "../ItemDetails/ItemDetails";
+import EditItem from "../EditItem/EditItem";
 import "./App.css";
 
 function App() {
@@ -89,6 +90,10 @@ function App() {
 
             <ProtectedRoute path="/items/:id">
               <Items />
+            </ProtectedRoute>
+
+            <ProtectedRoute path="/edititem/:id">
+              <EditItem />
             </ProtectedRoute>
 
             <Route exact path="/login">
