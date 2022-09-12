@@ -54,10 +54,10 @@ function Locations() {
     if (addLocationName === "") {
       return -1;
     } else {
-      if (mainLocation.name === {} || mainLocation.name === "" || mainLocation.name === undefined || !mainLocation || !mainLocation.name) {
+      if (mainLocation.name == "" || mainLocation.name == undefined || !mainLocation || !mainLocation.name) {
         dispatch({ type: "ADD_FIRST_LOCATION", payload: addLocationName });
         history.push('/locations')
-      } else {
+      } else if (mainLocation){
         dispatch({ type: "ADD_LOCATION", payload: addLocationName });
         history.push("/locations");
       }
@@ -70,15 +70,15 @@ function Locations() {
     setDeleteOpen(false);
   };
 
-  const handleClickDelete = (id) => {
+  const handleClickDelete = (locID) => {
     // console.log(id)
-    setIDToDelete(id);
+    setIDToDelete(locID);
     setDeleteOpen(true);
   };
 
-  const handleClickEdit = (id) => {
+  const handleClickEdit = (locID) => {
     // console.log(id)
-    setIDToEdit(id);
+    setIDToEdit(locID);
     setEditOpen(true);
   };
 

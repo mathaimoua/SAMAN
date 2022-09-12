@@ -46,7 +46,7 @@ function* addFirstLocation(action) {
 
 function* deleteLocation(action) {
   try {
-    yield axios.delete( '/api/locations/' + action.payload)
+    yield axios.delete( `/api/locations/${action.payload}`)
     yield put({ type: 'LOAD_DATA' });
   } catch ( error ) {
     console.log('Error in deleteLocation', error);

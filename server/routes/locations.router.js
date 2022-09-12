@@ -77,6 +77,7 @@ router.put('/makeactive/:id', rejectUnauthenticated, (req, res) => {
 
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
   const locID = req.params.id
+  console.log('locID is', locID)
   const queryText = `
   DELETE FROM "locations"
   WHERE location_id = $1 AND user_id = $2

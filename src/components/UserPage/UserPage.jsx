@@ -24,7 +24,7 @@ function UserPage() {
   const mainLocation = useSelector((store) => store.locations.main);
 
   const handleLocationClick = () => {
-    dispatch({type: "FETCH_CONTAINERS", payload: mainLocation.location_id })
+    dispatch({ type: "FETCH_CONTAINERS", payload: mainLocation.location_id })
     dispatch({ type: 'FETCH_CURRENT_LOCATION', payload:  { id: mainLocation.location_id } })
     history.push(`/containers/${mainLocation.location_id}`)
   }
