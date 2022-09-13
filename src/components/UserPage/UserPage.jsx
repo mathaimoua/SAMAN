@@ -26,12 +26,12 @@ function UserPage() {
   const handleLocationClick = () => {
     dispatch({ type: "FETCH_CONTAINERS", payload: mainLocation.location_id })
     dispatch({ type: 'FETCH_CURRENT_LOCATION', payload:  { id: mainLocation.location_id } })
-    history.push(`/containers/${mainLocation.location_id}`)
+    history.push(`/${mainLocation.location_id}/containers/`)
   }
 
-  const handleItemClick = (itemID) => {
+  const handleItemClick = (locID, containerID, itemID) => {
     // dispatch({type: "FETCH_CURRENT_ITEM", payload: itemID })
-    history.push(`/details/${itemID}`)
+    history.push(`${locID}/${containerID}/details/${itemID}`)
   }
 
   useEffect(() => {
@@ -96,7 +96,7 @@ function UserPage() {
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                <button className="btn_asLinkTables" onClick={() => handleItemClick(item.item_id)}>{item.item_name}</button>
+                <button className="btn_asLinkTables" onClick={() => handleItemClick(item.location_id, item.container_id, item.item_id)}>{item.item_name}</button>
                 </TableCell>
                 <TableCell>{item.container_name}</TableCell>
                 <TableCell>

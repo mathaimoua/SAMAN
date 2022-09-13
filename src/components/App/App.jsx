@@ -92,7 +92,7 @@ function App() {
               <Items />
             </ProtectedRoute>
 
-            <ProtectedRoute path="/:locID/:containerID/edititem/:id">
+            <ProtectedRoute path="/:locID/:containerID/edititem/:itemID">
               <EditItem />
             </ProtectedRoute>
 

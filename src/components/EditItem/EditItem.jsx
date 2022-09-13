@@ -45,7 +45,7 @@ function EditItem() {
   }, [dispatch]);
 
   const refresh = () => {
-    dispatch({ type: "FETCH_CURRENT_ITEM", payload: itemID.id });
+    dispatch({ type: "FETCH_CURRENT_ITEM", payload: itemID.itemID });
     setDate(currentItem.warranty_expiration);
     window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
     // console.log('iteminfo is', itemInfo)
@@ -97,7 +97,7 @@ function EditItem() {
   const handleSave = () => {
     dispatch({type: 'EDIT_ITEM', payload: {id: currentItem.item_id, info: itemInfo} })
     setSaveOpen(false)
-    history.push(`/details/${itemID.id}`)
+    history.push(`/${itemID.locID}/${itemID.containerID}/details/${itemID.itemID}`)
   }
 
   return (
