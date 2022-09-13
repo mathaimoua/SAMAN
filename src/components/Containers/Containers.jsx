@@ -62,7 +62,7 @@ function Containers() {
     // console.log('creating container named', newContainerName)
     dispatch({
       type: 'CREATE_CONTAINER', 
-      payload: {name: newContainerName, location: Number(paramID.id)} });
+      payload: {name: newContainerName, location: paramID.locID} });
     setNewContainerName('');
     setAddOpen(false);
   }
@@ -70,7 +70,7 @@ function Containers() {
   const handleDelete = () => {
     dispatch({ 
       type: 'DELETE_CONTAINER', 
-      payload: {container: IDToDelete, location: Number(paramID.id)} });
+      payload: {container: IDToDelete, location: paramID.locID} });
     setIDToDelete(-1);
     setDeleteOpen(false);
   };
