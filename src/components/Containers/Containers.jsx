@@ -100,7 +100,7 @@ function Containers() {
     console.log("new name will be", newContainerName);
     dispatch({
       type: "SET_CONTAINER_NAME",
-      payload: { name: newContainerName, id: IDToEdit,  location: Number(id)}
+      payload: { name: newContainerName, id: IDToEdit,  location: Number(paramID.locID)}
     });
     setNewContainerName("");
     setEditOpen(false);

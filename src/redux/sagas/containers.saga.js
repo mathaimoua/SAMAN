@@ -35,9 +35,9 @@ function* deleteContainer(action) {
 
 function* setContainerName(action) {
   try {
-    // yield console.log('payload is', action.payload)
+    yield console.log('payload is', action.payload)
     yield axios.put( `api/containers/editname/${action.payload.id}`, action.payload )
-    yield put({ type: 'FETCH_CONTAINERS', payload: {id: action.payload.location} })
+    yield put({ type: 'FETCH_CONTAINERS', payload: action.payload.location })
   } catch (error) {
     console.log('Error in Container', error)
   }
