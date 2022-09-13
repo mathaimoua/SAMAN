@@ -61,7 +61,7 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
 
 router.get('/current/:id', rejectUnauthenticated, (req, res) => {
   queryText = `
-  SELECT "item_name", "current_holder", "model", "serial", "warranty_expiration", "state", "container_name" FROM "items"
+  SELECT "item_id", "item_name", "current_holder", "model", "serial", "warranty_expiration", "state", "container_name" FROM "items"
   JOIN "user" ON "items".user_id = "user".id
   JOIN "containers" ON "items".container_id = "containers".container_id
   JOIN "locations" ON "containers".location_id = "locations".location_id
@@ -77,8 +77,36 @@ router.get('/current/:id', rejectUnauthenticated, (req, res) => {
     })
 })
 
-router.post('/', (req, res) => {
-  // POST route code here
+router.put('/:id', rejectUnauthenticated, (req, res) => {
+  queryText=`
+  UPDATE "items" 
+  SET "item_name" = $1,
+    "current_holder" = $2,
+    "model" = $3,
+    "serial" = $4,
+    "warranty_expiration" = $5,
+    "state" = $6
+  WHERE "item_id" = $7 AND "user_id" = $8
+  ;`;
+
+  values = [ 
+    req.body.info.name,
+    req.body.info.holder,
+    req.body.info.model,
+    req.body.info.serial,
+    req.body.info.warranty,
+    req.body.info.state,
+    req.params.id,
+    req.user.id
+  ]
+
+  pool.query(queryText, values)
+    .then(response => {
+      res.sendStatus(200)
+    }).catch(err => {
+      console.log(err)
+      res.sendStatus(500)
+    })
 });
 
 module.exports = router;

@@ -85,7 +85,7 @@ function EditItem() {
     setItemInfo({...itemInfo, state: event.target.value})
   };
 
-  const handleClickSave = (itemID) => {
+  const handleClickSave = () => {
     // console.log('deleting item', itemID)
     setSaveOpen(true);
   };
@@ -95,8 +95,9 @@ function EditItem() {
   };
 
   const handleSave = () => {
-    console.log('saving data!')
+    dispatch({type: 'EDIT_ITEM', payload: {id: currentItem.item_id, info: itemInfo} })
     setSaveOpen(false)
+    history.push(`/details/${itemID.id}`)
   }
 
   return (
