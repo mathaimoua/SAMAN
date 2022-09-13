@@ -273,7 +273,7 @@ Button
 }
 
 @media (min-width: 900px) {
-  .btn, .editItembtn {
+  .btn, .editItembtn, .btnRed {
     font-size: 12pt;
     max-width: 40%;
     padding: .75em .5em;

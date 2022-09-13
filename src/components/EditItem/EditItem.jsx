@@ -24,6 +24,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 function EditItem() {
 
   const [saveOpen, setSaveOpen] = useState(false);
+  const [deleteOpen, setDeleteOpen] = useState(false);
   const [IDToDelete, setIDToDelete] = useState(-1);
   const itemID = useParams();
   const currentItem = useSelector((store) => store.items.currentItem);
@@ -100,8 +101,19 @@ function EditItem() {
     history.push(`/${itemID.locID}/${itemID.containerID}/details/${itemID.itemID}`)
   }
 
+  const handleDelete = () => {
+    // console.log('DELETING!')
+    dispatch({type: 'DELETE_ITEM', payload: {deleteID: itemID.itemID, container: itemID.containerID} })
+    setDeleteOpen(false)
+    history.push(`/${itemID.locID}/${itemID.containerID}/items`)
+  }
+
   const handleClickDelete = () => {
-    console.log('DELETING!')
+    setDeleteOpen(true)
+  }
+
+  const handleDeleteClose = () => {
+    setDeleteOpen(false)
   }
 
   return (
@@ -224,6 +236,44 @@ function EditItem() {
               autoFocus
             >
               Save
+            </Button>
+          </DialogActions>
+        </Dialog>
+
+        <Dialog
+          PaperProps={{
+            style: {
+              backgroundColor: "#C0BCB6",
+              boxShadow: "none",
+            },
+          }}
+          open={deleteOpen}
+          onClose={handleDeleteClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">
+            {"Permanently Delete Item?"}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              Are you sure you want to delete this item? There is no undo!
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button sx={{ color: "black" }} onClick={handleDeleteClose}>
+              Cancel
+            </Button>
+            <Button
+              sx={{
+                border: "1px solid black",
+                backgroundColor: "#555555",
+                color: "salmon",
+              }}
+              onClick={handleDelete}
+              autoFocus
+            >
+              Delete
             </Button>
           </DialogActions>
         </Dialog>

@@ -36,6 +36,7 @@ function UserPage() {
 
   useEffect(() => {
     dispatch({ type: 'FETCH_MAIN_LOCATION' })
+    dispatch({ type: 'FETCH_RECENT_ITEMS' })
   }, [dispatch]);
 
   return (
