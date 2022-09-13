@@ -129,7 +129,7 @@ Containers
   margin-top: 50px;
 }
 
-.containersContainer, .itemsContainer, .locationsContainer, .itemDetailsContainer, .itemDetailsDataContainer, .editItemContainer, .viewItemsContainer, .addItemCContainer {
+.containersContainer, .itemsContainer, .locationsContainer, .itemDetailsContainer, .itemDetailsDataContainer, .editItemContainer, .viewItemsContainer {
   padding: 20px;
 }
 
@@ -137,10 +137,13 @@ Containers
   text-align: center;
 }
 
-.editItemDataContainer {
+.editItemDataContainer, .addItemDataContainer {
   text-align: center;
 }
-
+.addItemContainer, .addItemCContainer {
+  padding: 20px;
+  padding-bottom: 60px;
+}
 /* --------------------------------------------------------------------------------
 Button
 -------------------------------------------------------------------------------- */
@@ -283,7 +286,7 @@ Button
     padding-left: 80px;
     padding-right: 80px;
   }
-  .locationsContainer, .editItemContainer, .itemsContainer, .itemDetailsContainer, .containersContainer, .viewItemsContainer, .addItemCContainer  { 
+  .locationsContainer, .editItemContainer, .itemsContainer, .itemDetailsContainer, .containersContainer, .viewItemsContainer, .addItemCContainer, .addItemContainer  { 
     padding-left: 100px;
     padding-right: 100px;
   }

@@ -25,6 +25,7 @@ import ItemDetails from "../ItemDetails/ItemDetails";
 import EditItem from "../EditItem/EditItem";
 import AddItemC from "../AddItem/AddItemC";
 import ViewItems from "../ViewItems/ViewItems";
+import AddItem from "../AddItem/AddItem";
 import "./App.css";
 
 function App() {
@@ -104,6 +105,10 @@ function App() {
 
             <ProtectedRoute exact path="/viewitems/">
               <ViewItems />
+            </ProtectedRoute>
+
+            <ProtectedRoute path="/additem/:locID">
+              <AddItem />
             </ProtectedRoute>
 
             <Route exact path="/login">

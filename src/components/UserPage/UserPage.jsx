@@ -24,8 +24,8 @@ function UserPage() {
   const mainLocation = useSelector((store) => store.locations.main);
 
   const handleLocationClick = () => {
-    dispatch({ type: "FETCH_CONTAINERS", payload: mainLocation.location_id })
-    dispatch({ type: 'FETCH_CURRENT_LOCATION', payload:  { id: mainLocation.location_id } })
+    // dispatch({ type: "FETCH_CONTAINERS", payload: mainLocation.location_id })
+    // dispatch({ type: 'FETCH_CURRENT_LOCATION', payload:  { id: mainLocation.location_id } })
     history.push(`/${mainLocation.location_id}/containers/`)
   }
 
@@ -36,6 +36,10 @@ function UserPage() {
 
   const handleViewItems = () => {
     history.push('/viewitems/')
+  }
+
+  const handleClickAddItem = () => {
+    history.push(`/additem/${mainLocation.location_id}`)
   }
 
   useEffect(() => {
@@ -71,7 +75,7 @@ function UserPage() {
         >Go</Button>
         <p></p>
         <button className="btn" onClick={handleViewItems}>View Items</button>
-        <button className="btn">Add New Item</button>
+        <button className="btn" onClick={handleClickAddItem}>Add New Item</button>
         <button className="btn">Add New Container</button>
       </div>
       <h3 className='recentlyAddedItemsHeader'>Recently Added Items</h3>

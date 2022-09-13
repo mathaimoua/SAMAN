@@ -107,7 +107,7 @@ function Containers() {
   };
 
   const handleContainerClick = (id) => {
-    dispatch({type: "FETCH_CONTAINER_ITEMS", payload: id })
+    // dispatch({type: "FETCH_CONTAINER_ITEMS", payload: id })
     history.push(`/${paramID.locID}/${id}/items`)
   }
 
@@ -117,7 +117,7 @@ function Containers() {
         Back
       </button>
       <div className="containersDataContainer">
-        <h2>Containers of {location.currentLocation.location_name}</h2>
+        {location.currentLocation && <h2>Containers of {location.currentLocation.location_name}</h2>}
         <TableContainer
           sx={{
             maxWidth: "100%",

@@ -1,6 +1,6 @@
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory  } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import moment from 'moment'
 
 import {
@@ -10,6 +10,8 @@ import {
   InputLabel,
   OutlinedInput,
   TextField,
+  FormHelperText,
+  FormGroup,
   MenuItem,
   Button,
 } from "@mui/material";
@@ -21,21 +23,37 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-function AddItemC() {
 
+function AddItem(){
+
+ 
+  const paramID = useParams();
+  const dispatch = useDispatch();
+  const containersList = useSelector(store => store.containers.containersList)
+  const [newContainer, setNewContainer] = useState()
   const history = useHistory();
   const [newDate, setNewDate] = useState()
-  const dispatch = useDispatch();
-  const paramID = useParams();
   const [itemInfo, setItemInfo] = useState({
       name: '',
       holder: '',
-      // container: '', //switch to ID
+      container: '', //switch to ID
       model: '',
       serial: '',
       warranty: moment().format('YYYY-MM-DD'),
       state: 'IN USE',
   });
+
+
+  const handleContainerChange = (event) => {
+    console.log(event.target.value)
+    setNewContainer(event.target.value)
+  }
+
+  useEffect(() => {
+    dispatch({type: 'FETCH_CONTAINERS', payload: paramID.locID })
+  }, [dispatch]);
+    
+
   const [saveOpen, setSaveOpen] = useState(false);
 
   const handleNameChange = (event) => {
@@ -45,10 +63,6 @@ function AddItemC() {
   const handleHolderChange = (event) => {
     setItemInfo({...itemInfo, holder: event.target.value})
   }
-
-  // const handleContainerChange = (event) => {
-  //   setItemInfo({...itemInfo, container: event.target.value})
-  // }
 
   const handleModelChange = (event) => {
     setItemInfo({...itemInfo, model: event.target.value})
@@ -77,71 +91,78 @@ function AddItemC() {
   };
 
   const handleSave = () => {
-    dispatch({type: 'ADD_NEW_ITEM_C', payload: {containerID: paramID.containerID, itemInfo: itemInfo} })
+    dispatch({type: 'ADD_NEW_ITEM', payload: {containerID: paramID.containerID, itemInfo: itemInfo} })
     setSaveOpen(false)
     history.push(`/${paramID.locID}/${paramID.containerID}/items`)
   }
-  useEffect(() => {
-    dispatch({ type: "FETCH_CURRENT_CONTAINER", payload: paramID.containerID });
-    dispatch({
-      type: "FETCH_CURRENT_LOCATION",
-      payload: { id: paramID.containerID },
-    });
-  }, [dispatch]);
 
   return (
-    <div className="addItemCContainer">
-      <button style={{marginBottom: '20px'}} className="btn" onClick={() => history.goBack()}>
+    <div className="addItemContainer">
+<button style={{marginBottom: '20px'}} className="btn" onClick={() => history.goBack()}>
         Back
       </button>
-    <Box
-      sx={{ padding: "20px" }}
-      className="editItemDataContainer"
-      component={Paper}
-    >
-      <FormControl component="form">
-        <TextField
-          required
-          style={{ float: "center", margin: "5px" }}
-          helperText="name"
-          onChange={handleNameChange}
-        />
-        <TextField
-            style={{ float: "center", margin: "5px" }}
+      <div className='addItemDataContainer'>
+      <Box sx={{padding: '20px'}} className="editItemDataContainer" component={Paper}>
+        <FormGroup component="form">
+          <TextField
+            style={{ margin: "auto", width: '40%' }}
+            defaultValue={''}
+            helperText="name"
+            onChange={handleNameChange}
+          />
+          <TextField
+            style={{ margin: "auto", width: '40%' }}
+            defaultValue={''}
             helperText="holder"
             onChange={handleHolderChange}
           />
-        {/* <TextField
-            style={{ float: "center", margin: "5px" }}
-            helperText="container"
-            onChange={handleContainerChange}
-          /> */}
-        <TextField
-            style={{ float: "center", margin: "5px" }}
+        <Select
+        id="stateSelect"
+        defaultValue={'IN USE'}
+        onChange={handleContainerChange}
+        label="container"
+        style={{ margin: "auto", width: '40%' }}    
+      >
+        {containersList && containersList.map(container => {
+          return (
+            <MenuItem 
+              value={container.container_id}
+            >
+              {container.container_name}
+            </MenuItem>
+          )
+        })}
+      </Select>
+      <FormHelperText style={{ paddingLeft: '18px', margin: "auto", width: '40%' }}>container</FormHelperText>
+          <TextField
+            style={{ margin: "auto", width: '40%' }}
+            defaultValue={''}
             helperText="model"
             onChange={handleModelChange}
           />
-        <TextField
-            style={{ float: "center", margin: "5px" }}
+          <TextField
+            style={{ margin: "auto", width: '40%' }}
+            defaultValue={''}
             helperText="serial"
             onChange={handleSerialChange}
           />
-        <TextField
+          <TextField
             readOnly
-            style={{ float: "center", margin: "10px" }}
-            value={moment(newDate).format("MM Do YYYY")}
+            style={{ margin: "auto", width: '40%' }}
+            value={moment(newDate).format("MMM Do YYYY")}
             helperText="warranty expiration"
           />
           <input
             type="date"
             className="hidden"
+            style={{ margin: "auto", width: '40%' }}
             onChange={handleDateChange}
           />
-
-        <Select
+          <Select
             id="stateSelect"
-            defaultValue={'IN USE'}
+            defaultValue={''}
             onChange={handleStateChange}
+            style={{ margin: "auto", width: '40%', marginTop: '10px' }}
           >
             <MenuItem value={"IN USE"}>IN USE</MenuItem>
             <MenuItem value={"IN STOCK"}>IN STOCK</MenuItem>
@@ -151,24 +172,17 @@ function AddItemC() {
               WAITING FOR DISPOSAL
             </MenuItem>
           </Select>
+        </FormGroup>
+      </Box>
+      <button
+        style={{ float: "right" }}
+        className="btn"
+        onClick={handleClickSave}
+      >
+        Save
+      </button>
 
-          <Button
-              sx={{
-                marginTop: '10px',
-                border: "1px solid black",
-                backgroundColor: "#97c30a",
-                color: "black",
-              }}
-              onClick={handleClickSave}
-              autoFocus
-            >
-              Save
-            </Button>
-      </FormControl>
-
-    </Box>
-
-    <Dialog
+      <Dialog
           PaperProps={{
             style: {
               backgroundColor: "#C0BCB6",
@@ -211,8 +225,9 @@ function AddItemC() {
             </Button>
           </DialogActions>
         </Dialog>
+        </div>
     </div>
-  );
+  )
 }
 
-export default AddItemC;
+export default AddItem;
