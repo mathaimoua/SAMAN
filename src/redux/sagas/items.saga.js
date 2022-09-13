@@ -52,12 +52,21 @@ function* editItem(action) {
   }
 }
 
+function* addNewItemC(action) {
+  try {
+    yield axios.post(`api/items/${action.payload.containerID}`, action.payload.itemInfo)
+  } catch (error) {
+    console.log('Error in fetchCurrentItem', error)
+  }
+}
+
 function* itemsSaga() {
   yield takeLatest('FETCH_RECENT_ITEMS', fetchRecentItems);
   yield takeLatest('FETCH_CONTAINER_ITEMS', fetchContainerItems);
   yield takeLatest('DELETE_ITEM', deleteItem);
   yield takeLatest('FETCH_CURRENT_ITEM', fetchCurrentItem)
   yield takeLatest('EDIT_ITEM', editItem);
+  yield takeLatest('ADD_NEW_ITEM_C', addNewItemC)
 }
 
 export default itemsSaga;

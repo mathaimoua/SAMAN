@@ -23,6 +23,7 @@ import Containers from "../Containers/Containers";
 import Items from "../Items/Items"
 import ItemDetails from "../ItemDetails/ItemDetails";
 import EditItem from "../EditItem/EditItem";
+import AddItemC from "../AddItem/AddItemC";
 import "./App.css";
 
 function App() {
@@ -80,7 +81,7 @@ function App() {
               <Locations />
             </ProtectedRoute>
 
-            <ProtectedRoute path="/:locID/containers/">
+            <ProtectedRoute exact path="/:locID/containers/">
               <Containers />
             </ProtectedRoute>
 
@@ -88,12 +89,16 @@ function App() {
               <ItemDetails />
             </ProtectedRoute>
 
-            <ProtectedRoute path="/:locID/:containerID/items/">
+            <ProtectedRoute exact path="/:locID/:containerID/items/">
               <Items />
             </ProtectedRoute>
 
             <ProtectedRoute path="/:locID/:containerID/edititem/:itemID">
               <EditItem />
+            </ProtectedRoute>
+
+            <ProtectedRoute exact path="/:locID/:containerID/additem/">
+              <AddItemC />
             </ProtectedRoute>
 
             <Route exact path="/login">

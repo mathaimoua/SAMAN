@@ -1,7 +1,7 @@
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import moment from "moment";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import moment from 'moment'
 
 import {
   Box,
@@ -21,69 +21,51 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-function EditItem() {
+function AddItem() {
 
-  const [saveOpen, setSaveOpen] = useState(false);
-  const [IDToDelete, setIDToDelete] = useState(-1);
-  const itemID = useParams();
-  const currentItem = useSelector((store) => store.items.currentItem);
   const history = useHistory();
-  const [date, setDate] = useState();
+  const [newDate, setNewDate] = useState()
   const dispatch = useDispatch();
+  const paramID = useParams();
   const [itemInfo, setItemInfo] = useState({
-    name: currentItem.item_name,
-      holder: currentItem.current_holder,
-      container: currentItem.container_name, //switch to ID
-      model: currentItem.model,
-      serial: currentItem.serial,
-      warranty: moment(currentItem.warranty_expiration).format('YYYY-MM-DD'),
-      state: currentItem.state,
+      name: '',
+      holder: '',
+      container: '', //switch to ID
+      model: '',
+      serial: '',
+      warranty: moment().format('YYYY-MM-DD'),
+      state: 'IN USE',
   });
-
-  useEffect(() => {
-    refresh();
-  }, [dispatch]);
-
-  const refresh = () => {
-    dispatch({ type: "FETCH_CURRENT_ITEM", payload: itemID.itemID });
-    setDate(currentItem.warranty_expiration);
-    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
-    // console.log('iteminfo is', itemInfo)
-  };
+  const [saveOpen, setSaveOpen] = useState(false);
 
   const handleNameChange = (event) => {
     setItemInfo({...itemInfo, name: event.target.value})
-    console.log(itemInfo)
   }
+
   const handleHolderChange = (event) => {
     setItemInfo({...itemInfo, holder: event.target.value})
-    // console.log(itemInfo)
   }
+
   const handleContainerChange = (event) => {
     setItemInfo({...itemInfo, container: event.target.value})
-    // console.log(itemInfo)
   }
+
   const handleModelChange = (event) => {
     setItemInfo({...itemInfo, model: event.target.value})
-    // console.log(itemInfo)
   }
 
   const handleSerialChange = (event) => {
     setItemInfo({...itemInfo, serial: event.target.value})
-    // console.log(itemInfo)
   }
 
   const handleDateChange = (event) => {
-    setDate(event.target.value);
+    setNewDate(event.target.value);
     setItemInfo({...itemInfo, warranty: event.target.value})
-    // console.log(moment(event.target.value).format("MMM Do YYYY"));
-  };
+  }
 
   const handleStateChange = (event) => {
-    // console.log(event.target.value);
-    // setState(event.target.value);
     setItemInfo({...itemInfo, state: event.target.value})
-  };
+  }
 
   const handleClickSave = () => {
     // console.log('deleting item', itemID)
@@ -95,58 +77,56 @@ function EditItem() {
   };
 
   const handleSave = () => {
-    dispatch({type: 'EDIT_ITEM', payload: {id: currentItem.item_id, info: itemInfo} })
+    dispatch({type: 'ADD_NEW_ITEM_C', payload: {containerID: paramID.containerID, itemInfo: itemInfo} })
     setSaveOpen(false)
-    history.push(`/${itemID.locID}/${itemID.containerID}/details/${itemID.itemID}`)
+    history.push(`/${paramID.locID}/${paramID.containerID}/items`)
   }
-
-  const handleClickDelete = () => {
-    console.log('DELETING!')
-  }
+  useEffect(() => {
+    dispatch({ type: "FETCH_CURRENT_CONTAINER", payload: paramID.containerID });
+    dispatch({
+      type: "FETCH_CURRENT_LOCATION",
+      payload: { id: paramID.containerID },
+    });
+  }, [dispatch]);
 
   return (
-    <div className="editItemContainer" style={{ marginBottom: "50px" }}>
-      <button style={{marginBottom: '20px'}} className="btn" onClick={() => history.goBack()}>
-        Back
-      </button>
-
-      <Box  sx={{padding: '20px'}}className="editItemDataContainer" component={Paper}>
-        <h1>Editing {currentItem.item_name}</h1>
-        <FormControl component="form">
-          <TextField
+    <div className="addItemContainer">
+    <Box
+      sx={{ padding: "20px" }}
+      className="editItemDataContainer"
+      component={Paper}
+    >
+      <FormControl component="form">
+        <TextField
+          required
+          style={{ float: "center", margin: "5px" }}
+          helperText="name"
+          onChange={handleNameChange}
+        />
+        <TextField
             style={{ float: "center", margin: "5px" }}
-            defaultValue={currentItem.item_name}
-            helperText="name"
-            onChange={handleNameChange}
-          />
-          <TextField
-            style={{ float: "center", margin: "5px" }}
-            defaultValue={currentItem.current_holder}
             helperText="holder"
             onChange={handleHolderChange}
           />
-          <TextField
+        <TextField
             style={{ float: "center", margin: "5px" }}
-            defaultValue={currentItem.container_name}
             helperText="container"
             onChange={handleContainerChange}
           />
-          <TextField
+        <TextField
             style={{ float: "center", margin: "5px" }}
-            defaultValue={currentItem.model}
             helperText="model"
             onChange={handleModelChange}
           />
-          <TextField
+        <TextField
             style={{ float: "center", margin: "5px" }}
-            defaultValue={currentItem.serial}
             helperText="serial"
             onChange={handleSerialChange}
           />
-          <TextField
+        <TextField
             readOnly
             style={{ float: "center", margin: "10px" }}
-            value={moment(date).format("MMM Do YYYY")}
+            value={moment(newDate).format("MM Do YYYY")}
             helperText="warranty expiration"
           />
           <input
@@ -154,9 +134,10 @@ function EditItem() {
             className="hidden"
             onChange={handleDateChange}
           />
-          <Select
+
+        <Select
             id="stateSelect"
-            defaultValue={currentItem.state}
+            defaultValue={'IN USE'}
             onChange={handleStateChange}
           >
             <MenuItem value={"IN USE"}>IN USE</MenuItem>
@@ -167,24 +148,24 @@ function EditItem() {
               WAITING FOR DISPOSAL
             </MenuItem>
           </Select>
-        </FormControl>
-      </Box>
-      <button
-        style={{ float: "left" }}
-        className="btnRed"
-        onClick={handleClickDelete}
-      >
-        Delete
-      </button>
-      <button
-        style={{ float: "right" }}
-        className="btn"
-        onClick={handleClickSave}
-      >
-        Save
-      </button>
 
-      <Dialog
+          <Button
+              sx={{
+                marginTop: '10px',
+                border: "1px solid black",
+                backgroundColor: "#97c30a",
+                color: "black",
+              }}
+              onClick={handleClickSave}
+              autoFocus
+            >
+              Save
+            </Button>
+      </FormControl>
+
+    </Box>
+
+    <Dialog
           PaperProps={{
             style: {
               backgroundColor: "#C0BCB6",
@@ -231,4 +212,4 @@ function EditItem() {
   );
 }
 
-export default EditItem;
+export default AddItem;

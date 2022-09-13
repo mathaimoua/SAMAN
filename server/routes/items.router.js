@@ -109,4 +109,30 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
     })
 });
 
+router.post('/:id', rejectUnauthenticated, (req, res) => {
+  queryText=`
+  INSERT INTO "items" ("item_name", "user_id", "current_holder", "container_id", "model", "serial", "warranty_expiration", "state")
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8);
+  ;`;
+
+  values = [ 
+    req.body.name,
+    req.user.id,
+    req.body.holder,
+    req.params.id,
+    req.body.model,
+    req.body.serial,
+    req.body.warranty,
+    req.body.state
+  ]
+
+  pool.query(queryText, values)
+    .then(response => {
+      res.sendStatus(200)
+    }).catch(err => {
+      console.log(err)
+      res.sendStatus(500)
+    })
+});
+
 module.exports = router;

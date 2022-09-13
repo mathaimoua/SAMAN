@@ -20,6 +20,8 @@ import DialogTitle from "@mui/material/DialogTitle";
 
 import { Button } from "@mui/material";
 
+// Path is "/:locID/:containerID/additem/"
+
 function Items(){
 
   const history = useHistory();
@@ -56,6 +58,10 @@ function Items(){
   const handleDeleteClose = () => {
     setDeleteOpen(false);
   };
+
+  const clickAddItem = () => {
+    history.push(`/${paramID.locID}/${paramID.containerID}/additem/`)
+  }
 
   const refresh = (refreshID) => {
     window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
@@ -154,7 +160,7 @@ function Items(){
           </Table>
         </TableContainer>
         <div className="addLocationBtn">
-          <button className="btn">
+          <button className="btn" onClick={clickAddItem}>
             Add New Item
           </button>
         </div>
