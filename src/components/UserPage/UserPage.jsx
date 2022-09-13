@@ -34,6 +34,10 @@ function UserPage() {
     history.push(`${locID}/${containerID}/details/${itemID}`)
   }
 
+  const handleViewItems = () => {
+    history.push('/viewitems/')
+  }
+
   useEffect(() => {
     dispatch({ type: 'FETCH_MAIN_LOCATION' })
     dispatch({ type: 'FETCH_RECENT_ITEMS' })
@@ -66,7 +70,7 @@ function UserPage() {
         }} 
         >Go</Button>
         <p></p>
-        <button className="btn">View Items</button>
+        <button className="btn" onClick={handleViewItems}>View Items</button>
         <button className="btn">Add New Item</button>
         <button className="btn">Add New Container</button>
       </div>
@@ -93,7 +97,7 @@ function UserPage() {
             {items.map((item) => (
               <TableRow
                 hover
-                key={item.serial}
+                key={item.item_id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">

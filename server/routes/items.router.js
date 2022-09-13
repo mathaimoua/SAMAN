@@ -24,6 +24,24 @@ router.get('/recentItems', rejectUnauthenticated, (req, res) => {
     })
 });
 
+router.get('/viewall', rejectUnauthenticated, (req, res) => {
+  const queryText = `
+  SELECT * FROM "items"
+  JOIN "user" ON "items".user_id = "user".id
+  JOIN "containers" ON "items".container_id = "containers".container_id
+  JOIN "locations" ON "containers".location_id = "locations".location_id
+  WHERE "user".id = $1;`;
+
+  pool.query(queryText, [req.user.id])
+    .then(response => {
+      // console.log('data from server is', response.rows)
+      res.send(response.rows)
+    }).catch(err => {
+      // console.log(err)
+      // res.sendStatus(500)
+    })
+});
+
 router.get('/:id', rejectUnauthenticated, (req, res) => {
   queryText = `
   SELECT "item_id", "item_name", "current_holder", "model", "serial", "warranty_expiration", "state", "container_name" FROM "items"

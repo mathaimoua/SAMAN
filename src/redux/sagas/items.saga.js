@@ -48,7 +48,7 @@ function* editItem(action) {
     // console.log('sending', action.payload)
     yield axios.put(`api/items/${action.payload.id}`, action.payload)
   } catch (error) {
-    console.log('Error in fetchCurrentItem', error)
+    console.log('Error in fetchEditItem', error)
   }
 }
 
@@ -56,7 +56,16 @@ function* addNewItemC(action) {
   try {
     yield axios.post(`api/items/${action.payload.containerID}`, action.payload.itemInfo)
   } catch (error) {
-    console.log('Error in fetchCurrentItem', error)
+    console.log('Error in addNewItemC', error)
+  }
+}
+
+function* fetchAllItems(){
+  try {
+    const response = yield axios.get(`api/items/viewall`)
+    yield put({type: 'SET_ALL_ITEMS', payload: response.data})
+  } catch (error) {
+    console.log('Error in fetchAllItems', error)
   }
 }
 
@@ -67,6 +76,7 @@ function* itemsSaga() {
   yield takeLatest('FETCH_CURRENT_ITEM', fetchCurrentItem)
   yield takeLatest('EDIT_ITEM', editItem);
   yield takeLatest('ADD_NEW_ITEM_C', addNewItemC)
+  yield takeLatest('FETCH_ALL_ITEMS', fetchAllItems)
 }
 
 export default itemsSaga;

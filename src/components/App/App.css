@@ -129,7 +129,7 @@ Containers
   margin-top: 50px;
 }
 
-.containersContainer, .itemsContainer, .locationsContainer, .itemDetailsContainer, .itemDetailsDataContainer, .editItemContainer {
+.containersContainer, .itemsContainer, .locationsContainer, .itemDetailsContainer, .itemDetailsDataContainer, .editItemContainer, .viewItemsContainer, .addItemCContainer {
   padding: 20px;
 }
 
@@ -283,7 +283,7 @@ Button
     padding-left: 80px;
     padding-right: 80px;
   }
-  .locationsContainer, .editItemContainer, .itemsContainer, .itemDetailsContainer, .containersContainer { 
+  .locationsContainer, .editItemContainer, .itemsContainer, .itemDetailsContainer, .containersContainer, .viewItemsContainer, .addItemCContainer  { 
     padding-left: 100px;
     padding-right: 100px;
   }

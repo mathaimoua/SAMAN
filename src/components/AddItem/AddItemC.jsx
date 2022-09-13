@@ -21,7 +21,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-function AddItem() {
+function AddItemC() {
 
   const history = useHistory();
   const [newDate, setNewDate] = useState()
@@ -90,7 +90,7 @@ function AddItem() {
   }, [dispatch]);
 
   return (
-    <div className="addItemContainer">
+    <div className="addItemCContainer">
     <Box
       sx={{ padding: "20px" }}
       className="editItemDataContainer"
@@ -212,4 +212,4 @@ function AddItem() {
   );
 }
 
-export default AddItem;
+export default AddItemC;

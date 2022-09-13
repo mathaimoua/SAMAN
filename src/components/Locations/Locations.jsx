@@ -101,10 +101,10 @@ function Locations() {
     setEditOpen(false);
   };
 
-  const handleLocationClick = (id) => {
-    dispatch({ type: "FETCH_CONTAINERS", payload: id })
+  const handleLocationClick = (locationID) => {
+    dispatch({ type: "FETCH_CONTAINERS", payload: locationID })
     // dispatch({ type: 'FETCH_CURRENT_LOCATION', payload:  { id: id } })
-    history.push(`/${id}/containers/`)
+    history.push(`/${locationID}/containers/`)
   }
 
   return (
