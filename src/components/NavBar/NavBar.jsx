@@ -30,8 +30,9 @@ function NavBar() {
   const theme = useTheme();
   // console.log(theme);
   // For use with Tab and Tabs
+  const mainLocation = useSelector((store) => store.locations.main);
   const PAGES = ["Dashboard", "Locations", "Add New Item", "About"];
-  const pageLinks = ["/user", "/locations", "/additem", "/about"]
+  const pageLinks = ["/user", "/locations", `/additem/${mainLocation.location_id}`, "/about"]
   const [currentTab, setCurrentTab] = useState(0);
 
   // Check for mobile device
@@ -78,6 +79,10 @@ function NavBar() {
   const handleLogout = () => {
     dispatch({ type: "LOGOUT" });
   };
+
+  const handleClickAddItem = () => {
+    history.push(`/additem/${mainLocation.location_id}`)
+  }
 
   return (
     <React.Fragment>

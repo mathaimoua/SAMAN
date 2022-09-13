@@ -102,6 +102,7 @@ function AddItem(){
         Back
       </button>
       <div className='addItemDataContainer'>
+        <h1>Add New Item</h1>
       <Box sx={{padding: '20px'}} className="editItemDataContainer" component={Paper}>
         <FormGroup component="form">
           <TextField

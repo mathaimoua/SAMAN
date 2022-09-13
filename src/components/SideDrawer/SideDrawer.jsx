@@ -21,6 +21,7 @@ function SideDrawer(){
   const theme = useTheme();
   const user = useSelector((store) => store.user);
   const [openDrawer, setOpenDrawer] = useState(false);
+  const mainLocation = useSelector((store) => store.locations.main);
 
   const handleLogout = () => {
     setOpenDrawer(!openDrawer);
@@ -52,7 +53,7 @@ function SideDrawer(){
                 </ListItemIcon>
               </ListItemButton>
 
-              <ListItemButton onClick={() => setOpenDrawer(!openDrawer)}>
+              <ListItemButton component={Link} to={`/additem/${mainLocation.location_id}`} onClick={() => setOpenDrawer(!openDrawer)}>
                 <ListItemIcon>
                   <ListItemText><h3>Add New Item</h3></ListItemText>
                 </ListItemIcon>

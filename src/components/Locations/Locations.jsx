@@ -109,10 +109,11 @@ function Locations() {
 
   return (
     <div className="locationsContainer">
-      <button className="btn" onClick={() => history.goBack()}>
+      
+      <div className="locationsDataContainer">
+      <button className="btn" onClick={() => history.goBack()} style={{display: 'flex', margin: '0px'}}>
         Back
       </button>
-      <div className="locationsDataContainer">
         <h2>Your Locations</h2>
 
         <TableContainer

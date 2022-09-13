@@ -94,6 +94,7 @@ function AddItemC() {
       <button style={{marginBottom: '20px'}} className="btn" onClick={() => history.goBack()}>
         Back
       </button>
+      <h1 style={{textAlign: 'center'}}>Add New Item</h1>
     <Box
       sx={{ padding: "20px" }}
       className="editItemDataContainer"
