@@ -41,8 +41,8 @@ function Containers() {
 
   const refresh = () => {
     window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
-    dispatch({ type: 'FETCH_CONTAINERS', payload: paramID.id})
-    dispatch({ type: 'FETCH_CURRENT_LOCATION', payload:  { id: paramID.id } })
+    dispatch({ type: 'FETCH_CONTAINERS', payload: paramID.locID})
+    dispatch({ type: 'FETCH_CURRENT_LOCATION', payload:  { id: paramID.locID } })
   }
 
   const handleAddContainer = () => {
@@ -108,7 +108,7 @@ function Containers() {
 
   const handleContainerClick = (id) => {
     dispatch({type: "FETCH_CONTAINER_ITEMS", payload: id })
-    history.push(`/items/${id}`)
+    history.push(`/${paramID.locID}/${id}/items`)
   }
 
   return (

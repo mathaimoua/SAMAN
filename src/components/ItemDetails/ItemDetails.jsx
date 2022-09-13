@@ -13,13 +13,14 @@ import moment from "moment";
 
 function ItemDetails() {
   const currentItem = useSelector((store) => store.items.currentItem);
+  const currentContainer = useSelector(store => store.containers.currentContainer)
   const dispatch = useDispatch();
   const itemID = useParams();
   const history = useHistory();
   // const [fieldLocked, setFieldLocked] = useState(true);
   // const [itemName, setItemName] = useState("");
   const handleEditItem = (idtoedit) => {
-    history.push(`/edititem/${idtoedit}`);
+    history.push(`/${itemID.locID}/${itemID.containerID}/edititem/${idtoedit}`);
   };
 
   useEffect(() => {

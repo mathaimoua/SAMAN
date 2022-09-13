@@ -104,7 +104,7 @@ function Locations() {
   const handleLocationClick = (id) => {
     dispatch({ type: "FETCH_CONTAINERS", payload: id })
     // dispatch({ type: 'FETCH_CURRENT_LOCATION', payload:  { id: id } })
-    history.push(`/containers/${id}`)
+    history.push(`/${id}/containers/`)
   }
 
   return (

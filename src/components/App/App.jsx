@@ -80,19 +80,19 @@ function App() {
               <Locations />
             </ProtectedRoute>
 
-            <ProtectedRoute path="/containers/:id">
+            <ProtectedRoute path="/:locID/containers/">
               <Containers />
             </ProtectedRoute>
 
-            <ProtectedRoute path="/details/:id">
+            <ProtectedRoute path="/:locID/:containerID/details/:id">
               <ItemDetails />
             </ProtectedRoute>
 
-            <ProtectedRoute path="/items/:id">
+            <ProtectedRoute path="/:locID/:containerID/items/">
               <Items />
             </ProtectedRoute>
 
-            <ProtectedRoute path="/edititem/:id">
+            <ProtectedRoute path="/:locID/:containerID/edititem/:id">
               <EditItem />
             </ProtectedRoute>
 

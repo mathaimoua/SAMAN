@@ -194,13 +194,13 @@ function EditItem() {
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description" sx={{textAlign: 'center'}}>
-              {itemInfo.name}<p></p>
-              {itemInfo.holder}<p></p>
-              {itemInfo.container}<p></p>
-              {itemInfo.model}<p></p>
-              {itemInfo.serial}<p></p>
-              {itemInfo.warranty}<p></p>
-              {itemInfo.state}
+              {itemInfo.name}<br></br>
+              {itemInfo.holder}<br></br>
+              {itemInfo.container}<br></br>
+              {itemInfo.model}<br></br>
+              {itemInfo.serial}<br></br>
+              {itemInfo.warranty}<br></br>
+              {itemInfo.state}<br></br>
             </DialogContentText>
           </DialogContent>
           <DialogActions>

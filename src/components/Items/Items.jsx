@@ -24,27 +24,27 @@ function Items(){
 
   const history = useHistory();
   const dispatch = useDispatch();
-  const containerID = useParams();
+  const paramID = useParams();
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [IDToDelete, setIDToDelete] = useState(-1);
   const items = useSelector(store => store.items.containerItems)
   const currentContainer = useSelector(store => store.containers.currentContainer)
 
   useEffect(() => {
-    refresh(containerID.id)
+    refresh(paramID.containerID)
   }, [dispatch]);
 
   const handleDelete = () => {
     dispatch({ 
       type: 'DELETE_ITEM', 
-      payload: {deleteID: IDToDelete, container: containerID.id} });
+      payload: {deleteID: IDToDelete, container: paramID.containerID} });
     setIDToDelete(-1);
     setDeleteOpen(false);
   };
 
   const handleItemClick = (itemID) => {
     // dispatch({type: 'FETCH_CURRENT_ITEM', payload: itemID})
-    history.push(`/details/${itemID}`)
+    history.push(`/${paramID.locID}/${paramID.containerID}/details/${itemID}`)
   }
 
   const handleClickDelete = (itemID) => {
@@ -60,7 +60,7 @@ function Items(){
   const refresh = (refreshID) => {
     window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
     dispatch({ type: 'FETCH_CONTAINER_ITEMS', payload: refreshID })
-    dispatch({ type: 'FETCH_CURRENT_CONTAINER', payload: containerID.id })
+    dispatch({ type: 'FETCH_CURRENT_CONTAINER', payload: paramID.containerID })
   }
 
   return(
