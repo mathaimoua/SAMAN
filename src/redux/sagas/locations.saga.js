@@ -71,6 +71,16 @@ function* fetchCurrentLocation(action) {
   }
 }
 
+function* setNewMain(action) {
+  try {
+    yield axios.get( 'api/locations/setallfalse/' )
+    yield axios.put( `api/locations/setnewmain/${action.payload}`)
+    yield put({ type: 'LOAD_DATA' });
+  } catch (error) {
+    console.log('Error in fetchCurrentContainer', error)
+  }
+}
+
 function* mainLocationSaga() {
   yield takeEvery('FETCH_MAIN_LOCATION', fetchMainLocation);
   yield takeEvery('FETCH_ALL_LOCATIONS', fetchLocations);
@@ -79,6 +89,7 @@ function* mainLocationSaga() {
   yield takeLatest('DELETE_LOC', deleteLocation)
   yield takeLatest('SET_LOCATION_NAME', setLocationName)
   yield takeLatest('FETCH_CURRENT_LOCATION', fetchCurrentLocation)
+  yield takeLatest('SET_NEW_MAIN', setNewMain)
 }
 
 export default mainLocationSaga;

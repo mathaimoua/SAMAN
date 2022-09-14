@@ -107,6 +107,11 @@ function Locations() {
     history.push(`/${locationID}/containers/`)
   }
 
+  const handleSetMain = (locationID) => {
+    console.log("switching to true!")
+    dispatch({type: 'SET_NEW_MAIN', payload: locationID})
+  }
+
   return (
     <div className="locationsContainer">
       
@@ -152,7 +157,7 @@ function Locations() {
                   <TableCell component="th" scope="row">
                   <button className="btn_asLinkTables"  onClick={() => handleLocationClick(location.location_id)}><h2>{location.location_name}</h2></button>
                   </TableCell>
-                  <TableCell>{String(location.isActive)}</TableCell>
+                  { location.isActive ? <TableCell>{String(location.isActive)}</TableCell> : <TableCell><button className="btn_asLinkTables"  onClick={() => handleSetMain(location.location_id)}>Set as main</button></TableCell> }
                   <TableCell
                     align="left"
                     sx={{ minWidth: 25, fontWeight: "bold", fontSize: "12pt" }}

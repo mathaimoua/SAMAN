@@ -126,4 +126,41 @@ router.get('/current/:id', rejectUnauthenticated, (req, res) => {
     })
 });
 
+router.get('/setallfalse', rejectUnauthenticated, (req, res) => {
+  console.log('userid is', req.user.id)
+  const queryText = `
+    UPDATE "locations" 
+    SET "isActive" = false
+    WHERE "user_id" = $1
+  ;`;
+
+  pool.query(queryText, [req.user.id])
+    .then(response => {
+      console.log(response)
+      res.sendStatus(200)
+    }).catch(err => {
+      console.log(err)
+      res.sendStatus(500)
+    })
+})
+
+router.put('/setnewmain/:id', rejectUnauthenticated, (req, res) => {
+  const locationID = req.params.id
+  console.log(locationID, req.params.id)
+  const queryText = `
+    UPDATE "locations" 
+    SET "isActive" = true
+    WHERE "user_id" = $1 AND "location_id" = $2
+  ;`;
+
+  pool.query(queryText, [req.user.id, locationID])
+    .then(response => {
+      console.log(response)
+      res.sendStatus(200)
+    }).catch(err => {
+      console.log(err)
+      res.sendStatus(500)
+    })
+})
+
 module.exports = router;
