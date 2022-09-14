@@ -11,11 +11,17 @@ import Moment from 'react-moment'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 
 function ViewItems(){
 
+  const history = useHistory();
   const dispatch = useDispatch();
   const allItems = useSelector(store => store.items.allItems)
+
+  const handleItemClick = (loc, con, itemid) => {
+    history.push(`/${loc}/${con}/details/${itemid}`)
+  }
 
   useEffect(() => {
     dispatch({type: 'FETCH_ALL_ITEMS'})

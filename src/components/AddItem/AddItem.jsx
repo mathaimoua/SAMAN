@@ -98,11 +98,11 @@ function AddItem(){
 
   return (
     <div className="addItemContainer">
-<button style={{marginBottom: '20px'}} className="btn" onClick={() => history.goBack()}>
+<button className="btn" onClick={() => history.goBack()}>
         Back
       </button>
       <div className='addItemDataContainer'>
-        <h1>Add New Item</h1>
+        <h1 style={{margin: '0px'}}>Add New Item</h1>
       <Box sx={{padding: '20px'}} className="editItemDataContainer" component={Paper}>
         <FormGroup component="form">
           <TextField
@@ -119,9 +119,7 @@ function AddItem(){
           />
         <Select
         id="stateSelect"
-        defaultValue={'IN USE'}
         onChange={handleContainerChange}
-        label="container"
         style={{ margin: "auto", width: '40%' }}    
       >
         {containersList && containersList.map(container => {
@@ -161,7 +159,7 @@ function AddItem(){
           />
           <Select
             id="stateSelect"
-            defaultValue={''}
+            defaultValue={'IN USE'}
             onChange={handleStateChange}
             style={{ margin: "auto", width: '40%', marginTop: '10px' }}
           >
@@ -173,6 +171,7 @@ function AddItem(){
               WAITING FOR DISPOSAL
             </MenuItem>
           </Select>
+          <FormHelperText style={{ paddingLeft: '30px', margin: "auto", width: '40%'}}>state</FormHelperText>
         </FormGroup>
       </Box>
       <button
@@ -196,7 +195,7 @@ function AddItem(){
           aria-describedby="alert-dialog-description"
         >
           <DialogTitle id="alert-dialog-title">
-            {"Update item information with the following?"}
+            {"Add item?"}
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description" sx={{textAlign: 'center'}}>

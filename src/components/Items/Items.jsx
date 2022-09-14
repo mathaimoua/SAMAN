@@ -75,7 +75,7 @@ function Items(){
         Back
       </button>
       <div className="containersDataContainer">
-        <h2>Items of {currentContainer.container_name}</h2>
+        <h2 style={{margin: '0px'}}>Items of {currentContainer.container_name}</h2>
         <TableContainer
           sx={{
             maxWidth: "100%",

@@ -41,7 +41,7 @@ function ItemDetails() {
         Edit Item
       </button>
       <div className="itemDetailsDataContainer">
-        <h1 style={{textAlign: 'center'}}>Item Details</h1>
+        <h2 style={{textAlign: 'center', margin: '0px'}}>Item Details</h2>
         <Box
           sx={{
             textAlign: "center",

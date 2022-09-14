@@ -121,9 +121,10 @@ function EditItem() {
       <button style={{marginBottom: '20px'}} className="btn" onClick={() => history.goBack()}>
         Back
       </button>
-
-      <Box  sx={{padding: '20px'}}className="editItemDataContainer" component={Paper}>
-        <h1>Editing {currentItem.item_name}</h1>
+      <div className='editItemDataContainer' >
+      <h2 style={{margin: '0px'}}>Editing {currentItem.item_name}</h2>
+      <Box  sx={{padding: '20px', marginTop: '5px'}}className="editItemDataContainer" component={Paper}>
+        
         <FormControl component="form">
           <TextField
             style={{ float: "center", margin: "5px" }}
@@ -277,6 +278,7 @@ function EditItem() {
             </Button>
           </DialogActions>
         </Dialog>
+        </div>
     </div>
   );
 }

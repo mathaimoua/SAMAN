@@ -117,7 +117,7 @@ function Containers() {
         Back
       </button>
       <div className="containersDataContainer">
-        {location.currentLocation && <h2>Containers of {location.currentLocation.location_name}</h2>}
+        {location.currentLocation && <h2 style={{margin: '0px'}}>Containers of {location.currentLocation.location_name}</h2>}
         <TableContainer
           sx={{
             maxWidth: "100%",

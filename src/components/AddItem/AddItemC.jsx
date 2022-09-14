@@ -7,6 +7,8 @@ import {
   Box,
   Paper,
   FormControl,
+  FormGroup,
+  FormHelperText,
   InputLabel,
   OutlinedInput,
   TextField,
@@ -91,45 +93,41 @@ function AddItemC() {
 
   return (
     <div className="addItemCContainer">
-      <button style={{marginBottom: '20px'}} className="btn" onClick={() => history.goBack()}>
+      <button className="btn" onClick={() => history.goBack()}>
         Back
       </button>
-      <h1 style={{textAlign: 'center'}}>Add New Item</h1>
+      <h2 style={{textAlign: 'center', margin: '0px'}}>Add New Item</h2>
     <Box
       sx={{ padding: "20px" }}
       className="editItemDataContainer"
       component={Paper}
     >
-      <FormControl component="form">
+      <FormGroup component="form">
         <TextField
           required
-          style={{ float: "center", margin: "5px" }}
+          style={{ margin: "auto", width: '40%' }}
           helperText="name"
           onChange={handleNameChange}
         />
         <TextField
-            style={{ float: "center", margin: "5px" }}
+            style={{ margin: "auto", width: '40%' }}
             helperText="holder"
             onChange={handleHolderChange}
           />
-        {/* <TextField
-            style={{ float: "center", margin: "5px" }}
-            helperText="container"
-            onChange={handleContainerChange}
-          /> */}
+
         <TextField
-            style={{ float: "center", margin: "5px" }}
+            style={{ margin: "auto", width: '40%' }}
             helperText="model"
             onChange={handleModelChange}
           />
         <TextField
-            style={{ float: "center", margin: "5px" }}
+            style={{ margin: "auto", width: '40%' }}
             helperText="serial"
             onChange={handleSerialChange}
           />
         <TextField
             readOnly
-            style={{ float: "center", margin: "10px" }}
+            style={{ margin: "auto", width: '40%' }}
             value={moment(newDate).format("MM Do YYYY")}
             helperText="warranty expiration"
           />
@@ -137,12 +135,14 @@ function AddItemC() {
             type="date"
             className="hidden"
             onChange={handleDateChange}
+            style={{ margin: "auto", width: '40%' }}
           />
 
         <Select
             id="stateSelect"
             defaultValue={'IN USE'}
             onChange={handleStateChange}
+            style={{ margin: "auto", width: '40%', marginTop: '10px'  }}
           >
             <MenuItem value={"IN USE"}>IN USE</MenuItem>
             <MenuItem value={"IN STOCK"}>IN STOCK</MenuItem>
@@ -152,7 +152,7 @@ function AddItemC() {
               WAITING FOR DISPOSAL
             </MenuItem>
           </Select>
-
+          <FormHelperText style={{ paddingLeft: '30px', margin: "auto", width: '40%'}}>state</FormHelperText>
           <Button
               sx={{
                 marginTop: '10px',
@@ -165,7 +165,7 @@ function AddItemC() {
             >
               Save
             </Button>
-      </FormControl>
+      </FormGroup>
 
     </Box>
 
@@ -182,7 +182,7 @@ function AddItemC() {
           aria-describedby="alert-dialog-description"
         >
           <DialogTitle id="alert-dialog-title">
-            {"Update item information with the following?"}
+            {"Add item?"}
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description" sx={{textAlign: 'center'}}>

@@ -114,7 +114,7 @@ function Locations() {
       <button className="btn" onClick={() => history.goBack()} style={{display: 'flex', margin: '0px'}}>
         Back
       </button>
-        <h2>Your Locations</h2>
+        <h2 style={{margin: '0px'}}>Your Locations</h2>
 
         <TableContainer
           sx={{
