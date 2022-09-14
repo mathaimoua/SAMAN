@@ -27,6 +27,7 @@ import AddItemC from "../AddItem/AddItemC";
 import ViewItems from "../ViewItems/ViewItems";
 import AddItem from "../AddItem/AddItem";
 import Search from "../Search/Search";
+import NewForm from "../NewForm/NewForm";
 import "./App.css";
 
 function App() {
@@ -119,6 +120,10 @@ function App() {
             <Route exact path="/login">
               {user.id ? <Redirect to="/user" /> : <LoginPage />}
             </Route>
+
+            <ProtectedRoute exact path="/newform">
+              <NewForm />
+            </ProtectedRoute>
 
             <Route exact path="/registration">
               {user.id ? (

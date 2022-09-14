@@ -22,7 +22,6 @@ function Search() {
   const history = useHistory();
 
   const handleItemClick = (locID, containerID, itemID) => {
-    // dispatch({type: "FETCH_CURRENT_ITEM", payload: itemID })
     history.push(`/${locID}/${containerID}/details/${itemID}`);
   };
 

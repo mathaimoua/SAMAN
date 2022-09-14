@@ -30,7 +30,7 @@ function UserPage() {
   const mainLocation = useSelector((store) => store.locations.main);
   const [addOpen, setAddOpen] = useState(false);
   const [newContainerName, setNewContainerName] = useState("");
-  const [searchString, setSearchString] = useState("");
+  const [searchString, setSearchString] = useState();
 
   const handleLocationClick = () => {
     // dispatch({ type: "FETCH_CONTAINERS", payload: mainLocation.location_id })
@@ -76,11 +76,13 @@ function UserPage() {
   };
 
   const handleSearch = () => {
-    if (searchString === "") {
+    if (searchString === "" || searchString === "/" || (!searchString.replace(/\s/g, '').length)) {
+      setSearchString('')
       return -1;
     } else {
       // console.log(`searching for ${searchString}!`)
       history.push(`/search/${searchString}`);
+      setSearchString('')
     }
   };
 
