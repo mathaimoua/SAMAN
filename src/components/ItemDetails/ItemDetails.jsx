@@ -16,6 +16,7 @@ function ItemDetails() {
   const currentContainer = useSelector(store => store.containers.currentContainer)
   const dispatch = useDispatch();
   const itemID = useParams();
+  console.log(itemID)
   const history = useHistory();
   // const [fieldLocked, setFieldLocked] = useState(true);
   // const [itemName, setItemName] = useState("");

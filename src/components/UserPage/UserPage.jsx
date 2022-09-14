@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Moment from "react-moment";
 import { Link } from 'react-router-dom'
@@ -14,6 +14,13 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import FormControl from '@mui/material/FormControl'
+
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 
 function UserPage() {
 
@@ -22,6 +29,9 @@ function UserPage() {
   const user = useSelector((store) => store.user);
   const items = useSelector((store) => store.items.recentItems);
   const mainLocation = useSelector((store) => store.locations.main);
+  const [addOpen, setAddOpen] = useState(false);
+  const [newContainerName, setNewContainerName] = useState("");
+  const [searchString, setSearchString] = useState("");
 
   const handleLocationClick = () => {
     // dispatch({ type: "FETCH_CONTAINERS", payload: mainLocation.location_id })
@@ -31,7 +41,7 @@ function UserPage() {
 
   const handleItemClick = (locID, containerID, itemID) => {
     // dispatch({type: "FETCH_CURRENT_ITEM", payload: itemID })
-    history.push(`${locID}/${containerID}/details/${itemID}`)
+    history.push(`/${locID}/${containerID}/details/${itemID}`)
   }
 
   const handleViewItems = () => {
@@ -40,6 +50,41 @@ function UserPage() {
 
   const handleClickAddItem = () => {
     history.push(`/additem/${mainLocation.location_id}`)
+  }
+
+  const handleAddContainer = () => {
+    // console.log(id)
+    setAddOpen(true);
+  };
+
+  const handleAddClose = () => {
+    setAddOpen(false);
+  };
+
+  const changeNewContainerName = (event) => {
+    setNewContainerName(event.target.value)
+  }
+
+  const handleCreateContainer = () => {
+    // console.log('creating container named', newContainerName)
+    dispatch({
+      type: 'CREATE_CONTAINER', 
+      payload: {name: newContainerName, location: mainLocation.location_id} });
+    setNewContainerName('');
+    setAddOpen(false);
+    history.push(`/${mainLocation.location_id}/containers`)
+  }
+  
+  const handleSearch = () => {
+    if (searchString === "") {return -1;}
+    else {
+    // console.log(`searching for ${searchString}!`)
+    history.push(`/search/${searchString}`)
+    }
+  }
+
+  const handleSearchChange = (event) => {
+    setSearchString(event.target.value)
   }
 
   useEffect(() => {
@@ -54,29 +99,41 @@ function UserPage() {
       
         <h2>Welcome, {String(user.username).charAt(0).toUpperCase()+String(user.username).slice(1)}!</h2>
         <h2>Currently managing: { mainLocation ? <button className="btn_asLinkMainLocation"  onClick={handleLocationClick}><h2>{mainLocation.location_name}</h2></button> : <p className="noLocationText">No location set, please create a location!</p> }</h2>
+        
+        <FormControl 
+          component="form" 
+          sx={{ width: '100%', display: 'inline-block', margin: '0px'}}
+          onSubmit={handleSearch}
+          >
         <TextField 
           id="filled-search"
           label="Search for an item"
           type="search"
           variant="filled"
-          sx={{backgroundColor: '#FFFFFF', width: '66%', height: 'auto'}} 
+          onChange={handleSearchChange}
+          sx={{backgroundColor: '#FFFFFF', height: 'auto', width: '50%'}} 
         />
-        <br></br>
+        {/* <Box sx={{textAlign: 'center'}}> */}
         <Button
           className="searchButton"
+          type='submit'
           sx={{ 
             color: '#97c30a', 
             margin: '5px', 
             backgroundColor: '#555555', 
-            width: '20%', 
+            width: '10%', 
             height: 'auto',
-            boxShadow: '5px 5px 2px 2px rgba(91, 91, 91, 0.2)'
+            boxShadow: '5px 5px 2px 2px rgba(91, 91, 91, 0.2)',
+            display: 'inline-block'
         }} 
         >Go</Button>
+        {/* </Box> */}
+        </FormControl>
+        
         <p></p>
         <button className="btn" onClick={handleViewItems}>View Items</button>
         <button className="btn" onClick={handleClickAddItem}>Add New Item</button>
-        <button className="btn">Add New Container</button>
+        <button className="btn" onClick={handleAddContainer}>Add New Container</button>
       </div>
       <h3 className='recentlyAddedItemsHeader'>Recently Added Items</h3>
       <TableContainer
@@ -116,6 +173,50 @@ function UserPage() {
           </TableBody>
         </Table>
       </TableContainer>
+
+      <Dialog
+          PaperProps={{
+            style: {
+              backgroundColor: "#C0BCB6",
+              boxShadow: "none",
+            },
+          }}
+          open={addOpen}
+          onClose={handleAddClose}
+        >
+          <DialogTitle>Add New Container</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Please enter a name for the container.
+            </DialogContentText>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="name"
+              value={newContainerName}
+              onChange={changeNewContainerName}
+              label="Container Name"
+              type="text"
+              fullWidth
+              variant="standard"
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button sx={{ color: "black" }} onClick={handleAddClose}>
+              Cancel
+            </Button>
+            <Button
+              sx={{
+                border: "1px solid black",
+                backgroundColor: "#97c30a",
+                color: "black",
+              }}
+              onClick={handleCreateContainer}
+            >
+              Confirm
+            </Button>
+          </DialogActions>
+        </Dialog>
     </div>
   );
 }

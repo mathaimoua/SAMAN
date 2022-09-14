@@ -35,6 +35,7 @@ function* deleteItem(action) {
 
 function* fetchCurrentItem(action) {
   try {
+    console.log(action.payload)
     const response = yield axios.get(`api/items/current/${action.payload}`)
     // yield console.log('response from fetchCurrentItem', response.data)
     yield put({type: 'SET_CURRENT_ITEM', payload: response.data[0]})
@@ -69,6 +70,15 @@ function* fetchAllItems(){
   }
 }
 
+function* searchItems(action){
+  try {
+    const response = yield axios.get(`api/items/search/${action.payload}`)
+    yield put({type: 'SET_SEARCH_ITEMS', payload: response.data})
+  } catch (error) {
+    console.log('Error in fetchAllItems', error)
+  }
+}
+
 function* itemsSaga() {
   yield takeLatest('FETCH_RECENT_ITEMS', fetchRecentItems);
   yield takeLatest('FETCH_CONTAINER_ITEMS', fetchContainerItems);
@@ -77,6 +87,7 @@ function* itemsSaga() {
   yield takeLatest('EDIT_ITEM', editItem);
   yield takeLatest('ADD_NEW_ITEM_C', addNewItemC)
   yield takeLatest('FETCH_ALL_ITEMS', fetchAllItems)
+  yield takeLatest('SEARCH_ITEMS', searchItems)
 }
 
 export default itemsSaga;

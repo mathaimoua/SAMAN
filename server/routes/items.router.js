@@ -153,4 +153,27 @@ router.post('/:id', rejectUnauthenticated, (req, res) => {
     })
 });
 
+router.get('/search/:string', rejectUnauthenticated, (req, res) => {
+  const string = String(req.params.string) + '%'
+  console.log(string)
+  queryText = `
+    SELECT * FROM "items"
+    JOIN "containers" ON "containers".container_id = "items".container_id
+    WHERE current_holder ILIKE $1  AND user_id = $2
+    OR container_name ILIKE $1 AND user_id = $2
+    OR item_name ILIKE $1 AND user_id = $2
+    OR model ILIKE $1 AND user_id = $2
+    OR serial ILIKE $1 AND user_id = $2
+    OR state ILIKE $1 AND user_id = $2
+    OR current_holder ILIKE $1 AND user_id = $2;
+  `;
+  pool.query(queryText, [string, req.user.id])
+    .then(response => {
+      res.send(response.rows)
+    }).catch(err => {
+      res.sendStatus(500)
+      console.log(err)
+    })
+})
+
 module.exports = router;

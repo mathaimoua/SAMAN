@@ -129,7 +129,7 @@ Containers
   margin-top: 50px;
 }
 
-.containersContainer, .itemsContainer, .locationsContainer, .itemDetailsContainer, .itemDetailsDataContainer, .editItemContainer, .viewItemsContainer {
+.containersContainer, .itemsContainer, .locationsContainer, .itemDetailsContainer, .itemDetailsDataContainer, .editItemContainer, .viewItemsContainer, .searchContainer {
   padding: 20px;
 }
 
@@ -137,13 +137,14 @@ Containers
   text-align: center;
 }
 
-.editItemDataContainer, .addItemDataContainer {
+.editItemDataContainer, .addItemDataContainer, .searchContainer {
   text-align: center;
 }
 .addItemContainer, .addItemCContainer {
   padding: 20px;
   padding-bottom: 60px;
 }
+
 /* --------------------------------------------------------------------------------
 Button
 -------------------------------------------------------------------------------- */

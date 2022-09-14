@@ -1,4 +1,4 @@
-const itemsReducer = (state = {recentItems: [], containerItems: [], currentItem: {}, allItems: [] }, action) => {
+const itemsReducer = (state = {recentItems: [], containerItems: [], currentItem: {}, allItems: [], searchResults: [] }, action) => {
   switch (action.type) {
     case 'SET_RECENT_ITEMS':
       return {...state, recentItems: action.payload};
@@ -8,6 +8,8 @@ const itemsReducer = (state = {recentItems: [], containerItems: [], currentItem:
       return {...state, currentItem: action.payload};
     case 'SET_ALL_ITEMS':
       return {...state, allItems: action.payload};
+    case 'SET_SEARCH_ITEMS':
+      return {...state, searchResults: action.payload};
     default:
       return state;
   }

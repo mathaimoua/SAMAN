@@ -26,6 +26,7 @@ import EditItem from "../EditItem/EditItem";
 import AddItemC from "../AddItem/AddItemC";
 import ViewItems from "../ViewItems/ViewItems";
 import AddItem from "../AddItem/AddItem";
+import Search from "../Search/Search";
 import "./App.css";
 
 function App() {
@@ -105,6 +106,10 @@ function App() {
 
             <ProtectedRoute exact path="/viewitems/">
               <ViewItems />
+            </ProtectedRoute>
+
+            <ProtectedRoute exact path="/search/:string">
+              <Search />
             </ProtectedRoute>
 
             <ProtectedRoute path="/additem/:locID">
