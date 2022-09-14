@@ -47,6 +47,7 @@ function AddItem(){
   const handleContainerChange = (event) => {
     console.log(event.target.value)
     setNewContainer(event.target.value)
+    setItemInfo({...itemInfo, container: Number(event.target.value)})
   }
 
   useEffect(() => {
@@ -91,9 +92,9 @@ function AddItem(){
   };
 
   const handleSave = () => {
-    dispatch({type: 'ADD_NEW_ITEM', payload: {containerID: paramID.containerID, itemInfo: itemInfo} })
+    dispatch({type: 'ADD_NEW_ITEM', payload: {containerID: itemInfo.container, itemInfo: itemInfo} })
     setSaveOpen(false)
-    history.push(`/${paramID.locID}/${paramID.containerID}/items`)
+    history.push(`/${paramID.locID}/${itemInfo.container}/items`)
   }
 
   return (

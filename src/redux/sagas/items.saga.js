@@ -61,6 +61,14 @@ function* addNewItemC(action) {
   }
 }
 
+function* addNewItem(action) {
+  try {
+    yield axios.post(`api/items/${action.payload.containerID}`, action.payload.itemInfo)
+  } catch (error) {
+    console.log('Error in addNewItemC', error)
+  }
+}
+
 function* fetchAllItems(){
   try {
     const response = yield axios.get(`api/items/viewall`)
@@ -86,6 +94,7 @@ function* itemsSaga() {
   yield takeLatest('FETCH_CURRENT_ITEM', fetchCurrentItem)
   yield takeLatest('EDIT_ITEM', editItem);
   yield takeLatest('ADD_NEW_ITEM_C', addNewItemC)
+  yield takeLatest('ADD_NEW_ITEM', addNewItem)
   yield takeLatest('FETCH_ALL_ITEMS', fetchAllItems)
   yield takeLatest('SEARCH_ITEMS', searchItems)
 }
