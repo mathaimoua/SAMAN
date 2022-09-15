@@ -57,6 +57,11 @@ function Search() {
                 <TableCell
                   sx={{ minWidth: 100, fontWeight: "bold", fontSize: "12pt" }}
                 >
+                  State
+                </TableCell>
+                <TableCell
+                  sx={{ minWidth: 100, fontWeight: "bold", fontSize: "12pt" }}
+                >
                   Date Added
                 </TableCell>
               </TableRow>
@@ -83,6 +88,7 @@ function Search() {
                     </button>
                   </TableCell>
                   <TableCell>{item.container_name}</TableCell>
+                  <TableCell>{item.state}</TableCell>
                   <TableCell>
                     <Moment format="MMM Do YYYY">{item.date_added}</Moment>
                   </TableCell>

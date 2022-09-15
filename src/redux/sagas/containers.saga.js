@@ -52,15 +52,6 @@ function* fetchCurrentContainer(action) {
   }
 }
 
-function* fetchItemsNumber(action) {
-  try {
-    const response = yield axios.get(`/api/containers/itemsnumber/${action.payload}`)
-    // yield put({type: 'SET_ITEMS_NUMBER', payload: {containerID: action.payload, itemsNumber: response.data[0]} })
-    return response.data[0];
-  } catch (error) {
-    console.log('Error in fetchItemsNumber', error)
-  }
-}
 
 function* containersSaga() {
   yield takeLatest('FETCH_CONTAINERS', fetchContainers);
@@ -68,7 +59,6 @@ function* containersSaga() {
   yield takeLatest('DELETE_CONTAINER', deleteContainer);
   yield takeLatest('SET_CONTAINER_NAME', setContainerName);
   yield takeLatest('FETCH_CURRENT_CONTAINER', fetchCurrentContainer);
-  yield takeEvery('FETCH_ITEMS_NUMBER', fetchItemsNumber)
 }
 
 export default containersSaga;

@@ -1,6 +1,6 @@
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
+import { useState} from "react";
 
 // Table Imports
 import Table from "@mui/material/Table";
@@ -22,6 +22,7 @@ import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 
 function Locations() {
+  const paramID = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
   const [deleteOpen, setDeleteOpen] = useState(false);

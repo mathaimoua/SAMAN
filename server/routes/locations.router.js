@@ -48,7 +48,7 @@ router.post('/', (req, res) => {
 
   pool.query(queryText, [req.body.name, req.user.id])
     .then(response => {
-      console.log(response)
+      // console.log(response)
       res.sendStatus(200)
     }).catch(err => {
       console.log(err)
@@ -67,7 +67,7 @@ router.put('/makeactive/:id', rejectUnauthenticated, (req, res) => {
 
   pool.query(queryText, [req.user.id, id])
     .then(response => {
-      console.log(response)
+      // console.log(response)
       res.sendStatus(200)})
     .catch(err => {
       console.log(err)
@@ -85,7 +85,7 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
 
   pool.query(queryText, [locID, req.user.id])
     .then(response => {
-      console.log(response)
+      // console.log(response)
       res.sendStatus(200)})
     .catch(err => {
       console.log(err)
@@ -103,7 +103,7 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
 
   pool.query(queryText, [req.body.name, req.user.id, locID ])
     .then(response => {
-      console.log(response)
+      // console.log(response)
       res.sendStatus(200)})
     .catch(err => {
       console.log(err)
@@ -136,7 +136,7 @@ router.get('/setallfalse', rejectUnauthenticated, (req, res) => {
 
   pool.query(queryText, [req.user.id])
     .then(response => {
-      console.log(response)
+      // console.log(response)
       res.sendStatus(200)
     }).catch(err => {
       console.log(err)
@@ -155,7 +155,7 @@ router.put('/setnewmain/:id', rejectUnauthenticated, (req, res) => {
 
   pool.query(queryText, [req.user.id, locationID])
     .then(response => {
-      console.log(response)
+      // console.log(response)
       res.sendStatus(200)
     }).catch(err => {
       console.log(err)

@@ -47,7 +47,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
   pool.query(queryText, [req.body.name, number])
     .then( response => {
-      console.log(response)
+      // console.log(response)
       res.sendStatus(200)    
     }).catch( err => {
         console.log(err)
@@ -65,7 +65,7 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
 
   pool.query(queryText, [containerID])
     .then(response => {
-      console.log(response)
+      // console.log(response)
       res.sendStatus(200)
     }).catch(err => {
       console.log(err)
@@ -84,7 +84,7 @@ router.put('/editname/:id', rejectUnauthenticated, (req, res) => {
 
   pool.query(queryText, [req.body.name, containerID])
     .then(response => {
-      console.log(response)
+      // console.log(response)
       res.sendStatus(200)
     }).catch(err => {
       console.log(err)

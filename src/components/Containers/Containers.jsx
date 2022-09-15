@@ -40,7 +40,7 @@ function Containers() {
 
   const refresh = () => {
     window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
-    dispatch({ type: 'FETCH_CONTAINERS', payload: paramID.locID})
+    dispatch({ type: 'FETCH_CONTAINERS', payload: paramID.locID })
     dispatch({ type: 'FETCH_CURRENT_LOCATION', payload:  { id: paramID.locID } })
   }
 
@@ -134,11 +134,11 @@ function Containers() {
                 >
                   Container Name
                 </TableCell>
-                <TableCell
+                {/* <TableCell
                   sx={{ minWidth: 50, fontWeight: "bold", fontSize: "12pt" }}
                 >
                   Number of Items
-                </TableCell>
+                </TableCell> */}
                 <TableCell></TableCell>
                 <TableCell></TableCell>
               </TableRow>
@@ -155,7 +155,6 @@ function Containers() {
                       <h2>{container.container_name}</h2>
                     </button>
                   </TableCell>
-                  <TableCell>Number</TableCell>
                   <TableCell
                     align="left"
                     sx={{ minWidth: 25, fontWeight: "bold", fontSize: "12pt" }}

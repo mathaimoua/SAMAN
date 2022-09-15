@@ -94,11 +94,13 @@ function AddItem(){
   const handleSave = () => {
     dispatch({type: 'ADD_NEW_ITEM', payload: {containerID: itemInfo.container, itemInfo: itemInfo} })
     setSaveOpen(false)
+    dispatch({ type: 'FETCH_CONTAINER_ITEMS', payload: paramID.locID })
     history.push(`/${paramID.locID}/${itemInfo.container}/items`)
   }
 
   return (
     <div className="addItemContainer">
+      <div>
 <button className="btn" onClick={() => history.goBack()}>
         Back
       </button>
@@ -125,7 +127,7 @@ function AddItem(){
       >
         {containersList && containersList.map(container => {
           return (
-            <MenuItem 
+            <MenuItem key={container.container_id}
               value={container.container_id}
             >
               {container.container_name}
@@ -226,6 +228,7 @@ function AddItem(){
             </Button>
           </DialogActions>
         </Dialog>
+        </div>
         </div>
     </div>
   )

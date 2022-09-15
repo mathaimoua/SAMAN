@@ -65,8 +65,8 @@ function Items(){
 
   const refresh = (refreshID) => {
     window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
-    dispatch({ type: 'FETCH_CONTAINER_ITEMS', payload: refreshID })
     dispatch({ type: 'FETCH_CURRENT_CONTAINER', payload: paramID.containerID })
+    dispatch({ type: 'FETCH_CONTAINER_ITEMS', payload: paramID.containerID })
   }
 
   return(

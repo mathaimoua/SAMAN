@@ -36,7 +36,7 @@ function EditItem() {
   const containersList = useSelector(store => store.containers.containersList)
   const [newContainer, setNewContainer] = useState()
   const [itemInfo, setItemInfo] = useState({
-    name: currentItem.item_name,
+      name: String(currentItem.item_name),
       holder: currentItem.current_holder,
       container: currentItem.container_id, //switch to ID
       model: currentItem.model,
@@ -120,7 +120,7 @@ function EditItem() {
   const handleContainerChange = (event) => {
     console.log(event.target.value)
     setNewContainer(event.target.value)
-    setItemInfo({...currentItem, container: Number(event.target.value)})
+    setItemInfo({...itemInfo, container: event.target.value})
   }
 
 

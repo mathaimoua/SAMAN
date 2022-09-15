@@ -33,8 +33,8 @@ function UserPage() {
   const [searchString, setSearchString] = useState();
 
   const handleLocationClick = () => {
-    // dispatch({ type: "FETCH_CONTAINERS", payload: mainLocation.location_id })
-    // dispatch({ type: 'FETCH_CURRENT_LOCATION', payload:  { id: mainLocation.location_id } })
+    dispatch({ type: "FETCH_CONTAINERS", payload: mainLocation.location_id })
+    dispatch({ type: 'FETCH_CURRENT_LOCATION', payload:  { id: mainLocation.location_id } })
     history.push(`/${mainLocation.location_id}/containers/`);
   };
 
@@ -141,7 +141,7 @@ function UserPage() {
               color: "#97c30a",
               margin: "5px",
               backgroundColor: "#555555",
-              width: "10%",
+              width: "30px",
               height: "auto",
               boxShadow: "5px 5px 2px 2px rgba(91, 91, 91, 0.2)",
               display: "inline-block",

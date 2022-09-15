@@ -55,6 +55,7 @@ function* editItem(action) {
 function* addNewItemC(action) {
   try {
     yield axios.post(`api/items/${action.payload.containerID}`, action.payload.itemInfo)
+    yield put({type:'FETCH_CONTAINER_ITEMS', payload: action.payload.containerID})
   } catch (error) {
     console.log('Error in addNewItemC', error)
   }
@@ -63,6 +64,7 @@ function* addNewItemC(action) {
 function* addNewItem(action) {
   try {
     yield axios.post(`api/items/${action.payload.containerID}`, action.payload.itemInfo)
+    yield put({type:'FETCH_CONTAINER_ITEMS', payload: action.payload.containerID})
   } catch (error) {
     console.log('Error in addNewItemC', error)
   }

@@ -100,16 +100,18 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
   UPDATE "items" 
   SET "item_name" = $1,
     "current_holder" = $2,
-    "model" = $3,
-    "serial" = $4,
-    "warranty_expiration" = $5,
-    "state" = $6
-  WHERE "item_id" = $7 AND "user_id" = $8
+    "container_id" = $3,
+    "model" = $4,
+    "serial" = $5,
+    "warranty_expiration" = $6,
+    "state" = $7
+  WHERE "item_id" = $8 AND "user_id" = $9
   ;`;
 
   values = [ 
     req.body.info.name,
     req.body.info.holder,
+    req.body.info.container,
     req.body.info.model,
     req.body.info.serial,
     req.body.info.warranty,
@@ -154,7 +156,7 @@ router.post('/:id', rejectUnauthenticated, (req, res) => {
 });
 
 router.get('/search/:string', rejectUnauthenticated, (req, res) => {
-  const string = String(req.params.string) + '%'
+  const string = '%'+ String(req.params.string) + '%'
   // console.log(string)
   queryText = `
     SELECT * FROM "items"
