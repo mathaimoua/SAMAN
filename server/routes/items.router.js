@@ -155,7 +155,7 @@ router.post('/:id', rejectUnauthenticated, (req, res) => {
 
 router.get('/search/:string', rejectUnauthenticated, (req, res) => {
   const string = String(req.params.string) + '%'
-  console.log(string)
+  // console.log(string)
   queryText = `
     SELECT * FROM "items"
     JOIN "containers" ON "containers".container_id = "items".container_id

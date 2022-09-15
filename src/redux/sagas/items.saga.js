@@ -35,7 +35,6 @@ function* deleteItem(action) {
 
 function* fetchCurrentItem(action) {
   try {
-    console.log(action.payload)
     const response = yield axios.get(`api/items/current/${action.payload}`)
     // yield console.log('response from fetchCurrentItem', response.data)
     yield put({type: 'SET_CURRENT_ITEM', payload: response.data[0]})

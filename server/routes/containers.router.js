@@ -92,4 +92,19 @@ router.put('/editname/:id', rejectUnauthenticated, (req, res) => {
     })
 });
 
+router.get('/api/containers/itemsnumber/:id', rejectUnauthenticated, (req, res) => {
+  const queryText = `
+    SELECT COUNT(*) FROM "items"
+    WHERE "items".container_id = $1 AND "user_id" = $2;
+  ;`;
+
+  pool.query(queryText, [req.params.id, req.user.id])
+    .then( response => {
+      res.send(response.rows)
+    }).catch( error => {
+      console.log(error)
+      res.sendStatus(500)
+    })
+})
+
 module.exports = router;

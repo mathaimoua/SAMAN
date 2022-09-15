@@ -98,13 +98,13 @@ function UserPage() {
   return (
     <div className="dashBoardContainer">
       <div>
-        <h2>
+        <h2 style={{marginBottom: '0px'}}>
           Welcome,{" "}
           {String(user.username).charAt(0).toUpperCase() +
             String(user.username).slice(1)}
           !
         </h2>
-        <h2>
+        <h2 style={{margin: '0px'}}>
           Currently managing:{" "}
           {mainLocation ? (
             <button

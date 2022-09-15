@@ -1,12 +1,10 @@
 import axios from 'axios';
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest, takeEvery } from 'redux-saga/effects';
 
 // worker Saga: will be fired on "FETCH_USER" actions
 function* fetchContainers(action) {
   try {
-    console.log('/api/containers/, id is', action.payload)
     const response = yield axios.get(`/api/containers/${action.payload}`)
-    yield console.log('response is', response.data)
     yield put({ type: 'SET_CONTAINERS', payload: response.data });
   } catch (error) {
     console.log('Error in fetchContainers', error);
@@ -35,7 +33,7 @@ function* deleteContainer(action) {
 
 function* setContainerName(action) {
   try {
-    yield console.log('payload is', action.payload)
+    // yield console.log('payload is', action.payload)
     yield axios.put( `api/containers/editname/${action.payload.id}`, action.payload )
     yield put({ type: 'FETCH_CONTAINERS', payload: action.payload.location })
   } catch (error) {
@@ -54,12 +52,23 @@ function* fetchCurrentContainer(action) {
   }
 }
 
+function* fetchItemsNumber(action) {
+  try {
+    const response = yield axios.get(`/api/containers/itemsnumber/${action.payload}`)
+    // yield put({type: 'SET_ITEMS_NUMBER', payload: {containerID: action.payload, itemsNumber: response.data[0]} })
+    return response.data[0];
+  } catch (error) {
+    console.log('Error in fetchItemsNumber', error)
+  }
+}
+
 function* containersSaga() {
   yield takeLatest('FETCH_CONTAINERS', fetchContainers);
   yield takeLatest('CREATE_CONTAINER', createContainer);
   yield takeLatest('DELETE_CONTAINER', deleteContainer);
   yield takeLatest('SET_CONTAINER_NAME', setContainerName);
   yield takeLatest('FETCH_CURRENT_CONTAINER', fetchCurrentContainer);
+  yield takeEvery('FETCH_ITEMS_NUMBER', fetchItemsNumber)
 }
 
 export default containersSaga;

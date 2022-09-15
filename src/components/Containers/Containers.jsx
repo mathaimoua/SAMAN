@@ -33,10 +33,9 @@ function Containers() {
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [IDToDelete, setIDToDelete] = useState(-1);
   const [editOpen, setEditOpen] = useState(false);
-  const [IDToEdit, setIDToEdit] = useState();
 
   useEffect(() => {
-    refresh()
+    refresh;
   }, [dispatch]);
 
   const refresh = () => {

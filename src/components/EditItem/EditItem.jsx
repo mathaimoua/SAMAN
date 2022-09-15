@@ -7,6 +7,8 @@ import {
   Box,
   Paper,
   FormControl,
+  FormHelperText,
+  FormGroup,
   InputLabel,
   OutlinedInput,
   TextField,
@@ -31,10 +33,12 @@ function EditItem() {
   const history = useHistory();
   const [date, setDate] = useState();
   const dispatch = useDispatch();
+  const containersList = useSelector(store => store.containers.containersList)
+  const [newContainer, setNewContainer] = useState()
   const [itemInfo, setItemInfo] = useState({
     name: currentItem.item_name,
       holder: currentItem.current_holder,
-      container: currentItem.container_name, //switch to ID
+      container: currentItem.container_id, //switch to ID
       model: currentItem.model,
       serial: currentItem.serial,
       warranty: moment(currentItem.warranty_expiration).format('YYYY-MM-DD'),
@@ -46,10 +50,10 @@ function EditItem() {
   }, [dispatch]);
 
   const refresh = () => {
+    dispatch({type: 'FETCH_CONTAINERS', payload: itemID.locID })
     dispatch({ type: "FETCH_CURRENT_ITEM", payload: itemID.itemID });
     setDate(currentItem.warranty_expiration);
     window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
-    // console.log('iteminfo is', itemInfo)
   };
 
   const handleNameChange = (event) => {
@@ -60,10 +64,7 @@ function EditItem() {
     setItemInfo({...itemInfo, holder: event.target.value})
     // console.log(itemInfo)
   }
-  const handleContainerChange = (event) => {
-    setItemInfo({...itemInfo, container: event.target.value})
-    // console.log(itemInfo)
-  }
+
   const handleModelChange = (event) => {
     setItemInfo({...itemInfo, model: event.target.value})
     // console.log(itemInfo)
@@ -116,6 +117,13 @@ function EditItem() {
     setDeleteOpen(false)
   }
 
+  const handleContainerChange = (event) => {
+    console.log(event.target.value)
+    setNewContainer(event.target.value)
+    setItemInfo({...currentItem, container: Number(event.target.value)})
+  }
+
+
   return (
     <div className="editItemContainer" style={{ marginBottom: "50px" }}>
       <button style={{marginBottom: '20px'}} className="btn" onClick={() => history.goBack()}>
@@ -123,42 +131,53 @@ function EditItem() {
       </button>
       <div className='editItemDataContainer' >
       <h2 style={{margin: '0px'}}>Editing {currentItem.item_name}</h2>
-      <Box  sx={{padding: '20px', marginTop: '5px'}}className="editItemDataContainer" component={Paper}>
+      <Box sx={{padding: '20px'}} className="editItemDataContainer" component={Paper}>
         
-        <FormControl component="form">
+        <FormGroup component="form">
           <TextField
-            style={{ float: "center", margin: "5px" }}
+            style={{ margin: "auto", width: '40%' }}
             defaultValue={currentItem.item_name}
             helperText="name"
             onChange={handleNameChange}
           />
           <TextField
-            style={{ float: "center", margin: "5px" }}
+            style={{ margin: "auto", width: '40%' }}
             defaultValue={currentItem.current_holder}
             helperText="holder"
             onChange={handleHolderChange}
           />
+          <Select
+        id="stateSelect"
+        defaultValue={itemID.containerID}
+        onChange={handleContainerChange}
+        style={{ margin: "auto", width: '40%' }}   
+      >
+        {containersList && containersList.map(container => {
+          return (
+            <MenuItem 
+              value={container.container_id}
+            >
+              {container.container_name}
+            </MenuItem>
+          )
+        })}
+      </Select>
+      <FormHelperText style={{ paddingLeft: '18px', margin: "auto", width: '40%' }}>container</FormHelperText>
           <TextField
-            style={{ float: "center", margin: "5px" }}
-            defaultValue={currentItem.container_name}
-            helperText="container"
-            onChange={handleContainerChange}
-          />
-          <TextField
-            style={{ float: "center", margin: "5px" }}
+            style={{ margin: "auto", width: '40%' }}
             defaultValue={currentItem.model}
             helperText="model"
             onChange={handleModelChange}
           />
           <TextField
-            style={{ float: "center", margin: "5px" }}
+            style={{ margin: "auto", width: '40%' }}
             defaultValue={currentItem.serial}
             helperText="serial"
             onChange={handleSerialChange}
           />
           <TextField
             readOnly
-            style={{ float: "center", margin: "10px" }}
+            style={{ margin: "auto", width: '40%' }}
             value={moment(date).format("MMM Do YYYY")}
             helperText="warranty expiration"
           />
@@ -166,11 +185,13 @@ function EditItem() {
             type="date"
             className="hidden"
             onChange={handleDateChange}
+            style={{ margin: "auto", width: '40%' }}
           />
           <Select
             id="stateSelect"
             defaultValue={currentItem.state}
             onChange={handleStateChange}
+            style={{ margin: "auto", width: '40%', marginTop: '10px' }}
           >
             <MenuItem value={"IN USE"}>IN USE</MenuItem>
             <MenuItem value={"IN STOCK"}>IN STOCK</MenuItem>
@@ -180,7 +201,8 @@ function EditItem() {
               WAITING FOR DISPOSAL
             </MenuItem>
           </Select>
-        </FormControl>
+          <FormHelperText style={{ paddingLeft: '30px', margin: "auto", width: '40%'}}>state</FormHelperText>
+        </FormGroup>
       </Box>
       <button
         style={{ float: "left" }}
