@@ -47,7 +47,7 @@ function AddItem(){
   const handleContainerChange = (event) => {
     console.log(event.target.value)
     setNewContainer(event.target.value)
-    setItemInfo({...itemInfo, container: Number(event.target.value)})
+    setItemInfo({...itemInfo, container: event.target.value})
   }
 
   useEffect(() => {
@@ -204,7 +204,7 @@ function AddItem(){
             <DialogContentText id="alert-dialog-description" sx={{textAlign: 'center'}}>
               {itemInfo.name}<br></br>
               {itemInfo.holder}<br></br>
-              {/* {itemInfo.container}<br></br> */}
+              {itemInfo.container}<br></br>
               {itemInfo.model}<br></br>
               {itemInfo.serial}<br></br>
               {itemInfo.warranty}<br></br>

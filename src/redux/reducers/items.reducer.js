@@ -5,7 +5,7 @@ const itemsReducer = (state = {recentItems: [], containerItems: [], currentItem:
     case 'SET_CONTAINER_ITEMS':
       return {...state, containerItems: action.payload};
     case 'SET_CURRENT_ITEM':
-      return {...state, currentItem: action.payload};
+      return {...state, currentItem: action.payload };
     case 'SET_ALL_ITEMS':
       return {...state, allItems: action.payload};
     case 'SET_SEARCH_ITEMS':

@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import moment from "moment";
 
@@ -45,9 +45,10 @@ function EditItem() {
       state: currentItem.state,
   });
 
+
   useEffect(() => {
     refresh();
-  }, [dispatch]);
+  }, [dispatch]); // Stop when item in brackets changes
 
   const refresh = () => {
     dispatch({type: 'FETCH_CONTAINERS', payload: itemID.locID })
@@ -57,7 +58,8 @@ function EditItem() {
   };
 
   const handleNameChange = (event) => {
-    setItemInfo({...itemInfo, name: event.target.value})
+    setItemInfo({...itemInfo, name: localStorage.getItem("name")})
+    localStorage.setItem("name", event.target.value);
     console.log(itemInfo)
   }
   const handleHolderChange = (event) => {
@@ -132,7 +134,6 @@ function EditItem() {
       <div className='editItemDataContainer' >
       <h2 style={{margin: '0px'}}>Editing {currentItem.item_name}</h2>
       <Box sx={{padding: '20px'}} className="editItemDataContainer" component={Paper}>
-        
         <FormGroup component="form">
           <TextField
             style={{ margin: "auto", width: '40%' }}
@@ -152,9 +153,9 @@ function EditItem() {
         onChange={handleContainerChange}
         style={{ margin: "auto", width: '40%' }}   
       >
-        {containersList && containersList.map(container => {
+        {containersList.map(container => {
           return (
-            <MenuItem 
+            <MenuItem key={container.container_id}
               value={container.container_id}
             >
               {container.container_name}
@@ -189,7 +190,7 @@ function EditItem() {
           />
           <Select
             id="stateSelect"
-            defaultValue={currentItem.state}
+            defaultValue={currentItem && currentItem.state}
             onChange={handleStateChange}
             style={{ margin: "auto", width: '40%', marginTop: '10px' }}
           >
