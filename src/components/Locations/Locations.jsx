@@ -1,6 +1,6 @@
 import { useHistory, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { useState} from "react";
+import { useState, useEffect } from "react";
 
 // Table Imports
 import Table from "@mui/material/Table";
@@ -112,6 +112,10 @@ function Locations() {
     console.log("switching to true!")
     dispatch({type: 'SET_NEW_MAIN', payload: locationID})
   }
+
+  useEffect(() => {
+    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+  }, [dispatch]);
 
   return (
     <div className="locationsContainer">
