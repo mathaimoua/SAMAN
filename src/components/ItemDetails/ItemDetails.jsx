@@ -76,6 +76,11 @@ function ItemDetails() {
           <h2 style={{ display: "inline" }}>
             {moment(currentItem.warranty_expiration).format("MMM Do YYYY")}
           </h2>
+          <br></br>
+          <h3 style={{ display: "inline" }}>Description: </h3>
+          <span style={{ display: "inline" }}>
+            {currentItem.description && currentItem.description}
+          </span>
         </Box>
       </div>
     </div>

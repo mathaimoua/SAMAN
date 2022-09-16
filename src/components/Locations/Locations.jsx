@@ -19,9 +19,11 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
 
-import { Button } from "@mui/material";
+import { Button, useTheme, useMediaQuery } from "@mui/material";
 
 function Locations() {
+  const theme = useTheme();
+  const isMatch = useMediaQuery(theme.breakpoints.down("md"));
   const paramID = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
@@ -41,7 +43,7 @@ function Locations() {
 
   const changeAddLocationName = (event) => {
     setAddLocationName(event.target.value);
-  }
+  };
 
   const handleClickAdd = () => {
     setAddOpen(true);
@@ -55,9 +57,14 @@ function Locations() {
     if (addLocationName === "") {
       return -1;
     } else {
-      if (mainLocation.location_name == "" || mainLocation.location_name == undefined || !mainLocation || !mainLocation.location_name) {
+      if (
+        mainLocation.location_name == "" ||
+        mainLocation.location_name == undefined ||
+        !mainLocation ||
+        !mainLocation.location_name
+      ) {
         dispatch({ type: "ADD_FIRST_LOCATION", payload: addLocationName });
-        history.push('/locations')
+        history.push("/locations");
       } else {
         dispatch({ type: "ADD_LOCATION", payload: addLocationName });
         history.push("/locations");
@@ -96,35 +103,40 @@ function Locations() {
     // console.log("new name will be", newLocName);
     dispatch({
       type: "SET_LOCATION_NAME",
-      payload: { name: newLocName, id: IDToEdit},
+      payload: { name: newLocName, id: IDToEdit },
     });
     setNewLocName("");
     setEditOpen(false);
   };
 
   const handleLocationClick = (locationID) => {
-    dispatch({ type: "FETCH_CONTAINERS", payload: locationID })
+    dispatch({ type: "FETCH_CONTAINERS", payload: locationID });
     // dispatch({ type: 'FETCH_CURRENT_LOCATION', payload:  { id: id } })
-    history.push(`/${locationID}/containers/`)
-  }
+    history.push(`/${locationID}/containers/`);
+  };
 
   const handleSetMain = (locationID) => {
-    console.log("switching to true!")
-    dispatch({type: 'SET_NEW_MAIN', payload: locationID})
-  }
+    console.log("switching to true!");
+    dispatch({ type: "SET_NEW_MAIN", payload: locationID });
+  };
 
   useEffect(() => {
-    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }, [dispatch]);
 
   return (
     <div className="locationsContainer">
-      
       <div className="locationsDataContainer">
-      <button className="btn" onClick={() => history.goBack()} style={{display: 'flex', margin: '0px'}}>
-        Back
-      </button>
-        <h2 style={{margin: '0px'}}>Your Locations</h2>
+        {isMatch && (
+          <button
+            className="btn"
+            onClick={() => history.goBack()}
+            style={{ display: "flex", margin: "0px" }}
+          >
+            Back
+          </button>
+        )}
+        <h2 style={{ margin: "0px" }}>Your Locations</h2>
 
         <TableContainer
           sx={{
@@ -160,9 +172,25 @@ function Locations() {
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
-                  <button className="btn_asLinkTables"  onClick={() => handleLocationClick(location.location_id)}><h2>{location.location_name}</h2></button>
+                    <button
+                      className="btn_asLinkTables"
+                      onClick={() => handleLocationClick(location.location_id)}
+                    >
+                      <h2>{location.location_name}</h2>
+                    </button>
                   </TableCell>
-                  { location.isActive ? <TableCell>{String(location.isActive)}</TableCell> : <TableCell><button className="btn_asLinkTables"  onClick={() => handleSetMain(location.location_id)}>Set as main</button></TableCell> }
+                  {location.isActive ? (
+                    <TableCell>{String(location.isActive)}</TableCell>
+                  ) : (
+                    <TableCell>
+                      <button
+                        className="btn_asLinkTables"
+                        onClick={() => handleSetMain(location.location_id)}
+                      >
+                        Set as main
+                      </button>
+                    </TableCell>
+                  )}
                   <TableCell
                     align="left"
                     sx={{ minWidth: 25, fontWeight: "bold", fontSize: "12pt" }}

@@ -13,7 +13,6 @@ import Footer from "../Footer/Footer";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import AboutPage from "../AboutPage/AboutPage";
 import UserPage from "../UserPage/UserPage";
-import InfoPage from "../InfoPage/InfoPage";
 import LandingPage from "../LandingPage/LandingPage";
 import LoginPage from "../LoginPage/LoginPage";
 import RegisterPage from "../RegisterPage/RegisterPage";
@@ -77,52 +76,48 @@ function App() {
               {user.id ? <UserPage /> : <LandingPage />}
             </Route>
 
-            <ProtectedRoute exact path="/info">
-              <InfoPage />
-            </ProtectedRoute>
-
             <ProtectedRoute exact path="/locations">
-              <Locations />
+            {user.id ? <Locations /> : <Redirect to="/user" />}
             </ProtectedRoute>
 
             <ProtectedRoute exact path="/:locID/containers/">
-              <Containers />
+            {user.id ? <Containers /> : <Redirect to="/user" />}
             </ProtectedRoute>
 
             <ProtectedRoute path="/:locID/:containerID/details/:id">
-              <ItemDetails />
+            {user.id ? <ItemDetails /> : <Redirect to="/user" />}
             </ProtectedRoute>
 
             <ProtectedRoute exact path="/:locID/:containerID/items/">
-              <Items />
+            {user.id ? <Items /> : <Redirect to="/user" />}
             </ProtectedRoute>
 
             <ProtectedRoute path="/:locID/:containerID/edititem/:itemID">
-              <EditItem />
+            {user.id ? <EditItem /> : <Redirect to="/user" />}
             </ProtectedRoute>
 
             <ProtectedRoute exact path="/:locID/:containerID/additem/">
-              <AddItemC />
+            {user.id ? <AddItemC /> : <Redirect to="/user" />}
             </ProtectedRoute>
 
             <ProtectedRoute exact path="/viewitems/">
-              <ViewItems />
+            {user.id ? <ViewItems /> : <Redirect to="/user" />}
             </ProtectedRoute>
 
             <ProtectedRoute exact path="/search/:string">
-              <Search />
+            {user.id ? <Search /> : <Redirect to="/user" />}
             </ProtectedRoute>
 
             <ProtectedRoute path="/additem/:locID">
-              <AddItem />
+            {user.id ? <AddItem /> : <Redirect to="/user" />}
             </ProtectedRoute>
 
             <Route exact path="/login">
-              {user.id ? <Redirect to="/user" /> : <LoginPage />}
+              <LoginPage />
             </Route>
 
             <ProtectedRoute exact path="/newform">
-              <NewForm />
+            {user.id ? <NewForm /> : <Redirect to="/user" />}
             </ProtectedRoute>
 
             <Route exact path="/registration">

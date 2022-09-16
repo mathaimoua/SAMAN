@@ -79,7 +79,7 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
 
 router.get('/current/:id', rejectUnauthenticated, (req, res) => {
   queryText = `
-  SELECT "item_id", "item_name", "current_holder", "model", "serial", "warranty_expiration", "state", "container_name" FROM "items"
+  SELECT "item_id", "item_name", "current_holder", "model", "serial", "warranty_expiration", "state", "container_name", "description" FROM "items"
   JOIN "user" ON "items".user_id = "user".id
   JOIN "containers" ON "items".container_id = "containers".container_id
   JOIN "locations" ON "containers".location_id = "locations".location_id

@@ -9,6 +9,8 @@ import {
   FormControl,
   FormHelperText,
   FormGroup,
+  useMediaQuery,
+  useTheme,
   InputLabel,
   OutlinedInput,
   TextField,
@@ -25,6 +27,8 @@ import DialogTitle from "@mui/material/DialogTitle";
 
 function EditItem() {
 
+  const theme = useTheme();
+  const isMatch = useMediaQuery(theme.breakpoints.down("md"));
   const [saveOpen, setSaveOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [IDToDelete, setIDToDelete] = useState(-1);
@@ -43,6 +47,7 @@ function EditItem() {
       serial: currentItem.serial,
       warranty: moment(currentItem.warranty_expiration).format('YYYY-MM-DD'),
       state: currentItem.state,
+      description: currentItem.description,
   });
 
 
@@ -59,7 +64,6 @@ function EditItem() {
 
   const handleNameChange = (event) => {
     setItemInfo({...itemInfo, name: localStorage.getItem("name")})
-    localStorage.setItem("name", event.target.value);
     console.log(itemInfo)
   }
   const handleHolderChange = (event) => {
@@ -128,9 +132,9 @@ function EditItem() {
 
   return (
     <div className="editItemContainer" style={{ marginBottom: "50px" }}>
-      <button style={{marginBottom: '20px'}} className="btn" onClick={() => history.goBack()}>
+      { isMatch && <button style={{marginBottom: '20px'}} className="btn" onClick={() => history.goBack()}>
         Back
-      </button>
+      </button> }
       <div className='editItemDataContainer' >
       <h2 style={{margin: '0px'}}>Editing {currentItem.item_name}</h2>
       <Box sx={{padding: '20px'}} className="editItemDataContainer" component={Paper}>

@@ -9,6 +9,8 @@ import {
   FormControl,
   FormGroup,
   FormHelperText,
+  useMediaQuery,
+  useTheme,
   InputLabel,
   OutlinedInput,
   TextField,
@@ -25,6 +27,8 @@ import DialogTitle from "@mui/material/DialogTitle";
 
 function AddItemC() {
 
+  const theme = useTheme();
+  const isMatch = useMediaQuery(theme.breakpoints.down("md"));
   const history = useHistory();
   const [newDate, setNewDate] = useState()
   const dispatch = useDispatch();
@@ -93,9 +97,9 @@ function AddItemC() {
 
   return (
     <div className="addItemCContainer">
-      <button className="btn" onClick={() => history.goBack()}>
+      { isMatch && <button className="btn" onClick={() => history.goBack()}>
         Back
-      </button>
+      </button> }
       <h2 style={{textAlign: 'center', margin: '0px'}}>Add New Item</h2>
     <Box
       sx={{ padding: "20px" }}

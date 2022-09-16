@@ -30,7 +30,8 @@ body,
 body {
   font-family: "Open Sans", sans-serif;
   margin: 0px;
-  background-color: #C0BCB6;
+  /* background-color: #C0BCB6; */
+  background-color: white;
   background-image: radial-gradient(rgb(130, 130, 130) 1px, transparent 0);
   background-size: 60px 50px;
   background-position: -50px -50px;
@@ -93,9 +94,9 @@ Containers
 
 /* Spacing for under the nav bar */
 .appDiv {
-  margin-top: 70px;
+  margin-top: 0px;
   padding-bottom: 70px;
-  padding-top: 5px;
+  padding-top: 70px;
 }
 
 .appBar {
@@ -107,10 +108,15 @@ Containers
   width: 100%
 }
 
-.dashBoardContainer {
+/* .dashBoardContainer {
   text-align: center;
   padding-left: 20px;
   padding-right: 20px;
+} */
+.dashBoardContainer {
+  text-align: center;
+  background-color: white;
+  padding: 0px;
 }
 
 .aboutPageContainer {
@@ -143,6 +149,10 @@ Containers
 .addItemContainer, .addItemCContainer {
   padding: 20px;
   padding-bottom: 60px;
+}
+
+.newFormContainer {
+  background-color: white;
 }
 
 /* --------------------------------------------------------------------------------
@@ -393,4 +403,101 @@ Misc
 
 .detailsDiv {
   vertical-align: auto;
+}
+
+.recentItemsTable {
+  max-width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* --------------------------------------------------------------------------------
+Form CSS
+-------------------------------------------------------------------------------- */
+
+#formApp {
+  min-height: 0vh;
+  justify-content: center;
+  align-items: center;
+  margin-top:20px;
+}
+
+.newFormContainer {
+  flex: 1;
+  max-width: 90%;
+  background-color: #fff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  padding: 15px 20px;
+}
+
+.title {
+  font-size: 1rem;
+  border-bottom: 1px #d7dbdf solid;
+  margin-bottom: 1rem;
+}
+
+.input-component {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-component > label {
+  margin-bottom: 0.8rem;
+}
+
+.input-component > .input {
+  flex: 1;
+  flex-basis: 2rem;
+  border: 1px #d2d6db solid;
+  border-radius: 4px;
+}
+
+.input-component.input__big {
+  grid-row-end: span 2;
+}
+
+.input-component > input {
+  max-height: 2rem;
+}
+
+.inputs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: .5fr;
+  grid-gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.consents {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 2.4rem;
+  gap: 1rem;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+}
+
+@media only screen and (max-width: 768px) {
+  .inputs {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .input-component.input__big {
+    grid-column: 1 / -1;
+  }
+
+  .consents {
+    flex-direction: column;
+  }
+
+}
+
+@media only screen and (max-width: 576px) {
+  .inputs {
+    grid-template-columns: 1fr;
+  }
 }

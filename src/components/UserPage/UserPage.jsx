@@ -165,11 +165,11 @@ function UserPage() {
         </button>
       </div>
       <h3 className="recentlyAddedItemsHeader">Recently Added Items</h3>
-      <TableContainer
-        sx={{ maxWidth: "100%", marginTop: "0px", boxShadow: 2 }}
+      {/* <TableContainer
+        sx={{marginTop: "0px", boxShadow: 2 }}
         component={Paper}
-      >
-        <Table aria-label="simple table">
+      > */}
+        <Table aria-label="simple table" className="recentItemsTable">
           <TableHead>
             <TableRow sx={{ backgroundColor: "#fa8072" }}>
               <TableCell
@@ -221,7 +221,7 @@ function UserPage() {
             ))}
           </TableBody>
         </Table>
-      </TableContainer>
+      {/* </TableContainer> */}
 
       <Dialog
         PaperProps={{
