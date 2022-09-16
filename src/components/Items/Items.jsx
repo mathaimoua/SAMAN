@@ -33,7 +33,8 @@ function Items(){
   const currentContainer = useSelector(store => store.containers.currentContainer)
 
   useEffect(() => {
-    refresh(paramID.containerID)
+    refresh()
+    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
   }, [dispatch]);
 
   const handleDelete = () => {
@@ -63,8 +64,7 @@ function Items(){
     history.push(`/${paramID.locID}/${paramID.containerID}/additem/`)
   }
 
-  const refresh = (refreshID) => {
-    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+  const refresh = () => {
     dispatch({ type: 'FETCH_CURRENT_CONTAINER', payload: paramID.containerID })
     dispatch({ type: 'FETCH_CONTAINER_ITEMS', payload: paramID.containerID })
   }

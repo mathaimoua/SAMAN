@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import "./LandingPage.css";
 import SAMANLogo from "../../files/SAMANLogo.png";
@@ -9,6 +9,7 @@ import { useMediaQuery, useTheme } from "@mui/material";
 import RegisterForm from "../RegisterForm/RegisterForm";
 
 function LandingPage() {
+
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
   // const [heading, setHeading] = useState("Welcome");
@@ -17,6 +18,10 @@ function LandingPage() {
   const onLogin = (event) => {
     history.push("/login");
   };
+
+  useEffect(() => {
+    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+  }, [dispatch]);
 
   return (
     <div className="landingPageContainer">

@@ -93,6 +93,7 @@ function UserPage() {
   useEffect(() => {
     dispatch({ type: "FETCH_MAIN_LOCATION" });
     dispatch({ type: "FETCH_RECENT_ITEMS" });
+    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
   }, [dispatch]);
 
   return (
