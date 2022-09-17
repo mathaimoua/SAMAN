@@ -4,20 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 
 import {
-  Box,
-  Paper,
-  FormControl,
-  InputLabel,
-  OutlinedInput,
   useMediaQuery,
   useTheme,
   TextField,
-  FormHelperText,
   FormGroup,
   MenuItem,
   Button,
+  Select,
 } from "@mui/material";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -40,7 +34,7 @@ function NewForm() {
     name: "",
     holder: "",
     description: "",
-    container: "",
+    container: paramID.containerID ? paramID.containerID : '',
     model: "",
     serial: "",
     warranty: moment().format("YYYY-MM-DD"),
@@ -155,8 +149,8 @@ function NewForm() {
               />
             </div>
             <div className="input-component">
-              <label htmlFor="phone">Container</label>
-              <Select id="stateSelect" onChange={handleContainerChange}>
+              <label htmlFor="container">Container</label>
+              <Select id="stateSelect" defaultValue={paramID.containerID && paramID.containerID} onChange={handleContainerChange}>
                 {containersList &&
                   containersList.map((container) => {
                     return (

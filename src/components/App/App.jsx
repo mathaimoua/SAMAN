@@ -22,7 +22,6 @@ import Containers from "../Containers/Containers";
 import Items from "../Items/Items"
 import ItemDetails from "../ItemDetails/ItemDetails";
 import EditItem from "../EditItem/EditItem";
-import AddItemC from "../AddItem/AddItemC";
 import ViewItems from "../ViewItems/ViewItems";
 import AddItem from "../AddItem/AddItem";
 import Search from "../Search/Search";
@@ -96,7 +95,7 @@ function App() {
             </ProtectedRoute>
 
             <ProtectedRoute exact path="/:locID/:containerID/additem/">
-            {user.id ? <AddItemC /> : <Redirect to="/user" />}
+            {user.id ? <AddItem /> : <Redirect to="/user" />}
             </ProtectedRoute>
 
             <ProtectedRoute exact path="/viewitems/">
@@ -114,10 +113,6 @@ function App() {
             <Route exact path="/login">
               <LoginPage />
             </Route>
-
-            {/* <ProtectedRoute exact path="/newform">
-            {user.id ? <NewForm /> : <Redirect to="/user" />}
-            </ProtectedRoute> */}
 
             <Route exact path="/registration">
               {user.id ? (

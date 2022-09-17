@@ -4,14 +4,20 @@ import { useParams, useHistory } from "react-router-dom";
 import moment from "moment";
 
 import {
+  Box,
+  Paper,
+  FormControl,
+  FormHelperText,
   FormGroup,
   useMediaQuery,
   useTheme,
-  Select,
+  InputLabel,
+  OutlinedInput,
   TextField,
   MenuItem,
   Button,
 } from "@mui/material";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -19,7 +25,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-function EditItem() {
+function NewEdit() {
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
   const [saveOpen, setSaveOpen] = useState(false);
@@ -97,7 +103,7 @@ function EditItem() {
   };
 
   const handleSave = () => {
-    console.log(itemInfo);
+    console.log(itemInfo)
     dispatch({
       type: "EDIT_ITEM",
       payload: { id: currentItem.item_id, info: itemInfo },
@@ -128,7 +134,7 @@ function EditItem() {
 
   const handleDescriptionChange = (event) => {
     setItemInfo({ ...itemInfo, description: event.target.value });
-  };
+  }
 
   const handleContainerChange = (event) => {
     console.log(event.target.value);
@@ -165,10 +171,7 @@ function EditItem() {
             </div>
             <div className="input-component">
               <label htmlFor="name">Current Holder</label>
-              <TextField
-                defaultValue={itemInfo.holder}
-                onChange={handleHolderChange}
-              />
+              <TextField defaultValue={itemInfo.holder} onChange={handleHolderChange} />
               {/* <input class="input" type="text" name="name" id="name" /> */}
             </div>
             <div className="input-component input__big">
@@ -183,7 +186,10 @@ function EditItem() {
             </div>
             <div className="input-component">
               <label htmlFor="warranty">Warranty Expiration</label>
-              <TextField readOnly value={moment(date).format("MMM Do YYYY")} />
+              <TextField
+                readOnly
+                value={moment(date).format("MMM Do YYYY")}
+              />
               <input
                 style={{ height: "40px", width: "auto" }}
                 type="date"
@@ -193,11 +199,7 @@ function EditItem() {
             </div>
             <div className="input-component">
               <label htmlFor="phone">Container</label>
-              <Select
-                id="stateSelect"
-                onChange={handleContainerChange}
-                value={itemInfo.container}
-              >
+              <Select id="stateSelect" onChange={handleContainerChange} value={itemInfo.container}>
                 {containersList &&
                   containersList.map((container) => {
                     return (
@@ -234,10 +236,7 @@ function EditItem() {
                   SCAN
                 </button>
               </span>
-              <TextField
-                defaultValue={itemInfo.model}
-                onChange={handleModelChange}
-              />
+              <TextField defaultValue={itemInfo.model} onChange={handleModelChange} />
               {/* <input class="input" type="text" name="city" id="city" /> */}
             </div>
             <div className="input-component">
@@ -247,17 +246,14 @@ function EditItem() {
                   SCAN
                 </button>
               </span>
-              <TextField
-                defaultValue={itemInfo.serial}
-                onChange={handleSerialChange}
-              />
+              <TextField defaultValue={itemInfo.serial} onChange={handleSerialChange} />
               {/* <input class="input" type="" name="zip" id="zip" /> */}
             </div>
           </div>
           <div className="actions">
-            <button
+          <button
               className="btnRed"
-              style={{ marginTop: "30px", marginRight: "10%" }}
+              style={{ marginTop: "30px", marginRight: '10%'}}
               onClick={handleClickDelete}
             >
               Delete Item
@@ -265,7 +261,7 @@ function EditItem() {
             <button
               className="btn"
               type="submit"
-              style={{ marginTop: "30px", marginLeft: "10%" }}
+              style={{ marginTop: "30px", marginLeft: '10%'}}
               onClick={handleClickSave}
             >
               Submit
@@ -339,44 +335,44 @@ function EditItem() {
       </Dialog>
 
       <Dialog
-        PaperProps={{
-          style: {
-            backgroundColor: "#C0BCB6",
-            boxShadow: "none",
-          },
-        }}
-        open={deleteOpen}
-        onClose={handleDeleteClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          {"Permanently Delete Item?"}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Are you sure you want to delete this item? There is no undo!
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button sx={{ color: "black" }} onClick={handleDeleteClose}>
-            Cancel
-          </Button>
-          <Button
-            sx={{
-              border: "1px solid black",
-              backgroundColor: "#555555",
-              color: "salmon",
-            }}
-            onClick={handleDelete}
-            autoFocus
-          >
-            Delete
-          </Button>
-        </DialogActions>
-      </Dialog>
+          PaperProps={{
+            style: {
+              backgroundColor: "#C0BCB6",
+              boxShadow: "none",
+            },
+          }}
+          open={deleteOpen}
+          onClose={handleDeleteClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">
+            {"Permanently Delete Item?"}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              Are you sure you want to delete this item? There is no undo!
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button sx={{ color: "black" }} onClick={handleDeleteClose}>
+              Cancel
+            </Button>
+            <Button
+              sx={{
+                border: "1px solid black",
+                backgroundColor: "#555555",
+                color: "salmon",
+              }}
+              onClick={handleDelete}
+              autoFocus
+            >
+              Delete
+            </Button>
+          </DialogActions>
+        </Dialog>
     </div>
   );
 }
 
-export default EditItem;
+export default NewEdit;
