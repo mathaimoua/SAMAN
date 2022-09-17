@@ -19,10 +19,12 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
 
-import { Button } from "@mui/material";
+import { Button, useTheme, useMediaQuery } from "@mui/material";
 
 function Containers() {
 
+  const theme = useTheme();
+  const isMatch = useMediaQuery(theme.breakpoints.down("md"));
   const paramID = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
@@ -112,9 +114,9 @@ function Containers() {
 
   return (
     <div className="containersContainer">
-      <button className="btn" onClick={() => history.goBack()}>
+      { isMatch && <button className="btn" onClick={() => history.goBack()}>
         Back
-      </button>
+      </button> }
       <div className="containersDataContainer">
         {location.currentLocation && <h2 style={{margin: '0px'}}>Containers of {location.currentLocation.location_name}</h2>}
         <TableContainer

@@ -135,21 +135,12 @@ function UserPage() {
             sx={{ backgroundColor: "#FFFFFF", height: "auto", width: "50%" }}
           />
           {/* <Box sx={{textAlign: 'center'}}> */}
-          <Button
-            className="searchButton"
+          <button
+            className="btn"
             type="submit"
-            sx={{
-              color: "#97c30a",
-              margin: "5px",
-              backgroundColor: "#555555",
-              width: "30px",
-              height: "auto",
-              boxShadow: "5px 5px 2px 2px rgba(91, 91, 91, 0.2)",
-              display: "inline-block",
-            }}
           >
             Go
-          </Button>
+          </button>
           {/* </Box> */}
         </FormControl>
 
@@ -166,17 +157,17 @@ function UserPage() {
       </div>
       <h3 className="recentlyAddedItemsHeader">Recently Added Items</h3>
       <TableContainer
-        sx={{ maxWidth: "100%", marginTop: "0px", boxShadow: 2 }}
+        className='recentItemsTable'
         component={Paper}
       >
-        <Table aria-label="simple table">
+        <Table aria-label="simple table" className="recentItemsTable">
           <TableHead>
             <TableRow sx={{ backgroundColor: "#fa8072" }}>
               <TableCell
                 onClick={() => {
                   handleSort("item_name");
                 }}
-                sx={{ minWidth: 100, fontWeight: "bold", fontSize: "12pt" }}
+                sx={{ minWidth: 130, fontWeight: "bold", fontSize: "12pt"}}
               >
                 Item Name
               </TableCell>

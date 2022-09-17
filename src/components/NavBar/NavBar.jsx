@@ -12,7 +12,7 @@ import SideDrawer from "../SideDrawer/SideDrawer";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import navLogo from '../../files/SAMANLogo.png'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 // Imports for TextFields
 import Box from "@mui/material/Box";
@@ -24,6 +24,7 @@ import IconButton from "@mui/material/IconButton";
 
 function NavBar() {
 
+  const history = useHistory();
   const errors = useSelector((store) => store.errors);
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
@@ -78,11 +79,8 @@ function NavBar() {
 
   const handleLogout = () => {
     dispatch({ type: "LOGOUT" });
+    history.push('/')
   };
-
-  const handleClickAddItem = () => {
-    history.push(`/additem/${mainLocation.location_id}`)
-  }
 
   return (
     <React.Fragment>

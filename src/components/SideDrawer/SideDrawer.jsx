@@ -9,7 +9,7 @@ import {
   useTheme,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -17,6 +17,7 @@ import SAMANLogo from "../../files/SAMANLogo.png";
 
 function SideDrawer(){
 
+  const history = useHistory();
   const dispatch = useDispatch();
   const theme = useTheme();
   const user = useSelector((store) => store.user);
@@ -25,6 +26,7 @@ function SideDrawer(){
 
   const handleLogout = () => {
     setOpenDrawer(!openDrawer);
+    history.push('/')
     dispatch({ type: "LOGOUT" });
   };
 
