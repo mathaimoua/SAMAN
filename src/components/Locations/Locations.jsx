@@ -131,7 +131,7 @@ function Locations() {
           <button
             className="btn"
             onClick={() => history.goBack()}
-            style={{ display: "flex", margin: "0px" }}
+            style={{ display: "flex", margin: "10px" }}
           >
             Back
           </button>

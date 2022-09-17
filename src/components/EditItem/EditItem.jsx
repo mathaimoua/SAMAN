@@ -63,7 +63,7 @@ function EditItem() {
   };
 
   const handleNameChange = (event) => {
-    setItemInfo({...itemInfo, name: localStorage.getItem("name")})
+    setItemInfo({...itemInfo, name: event.target.value})
     console.log(itemInfo)
   }
   const handleHolderChange = (event) => {
@@ -105,7 +105,7 @@ function EditItem() {
   const handleSave = () => {
     dispatch({type: 'EDIT_ITEM', payload: {id: currentItem.item_id, info: itemInfo} })
     setSaveOpen(false)
-    history.push(`/${itemID.locID}/${itemID.containerID}/details/${itemID.itemID}`)
+    history.push(`/${itemID.locID}/${itemInfo.container}/details/${itemID.itemID}`)
   }
 
   const handleDelete = () => {

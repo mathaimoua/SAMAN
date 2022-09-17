@@ -157,14 +157,7 @@ function UserPage() {
       </div>
       <h3 className="recentlyAddedItemsHeader">Recently Added Items</h3>
       <TableContainer
-        sx={{
-          marginLeft: 'auto',
-          marginRight: 'auto',
-          maxWidth: "70%",
-          marginTop: "0px",
-          marginBottom: "5px",
-          boxShadow: 2,
-        }}
+        className='recentItemsTable'
         component={Paper}
       >
         <Table aria-label="simple table" className="recentItemsTable">
@@ -174,7 +167,7 @@ function UserPage() {
                 onClick={() => {
                   handleSort("item_name");
                 }}
-                sx={{ minWidth: 100, fontWeight: "bold", fontSize: "12pt" }}
+                sx={{ minWidth: 130, fontWeight: "bold", fontSize: "12pt"}}
               >
                 Item Name
               </TableCell>
