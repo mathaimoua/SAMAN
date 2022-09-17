@@ -33,6 +33,7 @@ function AddItem() {
   const containersList = useSelector(
     (store) => store.containers.containersList
   );
+  const [newContainer, setNewContainer] = useState();
   const history = useHistory();
   const [newDate, setNewDate] = useState();
   const [itemInfo, setItemInfo] = useState({
@@ -47,6 +48,7 @@ function AddItem() {
 
   const handleContainerChange = (event) => {
     console.log(event.target.value);
+    setNewContainer(event.target.value);
     setItemInfo({ ...itemInfo, container: event.target.value });
   };
 

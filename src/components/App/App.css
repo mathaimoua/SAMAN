@@ -296,6 +296,7 @@ Button
     text-align: center;
     padding-left: 80px;
     padding-right: 80px;
+    padding-bottom: 10px;
   }
   .locationsContainer, .editItemContainer, .itemsContainer, .itemDetailsContainer, .containersContainer, .viewItemsContainer, .addItemCContainer, .addItemContainer  { 
     padding-left: 100px;
@@ -403,12 +404,6 @@ Misc
 
 .detailsDiv {
   vertical-align: auto;
-}
-
-.recentItemsTable {
-  max-width: 70%;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 /* --------------------------------------------------------------------------------

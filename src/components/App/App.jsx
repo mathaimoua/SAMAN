@@ -109,7 +109,7 @@ function App() {
             </ProtectedRoute>
 
             <ProtectedRoute path="/additem/:locID">
-            {user.id ? <AddItem /> : <Redirect to="/user" />}
+            {user.id ? <NewForm /> : <Redirect to="/user" />}
             </ProtectedRoute>
 
             <Route exact path="/login">

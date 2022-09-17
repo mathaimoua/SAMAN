@@ -42,7 +42,7 @@ function EditItem() {
   const [itemInfo, setItemInfo] = useState({
       name: String(currentItem.item_name),
       holder: currentItem.current_holder,
-      container: currentItem.container_id, //switch to ID
+      container: itemID.containerID, //switch to ID
       model: currentItem.model,
       serial: currentItem.serial,
       warranty: moment(currentItem.warranty_expiration).format('YYYY-MM-DD'),

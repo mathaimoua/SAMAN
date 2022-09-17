@@ -131,8 +131,8 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
 
 router.post('/:id', rejectUnauthenticated, (req, res) => {
   queryText=`
-  INSERT INTO "items" ("item_name", "user_id", "current_holder", "container_id", "model", "serial", "warranty_expiration", "state")
-  VALUES ($1, $2, $3, $4, $5, $6, $7, $8);
+  INSERT INTO "items" ("item_name", "user_id", "current_holder", "container_id", "model", "serial", "warranty_expiration", "state", "description")
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);
   ;`;
 
   values = [ 
@@ -143,7 +143,8 @@ router.post('/:id', rejectUnauthenticated, (req, res) => {
     req.body.model,
     req.body.serial,
     req.body.warranty,
-    req.body.state
+    req.body.state,
+    req.body.description
   ]
 
   pool.query(queryText, values)
@@ -161,14 +162,17 @@ router.get('/search/:string', rejectUnauthenticated, (req, res) => {
   queryText = `
     SELECT * FROM "items"
     JOIN "containers" ON "containers".container_id = "items".container_id
-    WHERE current_holder ILIKE $1  AND user_id = $2
-    OR container_name ILIKE $1 AND user_id = $2
-    OR item_name ILIKE $1 AND user_id = $2
-    OR model ILIKE $1 AND user_id = $2
-    OR serial ILIKE $1 AND user_id = $2
-    OR state ILIKE $1 AND user_id = $2
-    OR current_holder ILIKE $1 AND user_id = $2;
-  `;
+    JOIN "locations" ON "locations".location_id = "containers".location_id
+    WHERE current_holder ILIKE $1  AND "items".user_id = $2
+    OR container_name ILIKE $1 AND "items".user_id = $2
+    OR item_name ILIKE $1 AND "items".user_id = $2
+    OR model ILIKE $1 AND "items".user_id = $2
+    OR serial ILIKE $1 AND "items".user_id = $2
+    OR state ILIKE $1 AND "items".user_id = $2
+    OR current_holder ILIKE $1 AND "items".user_id = $2
+    OR description ILIKE $1 AND "items".user_id = $2
+    OR "locations".location_name ILIKE $1 AND "items".user_id = $2
+    ;`;
   pool.query(queryText, [string, req.user.id])
     .then(response => {
       res.send(response.rows)
