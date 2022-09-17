@@ -104,8 +104,9 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
     "model" = $4,
     "serial" = $5,
     "warranty_expiration" = $6,
-    "state" = $7
-  WHERE "item_id" = $8 AND "user_id" = $9
+    "state" = $7,
+    "description" = $8
+  WHERE "item_id" = $9 AND "user_id" = $10
   ;`;
 
   values = [ 
@@ -116,6 +117,7 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
     req.body.info.serial,
     req.body.info.warranty,
     req.body.info.state,
+    req.body.info.description,
     req.params.id,
     req.user.id
   ]
