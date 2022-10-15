@@ -62,33 +62,26 @@ function EditItem() {
   };
   const handleHolderChange = (event) => {
     setItemInfo({ ...itemInfo, holder: event.target.value });
-    // console.log(itemInfo)
   };
 
   const handleModelChange = (event) => {
     setItemInfo({ ...itemInfo, model: event.target.value });
-    // console.log(itemInfo)
   };
 
   const handleSerialChange = (event) => {
     setItemInfo({ ...itemInfo, serial: event.target.value });
-    // console.log(itemInfo)
   };
 
   const handleDateChange = (event) => {
     setDate(event.target.value);
     setItemInfo({ ...itemInfo, warranty: event.target.value });
-    // console.log(moment(event.target.value).format("MMM Do YYYY"));
   };
 
   const handleStateChange = (event) => {
-    // console.log(event.target.value);
-    // setState(event.target.value);
     setItemInfo({ ...itemInfo, state: event.target.value });
   };
 
   const handleClickSave = () => {
-    // console.log('deleting item', itemID)
     setSaveOpen(true);
   };
 
@@ -109,7 +102,6 @@ function EditItem() {
   };
 
   const handleDelete = () => {
-    // console.log('DELETING!')
     dispatch({
       type: "DELETE_ITEM",
       payload: { deleteID: itemID.itemID, container: itemID.containerID },

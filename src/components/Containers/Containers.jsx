@@ -22,14 +22,13 @@ import TextField from "@mui/material/TextField";
 import { Button, useTheme, useMediaQuery } from "@mui/material";
 
 function Containers() {
-
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
   const paramID = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
   const location = useSelector((store) => store.locations);
-  const containers = useSelector(store => store.containers)
+  const containers = useSelector((store) => store.containers);
   const [addOpen, setAddOpen] = useState(false);
   const [newContainerName, setNewContainerName] = useState("");
   const [deleteOpen, setDeleteOpen] = useState(false);
@@ -41,13 +40,15 @@ function Containers() {
   }, [dispatch]);
 
   const refresh = () => {
-    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
-    dispatch({ type: 'FETCH_CONTAINERS', payload: paramID.locID })
-    dispatch({ type: 'FETCH_CURRENT_LOCATION', payload:  { id: paramID.locID } })
-  }
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    dispatch({ type: "FETCH_CONTAINERS", payload: paramID.locID });
+    dispatch({
+      type: "FETCH_CURRENT_LOCATION",
+      payload: { id: paramID.locID },
+    });
+  };
 
   const handleAddContainer = () => {
-    // console.log(id)
     setAddOpen(true);
   };
 
@@ -56,22 +57,23 @@ function Containers() {
   };
 
   const changeNewContainerName = (event) => {
-    setNewContainerName(event.target.value)
-  }
+    setNewContainerName(event.target.value);
+  };
 
   const handleCreateContainer = () => {
-    // console.log('creating container named', newContainerName)
     dispatch({
-      type: 'CREATE_CONTAINER', 
-      payload: {name: newContainerName, location: paramID.locID} });
-    setNewContainerName('');
+      type: "CREATE_CONTAINER",
+      payload: { name: newContainerName, location: paramID.locID },
+    });
+    setNewContainerName("");
     setAddOpen(false);
-  }
+  };
 
   const handleDelete = () => {
-    dispatch({ 
-      type: 'DELETE_CONTAINER', 
-      payload: {container: IDToDelete, location: paramID.locID} });
+    dispatch({
+      type: "DELETE_CONTAINER",
+      payload: { container: IDToDelete, location: paramID.locID },
+    });
     setIDToDelete(-1);
     setDeleteOpen(false);
   };
@@ -87,7 +89,6 @@ function Containers() {
   };
 
   const handleClickEdit = (newID) => {
-    // console.log(id)
     setIDToEdit(newID);
     setEditOpen(true);
   };
@@ -101,24 +102,33 @@ function Containers() {
     console.log("new name will be", newContainerName);
     dispatch({
       type: "SET_CONTAINER_NAME",
-      payload: { name: newContainerName, id: IDToEdit,  location: Number(paramID.locID)}
+      payload: {
+        name: newContainerName,
+        id: IDToEdit,
+        location: Number(paramID.locID),
+      },
     });
     setNewContainerName("");
     setEditOpen(false);
   };
 
   const handleContainerClick = (id) => {
-    // dispatch({type: "FETCH_CONTAINER_ITEMS", payload: id })
-    history.push(`/${paramID.locID}/${id}/items`)
-  }
+    history.push(`/${paramID.locID}/${id}/items`);
+  };
 
   return (
     <div className="containersContainer">
-      { isMatch && <button className="btn" onClick={() => history.goBack()}>
-        Back
-      </button> }
+      {isMatch && (
+        <button className="btn" onClick={() => history.goBack()}>
+          Back
+        </button>
+      )}
       <div className="containersDataContainer">
-        {location.currentLocation && <h2 style={{margin: '0px'}}>Containers of {location.currentLocation.location_name}</h2>}
+        {location.currentLocation && (
+          <h2 style={{ margin: "0px" }}>
+            Containers of {location.currentLocation.location_name}
+          </h2>
+        )}
         <TableContainer
           sx={{
             maxWidth: "100%",
@@ -136,24 +146,24 @@ function Containers() {
                 >
                   Container Name
                 </TableCell>
-                {/* <TableCell
-                  sx={{ minWidth: 50, fontWeight: "bold", fontSize: "12pt" }}
-                >
-                  Number of Items
-                </TableCell> */}
                 <TableCell></TableCell>
                 <TableCell></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-            {containers.containersList.map((container) => (
+              {containers.containersList.map((container) => (
                 <TableRow
                   hover
                   key={container.container_id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
-                    <button className="btn_asLinkTables" onClick={() => handleContainerClick(container.container_id)}>
+                    <button
+                      className="btn_asLinkTables"
+                      onClick={() =>
+                        handleContainerClick(container.container_id)
+                      }
+                    >
                       <h2>{container.container_name}</h2>
                     </button>
                   </TableCell>

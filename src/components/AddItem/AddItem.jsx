@@ -2,6 +2,7 @@ import { useParams, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
+import BarcodeScannerComponent from "react-qr-barcode-scanner";
 
 import {
   useMediaQuery,
@@ -21,6 +22,8 @@ import DialogTitle from "@mui/material/DialogTitle";
 
 function NewForm() {
   const [saveOpen, setSaveOpen] = useState(false);
+  const [camOpen1, setCamOpen1] = useState(false);
+  const [camOpen2, setCamOpen2] = useState(false);
   const paramID = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -34,12 +37,28 @@ function NewForm() {
     name: "",
     holder: "",
     description: "",
-    container: paramID.containerID ? paramID.containerID : '',
+    container: paramID.containerID ? paramID.containerID : "",
     model: "",
     serial: "",
     warranty: moment().format("YYYY-MM-DD"),
     state: "IN USE",
   });
+  //Scanner functions
+  const scanModel = (error, result) => {
+    if (result) {
+      // setInput1(result.text);
+      setItemInfo({ ...itemInfo, model: result.text });
+      setCamOpen1(false);
+    }
+  };
+
+  const scanSerial = (error, result) => {
+    if (result) {
+      // setInput1(result.text);
+      setItemInfo({ ...itemInfo, serial: result.text });
+      setCamOpen2(false);
+    }
+  };
 
   const handleContainerChange = (event) => {
     setItemInfo({ ...itemInfo, container: event.target.value });
@@ -124,16 +143,19 @@ function NewForm() {
                 defaultValue={""}
                 onChange={handleNameChange}
               />
-              {/* <input class="input" type="text" name="name" id="surname" /> */}
             </div>
             <div className="input-component">
               <label htmlFor="name">Current Holder</label>
               <TextField defaultValue={""} onChange={handleHolderChange} />
-              {/* <input class="input" type="text" name="name" id="name" /> */}
             </div>
             <div className="input-component input__big">
               <label for="bio">Description</label>
-              <textarea className="input" name="bio" id="bio" onChange={handleDescriptionChange}></textarea>
+              <textarea
+                className="input"
+                name="bio"
+                id="bio"
+                onChange={handleDescriptionChange}
+              ></textarea>
             </div>
             <div className="input-component">
               <label htmlFor="warranty">Warranty Expiration</label>
@@ -150,7 +172,11 @@ function NewForm() {
             </div>
             <div className="input-component">
               <label htmlFor="container">Container</label>
-              <Select id="stateSelect" defaultValue={paramID.containerID && paramID.containerID} onChange={handleContainerChange}>
+              <Select
+                id="stateSelect"
+                defaultValue={paramID.containerID && paramID.containerID}
+                onChange={handleContainerChange}
+              >
                 {containersList &&
                   containersList.map((container) => {
                     return (
@@ -183,22 +209,20 @@ function NewForm() {
             <div className="input-component">
               <span>
                 <label>Model</label>
-                <button className="btn" style={{ marginLeft: "10px" }}>
+                <button className="btn" style={{ marginLeft: "10px" }} onClick={() => setCamOpen1(true)}>
                   SCAN
                 </button>
               </span>
-              <TextField defaultValue={""} onChange={handleModelChange} />
-              {/* <input class="input" type="text" name="city" id="city" /> */}
+              <TextField value={itemInfo.model} onChange={handleModelChange} />
             </div>
             <div className="input-component">
               <span>
                 <label>Serial Number</label>
-                <button className="btn" style={{ marginLeft: "10px" }}>
+                <button className="btn" style={{ marginLeft: "10px" }} onClick={() => setCamOpen2(true)}>
                   SCAN
                 </button>
               </span>
-              <TextField defaultValue={""} onChange={handleSerialChange} />
-              {/* <input class="input" type="" name="zip" id="zip" /> */}
+              <TextField value={itemInfo.serial} onChange={handleSerialChange} />
             </div>
           </div>
           <div className="actions">
@@ -212,6 +236,39 @@ function NewForm() {
             </button>
           </div>
         </FormGroup>
+        {camOpen1 && (
+          <Dialog open={camOpen1} sx={{padding: '0px'}}>
+        <div className="cameraDiv">
+        <Button  variant="contained" style={{position: 'absolute', right: '0', zIndex: '5', margin: '10px'}} className="cancelScan" onClick={() => setCamOpen1(false)}>
+            X
+          </Button>
+          <BarcodeScannerComponent
+           sx={{marginLeft: 'auto', marginRight: 'auto', marginTop: 'auto', marginBottom: 'auto'}}
+            // height={400}
+            // width={400}
+            onUpdate={scanModel}
+          />
+      
+        </div>
+        </Dialog>
+      )}
+
+{camOpen2 && (
+          <Dialog open={camOpen2} sx={{padding: '0px'}}>
+        <div className="cameraDiv">
+        <Button  variant="contained" style={{position: 'absolute', right: '0', zIndex: '5', margin: '10px'}} className="cancelScan" onClick={() => setCamOpen1(false)}>
+            X
+          </Button>
+          <BarcodeScannerComponent
+           sx={{marginLeft: 'auto', marginRight: 'auto', marginTop: 'auto', marginBottom: 'auto'}}
+            // height={400}
+            // width={400}
+            onUpdate={scanSerial}
+          />
+      
+        </div>
+        </Dialog>
+      )}
       </div>
 
       <Dialog
@@ -232,21 +289,31 @@ function NewForm() {
             id="alert-dialog-description"
             sx={{ textAlign: "center" }}
           >
-            <span style={{fontWeight: 'bold'}}>Name: </span>{itemInfo.name}
+            <span style={{ fontWeight: "bold" }}>Name: </span>
+            {itemInfo.name}
             <br></br>
-            <span style={{fontWeight: 'bold'}}>Current Holder: </span>{itemInfo.holder}
+            <span style={{ fontWeight: "bold" }}>Current Holder: </span>
+            {itemInfo.holder}
             <br></br>
-            <span style={{fontWeight: 'bold'}}>Container: </span>{itemInfo.container}
+            <span style={{ fontWeight: "bold" }}>Container: </span>
+            {itemInfo.container}
             <br></br>
-            <span style={{fontWeight: 'bold'}}>Model: </span>{itemInfo.model}
+            <span style={{ fontWeight: "bold" }}>Model: </span>
+            {itemInfo.model}
             <br></br>
-            <span style={{fontWeight: 'bold'}}>Serial: </span>{itemInfo.serial}
+            <span style={{ fontWeight: "bold" }}>Serial: </span>
+            {itemInfo.serial}
             <br></br>
-            <span style={{fontWeight: 'bold'}}>Warranty Expiration Date: </span>{itemInfo.warranty}
+            <span style={{ fontWeight: "bold" }}>
+              Warranty Expiration Date:{" "}
+            </span>
+            {itemInfo.warranty}
             <br></br>
-            <span style={{fontWeight: 'bold'}}>State: </span>{itemInfo.state}
+            <span style={{ fontWeight: "bold" }}>State: </span>
+            {itemInfo.state}
             <br></br>
-            <span style={{fontWeight: 'bold'}}>Description: </span>{itemInfo.description}
+            <span style={{ fontWeight: "bold" }}>Description: </span>
+            {itemInfo.description}
             <br></br>
           </DialogContentText>
         </DialogContent>
@@ -267,6 +334,7 @@ function NewForm() {
           </Button>
         </DialogActions>
       </Dialog>
+    
     </div>
   );
 }
