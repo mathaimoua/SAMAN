@@ -10,10 +10,13 @@ function AboutPage() {
         <p> Special thanks to my friends in the Mitchison cohort, instructor Dane Smith, my mentors Mali Franzese and Dewitt Kane, Jeannie from Gaimin, Matt Black, Edan Schwartz, and all of my family and friends who have supported me.</p>
         <p>Technologies used in this app include React.js, Redux, Express, Node.js, Axios, MUI, and Passport.
         </p>
-      </div>
-      Changelog
+      </div><p></p>
+      <h2>Changelog</h2>
       <p>
         1.0 - Launch. Scanning not yet implemented.
+      </p>
+      <p>
+        1.1 - Scanning barcodes implemented on both edit item and add item forms!
       </p>
     </div>
   );
