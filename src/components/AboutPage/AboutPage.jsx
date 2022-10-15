@@ -16,6 +16,10 @@ function AboutPage() {
         <p>Technologies used in this app include React.js, Redux, Express, Node.js, Axios, MUI, and Passport.
         </p>
       </div>
+      Changelog
+      <p>
+        1.0 - Launch. Scanning not yet implemented.
+      </p>
     </div>
   );
 }
