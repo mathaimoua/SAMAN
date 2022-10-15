@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState, useContext } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import moment from "moment";
+import BarcodeScannerComponent from "react-qr-barcode-scanner";
 
 import {
   FormGroup,
@@ -34,6 +35,8 @@ function EditItem() {
     (store) => store.containers.containersList
   );
   const [newContainer, setNewContainer] = useState();
+  const [camOpen1, setCamOpen1] = useState(false);
+  const [camOpen2, setCamOpen2] = useState(false);
   const [itemInfo, setItemInfo] = useState({
     name: String(currentItem.item_name),
     holder: currentItem.current_holder,
@@ -48,6 +51,23 @@ function EditItem() {
   useEffect(() => {
     refresh();
   }, [dispatch]); // Stop when item in brackets changes
+
+    //Scanner functions
+    const scanModel = (error, result) => {
+      if (result) {
+        // setInput1(result.text);
+        setItemInfo({ ...itemInfo, model: result.text });
+        setCamOpen1(false);
+      }
+    };
+  
+    const scanSerial = (error, result) => {
+      if (result) {
+        // setInput1(result.text);
+        setItemInfo({ ...itemInfo, serial: result.text });
+        setCamOpen2(false);
+      }
+    };
 
   const refresh = () => {
     dispatch({ type: "FETCH_CONTAINERS", payload: itemID.locID });
@@ -222,12 +242,12 @@ function EditItem() {
             <div className="input-component">
               <span>
                 <label>Model</label>
-                <button className="btn" style={{ marginLeft: "10px" }}>
+                <button className="btn" style={{ marginLeft: "10px" }} onClick={() => setCamOpen1(true)}>
                   SCAN
                 </button>
               </span>
               <TextField
-                defaultValue={itemInfo.model}
+                value={itemInfo.model}
                 onChange={handleModelChange}
               />
               {/* <input class="input" type="text" name="city" id="city" /> */}
@@ -235,12 +255,12 @@ function EditItem() {
             <div className="input-component">
               <span>
                 <label>Serial Number</label>
-                <button className="btn" style={{ marginLeft: "10px" }}>
+                <button className="btn" style={{ marginLeft: "10px" }} onClick={() => setCamOpen2(true)}>
                   SCAN
                 </button>
               </span>
               <TextField
-                defaultValue={itemInfo.serial}
+                value={itemInfo.serial}
                 onChange={handleSerialChange}
               />
               {/* <input class="input" type="" name="zip" id="zip" /> */}
@@ -264,6 +284,40 @@ function EditItem() {
             </button>
           </div>
         </FormGroup>
+
+        {camOpen1 && (
+          <Dialog open={camOpen1} sx={{padding: '0px'}}>
+        <div className="cameraDiv">
+        <Button  variant="contained" style={{position: 'absolute', right: '0', zIndex: '5', margin: '10px'}} className="cancelScan" onClick={() => setCamOpen1(false)}>
+            X
+          </Button>
+          <BarcodeScannerComponent
+           sx={{marginLeft: 'auto', marginRight: 'auto', marginTop: 'auto', marginBottom: 'auto'}}
+            // height={400}
+            // width={400}
+            onUpdate={scanModel}
+          />
+      
+        </div>
+        </Dialog>
+      )}
+
+{camOpen2 && (
+          <Dialog open={camOpen2} sx={{padding: '0px'}}>
+        <div className="cameraDiv">
+        <Button  variant="contained" style={{position: 'absolute', right: '0', zIndex: '5', margin: '10px'}} className="cancelScan" onClick={() => setCamOpen1(false)}>
+            X
+          </Button>
+          <BarcodeScannerComponent
+           sx={{marginLeft: 'auto', marginRight: 'auto', marginTop: 'auto', marginBottom: 'auto'}}
+            // height={400}
+            // width={400}
+            onUpdate={scanSerial}
+          />
+      
+        </div>
+        </Dialog>
+      )}
       </div>
 
       <Dialog
