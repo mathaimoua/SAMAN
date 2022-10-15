@@ -1,11 +1,11 @@
 {
-  "name": "prime-solo-project",
+  "name": "SAMAN",
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:5000",
   "engines": {
-    "node": "16.x",
-    "npm": "8.x"
+    "node": "16.17.1",
+    "npm": "8.15.0"
   },
   "dependencies": {
     "@emotion/react": "^11.10.4",
