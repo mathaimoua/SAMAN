@@ -13,10 +13,10 @@ function AboutPage() {
       </div><p></p>
       <h2>Changelog</h2>
       <p>
-        1.0 - Launch. Scanning not yet implemented.
+        1.0.0 - Launch. Scanning not yet implemented.
       </p>
       <p>
-        1.1 - Scanning barcodes implemented on both edit item and add item forms!
+        1.1.0 -
       </p>
     </div>
   );

@@ -1,8 +1,8 @@
 import { useParams, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import React from 'react'
 import moment from "moment";
-import BarcodeScannerComponent from "react-qr-barcode-scanner";
 
 import {
   useMediaQuery,
@@ -43,22 +43,6 @@ function NewForm() {
     warranty: moment().format("YYYY-MM-DD"),
     state: "IN USE",
   });
-  //Scanner functions
-  const scanModel = (error, result) => {
-    if (result) {
-      // setInput1(result.text);
-      setItemInfo({ ...itemInfo, model: result.text });
-      setCamOpen1(false);
-    }
-  };
-
-  const scanSerial = (error, result) => {
-    if (result) {
-      // setInput1(result.text);
-      setItemInfo({ ...itemInfo, serial: result.text });
-      setCamOpen2(false);
-    }
-  };
 
   const handleContainerChange = (event) => {
     setItemInfo({ ...itemInfo, container: event.target.value });
@@ -236,39 +220,6 @@ function NewForm() {
             </button>
           </div>
         </FormGroup>
-        {camOpen1 && (
-          <Dialog open={camOpen1} sx={{padding: '0px'}}>
-        <div className="cameraDiv">
-        <Button  variant="contained" style={{position: 'absolute', right: '0', zIndex: '5', margin: '10px'}} className="cancelScan" onClick={() => setCamOpen1(false)}>
-            X
-          </Button>
-          <BarcodeScannerComponent
-           sx={{marginLeft: 'auto', marginRight: 'auto', marginTop: 'auto', marginBottom: 'auto'}}
-            // height={400}
-            // width={400}
-            onUpdate={scanModel}
-          />
-      
-        </div>
-        </Dialog>
-      )}
-
-{camOpen2 && (
-          <Dialog open={camOpen2} sx={{padding: '0px'}}>
-        <div className="cameraDiv">
-        <Button  variant="contained" style={{position: 'absolute', right: '0', zIndex: '5', margin: '10px'}} className="cancelScan" onClick={() => setCamOpen1(false)}>
-            X
-          </Button>
-          <BarcodeScannerComponent
-           sx={{marginLeft: 'auto', marginRight: 'auto', marginTop: 'auto', marginBottom: 'auto'}}
-            // height={400}
-            // width={400}
-            onUpdate={scanSerial}
-          />
-      
-        </div>
-        </Dialog>
-      )}
       </div>
 
       <Dialog

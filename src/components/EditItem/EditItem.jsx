@@ -2,7 +2,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState, useContext } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import moment from "moment";
-import BarcodeScannerComponent from "react-qr-barcode-scanner";
 
 import {
   FormGroup,
@@ -285,39 +284,6 @@ function EditItem() {
           </div>
         </FormGroup>
 
-        {camOpen1 && (
-          <Dialog open={camOpen1} sx={{padding: '0px'}}>
-        <div className="cameraDiv">
-        <Button  variant="contained" style={{position: 'absolute', right: '0', zIndex: '5', margin: '10px'}} className="cancelScan" onClick={() => setCamOpen1(false)}>
-            X
-          </Button>
-          <BarcodeScannerComponent
-           sx={{marginLeft: 'auto', marginRight: 'auto', marginTop: 'auto', marginBottom: 'auto'}}
-            // height={400}
-            // width={400}
-            onUpdate={scanModel}
-          />
-      
-        </div>
-        </Dialog>
-      )}
-
-{camOpen2 && (
-          <Dialog open={camOpen2} sx={{padding: '0px'}}>
-        <div className="cameraDiv">
-        <Button  variant="contained" style={{position: 'absolute', right: '0', zIndex: '5', margin: '10px'}} className="cancelScan" onClick={() => setCamOpen1(false)}>
-            X
-          </Button>
-          <BarcodeScannerComponent
-           sx={{marginLeft: 'auto', marginRight: 'auto', marginTop: 'auto', marginBottom: 'auto'}}
-            // height={400}
-            // width={400}
-            onUpdate={scanSerial}
-          />
-      
-        </div>
-        </Dialog>
-      )}
       </div>
 
       <Dialog
