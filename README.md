@@ -1,4 +1,4 @@
-# Independent Living Care Services 
+# Simple Asset Management
 <a href="https://dry-brook-62079.herokuapp.com/#/home">Demo</a> found here
 
 ## Table of Contents
@@ -12,7 +12,7 @@
 
 ## Description
 
-ILCS App is a digital time tracking application that has an online dashboard for employees and for management. The app allows employees to submit or edit their work time sheets. It also includes organization tools for management to use to view, edit and filter employees time sheets. This was developed to be used internally by Independent Living Care Services (ILCS), which is a small company that provides in-home personal care at multiple locations across the Twin Cities.
+Simple Asset Management (SAMAN) is exactly what the name suggests, easy organizing of your belongings. SAMAN makes it easy for any organization or individual to get organized and help reduce unnecessary losses. Unlike other asset management software, SAMAN does NOT cost an arm and a leg, in fact, it's free!
 
 ## Built With
 
@@ -54,9 +54,6 @@ Once everything is installed and running it should open in your default browser 
 
 ## Deployment
 All registered users are admins of their own assets, locations, and containers. Users cannot manage other users but could be part of future updates.
-
-# Simple Asset Management
-Simple Asset Management (SAMAN) is exactly what the name suggests, easy organizing of your belongings. SAMAN makes it easy for any organization or individual to get organized and help reduce unnecessary losses. Unlike other asset management software, SAMAN does NOT cost an arm and a leg, in fact, it's free!
 
 ## Versioning
 I used Git and GitHub for version control.
